@@ -1,6 +1,6 @@
 Name:           nginx
 Version:        1.0.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Robust, high-performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://nginx.org/
