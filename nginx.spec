@@ -1,12 +1,3 @@
-%define nginx_user      nginx
-%define nginx_group     %{nginx_user}
-%define nginx_home      %{_localstatedir}/lib/nginx
-%define nginx_home_tmp  %{nginx_home}/tmp
-%define nginx_logdir    %{_localstatedir}/log/nginx
-%define nginx_confdir   %{_sysconfdir}/nginx
-%define nginx_datadir   %{_datadir}/nginx
-%define nginx_webroot   %{nginx_datadir}/html
-
 Name:           nginx
 Version:        1.0.8
 Release:        1%{?dist}
@@ -21,12 +12,13 @@ Requires:           pcre,openssl,GeoIP
 # for /usr/sbin/useradd
 Requires(pre):      shadow-utils
 Requires(post):     chkconfig
+
 # for /sbin/service
 Requires(preun):    chkconfig, initscripts
 Requires(postun):   initscripts
 
 %description
-Nginx [engine x] is an HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3
+Nginx [engine x] is a HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3
 proxy server written by Igor Sysoev.
 
 
@@ -35,20 +27,18 @@ proxy server written by Igor Sysoev.
 
 
 %build
-export DESTDIR=%{buildroot}
 ./configure \
-    --user=%{nginx_user} \
-    --group=%{nginx_group} \
-    --prefix=%{nginx_datadir} \
+    --user=%{name} \
+    --group=%{name} \
+    --prefix=%{_datadir}/%{name} \
     --sbin-path=%{_sbindir}/%{name} \
-    --conf-path=%{nginx_confdir}/%{name}.conf \
-    --error-log-path=%{nginx_logdir}/error.log \
-    --http-log-path=%{nginx_logdir}/access.log \
-    --http-client-body-temp-path=%{nginx_home_tmp}/client_body \
-    --http-proxy-temp-path=%{nginx_home_tmp}/proxy \
-    --http-fastcgi-temp-path=%{nginx_home_tmp}/fastcgi \
-    --http-uwsgi-temp-path=%{nginx_home_tmp}/uwsgi \
-    --http-scgi-temp-path=%{nginx_home_tmp}/scgi \
+    --conf-path=%{_sysconfdir}/%{name}/%{name}.conf \
+    --error-log-path=%{_localstatedir}/log/%{name}/error.log \
+    --http-log-path=%{_localstatedir}/log/%{name}/access.log \
+    --http-client-body-temp-path=%{_localstatedir}/lib/%{name}/tmp/client_body \
+    --http-proxy-temp-path=%{_localstatedir}/lib/%{name}/tmp/proxy \
+    --http-fastcgi-temp-path=%{_localstatedir}/lib/%{name}/tmp/fastcgi \
+    --http-scgi-temp-path=%{_localstatedir}/lib/%{name}/tmp/scgi \
     --pid-path=%{_localstatedir}/run/%{name}.pid \
     --lock-path=%{_localstatedir}/lock/subsys/%{name} \
     --with-http_ssl_module \
@@ -75,13 +65,13 @@ find %{buildroot} -type f -name .packlist -exec rm -f {} \;
 find %{buildroot} -type f -empty -exec rm -f {} \;
 find %{buildroot} -type f -exec chmod 0644 {} \;
 find %{buildroot} -type f -name '*.so' -exec chmod 0755 {} \;
-rm %{buildroot}/%{nginx_confdir}/{win-utf,koi-utf,koi-win}
-rm %{buildroot}/%{nginx_confdir}/{uwsgi_params,uwsgi_params.default}
+rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
+rm %{buildroot}/%{_sysconfdir}/%{name}/{uwsgi_params,uwsgi_params.default}
 chmod 0755 %{buildroot}%{_sbindir}/nginx
-%{__install} -p -d -m 0755 %{buildroot}%{nginx_confdir}/conf.d
-%{__install} -p -d -m 0755 %{buildroot}%{nginx_home_tmp}
-%{__install} -p -d -m 0755 %{buildroot}%{nginx_logdir}
-%{__install} -p -d -m 0755 %{buildroot}%{nginx_webroot}
+%{__install} -p -d -m 0755 %{buildroot}%{_sysconfdir}/%{name}/conf.d
+%{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/lib/%{name}/tmp
+%{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/log/%{name}
+%{__install} -p -d -m 0755 %{buildroot}%{_datadir}/%{name}/html
 
 # convert to UTF-8 all files that give warnings.
 for textfile in CHANGES; do
@@ -93,7 +83,7 @@ done
 
 %pre
 if [ $1 == 1 ]; then
-    %{_sbindir}/useradd -c "Nginx user" -s /bin/false -r -d %{nginx_home} %{nginx_user} 2>/dev/null || :
+    %{_sbindir}/useradd -c "Nginx user" -s /bin/false -r -d %{_localstatedir}/lib/%{name} %{name} 2>/dev/null || :
 fi
 
 %post
@@ -115,23 +105,23 @@ fi
 %files
 %defattr(-,root,root,-)
 %doc LICENSE CHANGES README
-%{nginx_datadir}/
+%{_datadir}/%{name}/
 %{_sbindir}/%{name}
-%dir %{nginx_confdir}
-%dir %{nginx_confdir}/conf.d
-%dir %{nginx_logdir}
-%config(noreplace) %{nginx_confdir}/%{name}.conf
-%config(noreplace) %{nginx_confdir}/%{name}.conf.default
-%config(noreplace) %{nginx_confdir}/mime.types
-%config(noreplace) %{nginx_confdir}/mime.types.default
-%config(noreplace) %{nginx_confdir}/fastcgi.conf
-%config(noreplace) %{nginx_confdir}/fastcgi.conf.default
-%config(noreplace) %{nginx_confdir}/fastcgi_params
-%config(noreplace) %{nginx_confdir}/fastcgi_params.default
-%config(noreplace) %{nginx_confdir}/scgi_params
-%config(noreplace) %{nginx_confdir}/scgi_params.default
-%attr(-,%{nginx_user},%{nginx_group}) %dir %{nginx_home}
-%attr(-,%{nginx_user},%{nginx_group}) %dir %{nginx_home_tmp}
+%dir %{_sysconfdir}/%{name}
+%dir %{_sysconfdir}/%{name}/conf.d
+%dir %{_localstatedir}/log/%{name}
+%config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
+%config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf.default
+%config(noreplace) %{_sysconfdir}/%{name}/mime.types
+%config(noreplace) %{_sysconfdir}/%{name}/mime.types.default
+%config(noreplace) %{_sysconfdir}/%{name}/fastcgi.conf
+%config(noreplace) %{_sysconfdir}/%{name}/fastcgi.conf.default
+%config(noreplace) %{_sysconfdir}/%{name}/fastcgi_params
+%config(noreplace) %{_sysconfdir}/%{name}/fastcgi_params.default
+%config(noreplace) %{_sysconfdir}/%{name}/scgi_params
+%config(noreplace) %{_sysconfdir}/%{name}/scgi_params.default
+%attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}
+%attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}/tmp
 
 
 %changelog
@@ -143,8 +133,10 @@ fi
 - Remove most of the extra modules
 - Remove unnecessary core modules
 - Remove configuration files for removed core modules
+- Replace and remove custom macros
 - Clean up files section
 - Remove remaining Perl cruft
+- Clean up grammar and formatting
 
 * Fri Aug 26 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-1
 - Truncate old changelog
