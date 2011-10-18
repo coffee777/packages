@@ -4,12 +4,13 @@ Release:        2%{?dist}
 Summary:        Robust, high-performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://nginx.org/
+
 Source0:        http://nginx.org/download/nginx-%{version}.tar.gz
 Source1:        simpl-ngx_devel_kit-v0.2.17-0-gbc97eea.tar.gz
 Source2:        chaoslawful-lua-nginx-module-v0.3.1rc16-0-gb298984.tar.gz
 
-BuildRequires:      pcre-devel,zlib-devel,openssl-devel,GeoIP-devel,lua-devel
-Requires:           pcre,openssl,GeoIP
+BuildRequires:  pcre-devel,zlib-devel,openssl-devel,GeoIP-devel,lua-devel
+Requires:       pcre,openssl,GeoIP
 
 %description
 Nginx [engine x] is a HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3
