@@ -1,12 +1,14 @@
 Name:           nginx
 Version:        1.0.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Robust, high-performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://nginx.org/
 Source0:        http://nginx.org/download/nginx-%{version}.tar.gz
+Source1:        simpl-ngx_devel_kit-v0.2.17-0-gbc97eea.tar.gz
+Source2:        chaoslawful-lua-nginx-module-v0.3.1rc16-0-gb298984.tar.gz
 
-BuildRequires:      pcre-devel,zlib-devel,openssl-devel,GeoIP-devel
+BuildRequires:      pcre-devel,zlib-devel,openssl-devel,GeoIP-devel,lua-devel
 Requires:           pcre,openssl,GeoIP
 
 %description
@@ -16,9 +18,13 @@ proxy server written by Igor Sysoev.
 
 %prep
 %setup -q
+%setup -q -b 1
+%setup -q -b 2
 
 
 %build
+export LUA_LIB=%{_libdir}/lua/5.1
+export LUA_INC=%{_includedir}
 ./configure \
     --user=%{name} \
     --group=%{name} \
@@ -47,7 +53,9 @@ proxy server written by Igor Sysoev.
     --without-http_split_clients_module \
     --without-http_ssi_module \
     --without-http_userid_module \
-    --without-http_uwsgi_module
+    --without-http_uwsgi_module \
+    --add-module=%{_builddir}/simpl-ngx_devel_kit-bc97eea \
+    --add-module=%{_builddir}/chaoslawful-lua-nginx-module-b298984
 make %{?_smp_mflags}
 
 %install
@@ -95,6 +103,9 @@ fi
 
 
 %changelog
+
+* Tue Oct 18 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-2
+- Add Lua module
 
 * Tue Oct 18 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-1
 - Install manpage
