@@ -1,0 +1,56 @@
+types {
+    # Web Standards
+    text/html                               html htm;
+    text/css                                css;
+    application/x-javascript                js;
+    application/atom+xml                    atom;
+    application/rss+xml                     rss;
+    text/cache-manifest                     appcache;
+    text/mathml                             mml;
+
+    # Images
+    image/jpeg                              jpeg jpg;
+    image/png                               png;
+    image/svg+xml                           svg svgz;
+    image/webp                              webp;
+    image/x-icon                            ico;
+    image/gif                               gif;
+
+    # Video
+    video/webm                              webm;
+    video/ogg                               ogv;
+    video/mp4                               m4v mp4;
+    video/x-flv                             flv;
+
+    # Audio
+    audio/ogg                               oga;
+    audio/mp4                               m4a;
+    audio/x-wav                             wav;
+
+    # Fonts
+    font/woff                               woff;
+    font/opentype                           otf;
+    font/truetype                           ttf;
+    application/vnd.ms-fontobject           eot;
+
+    # Data Serialisation
+    application/json                        json;
+    text/xml                                xml;
+    text/csv                                csv;
+
+    # Compressed Archives
+    application/x-gzip                      gz;
+    application/x-7z-compressed             7z;
+    application/x-redhat-package-manager    rpm;
+    application/zip                         zip;
+
+    # Other
+    text/plain                              txt;
+    application/pdf                         pdf;
+    text/x-component                        htc;
+    application/postscript                  ps eps ai;
+    application/x-chrome-extension          crx;
+    application/x-shockwave-flash           swf;
+    application/x-x509-ca-cert              der pem crt;
+}
+
