@@ -1,6 +1,6 @@
 Name:           nginx
 Version:        1.0.8
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        High performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://nginx.org/
@@ -69,8 +69,8 @@ chmod 0755 %{buildroot}%{_sbindir}/nginx
 rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
 rm %{buildroot}/%{_sysconfdir}/%{name}/{uwsgi_params,uwsgi_params.default}
 gzip -9 objs/%{name}.8
-%{__install} -p -D -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8
-%{__install} -p -D -m 0644 %{source3} %{buildroot}%{_unitdir}/%{source3}
+%{__install} -p -D -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8/%{name}.8.gz
+%{__install} -p -D -m 0644 %{source3} %{buildroot}%{_unitdir}/%{name}.service
 %{__install} -p -D -m 0644 %{source4} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 %{__install} -p -d -m 0755 %{buildroot}%{_sysconfdir}/%{name}/conf.d
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/lib/%{name}/tmp
@@ -90,6 +90,7 @@ fi
 %{_datadir}/%{name}/
 %{_sbindir}/%{name}
 %{_mandir}/man8/%{name}.8.gz
+%{_unitdir}/${name}.service
 %dir %{_sysconfdir}/%{name}
 %dir %{_sysconfdir}/%{name}/conf.d
 %dir %{_localstatedir}/log/%{name}
@@ -103,11 +104,16 @@ fi
 %config(noreplace) %{_sysconfdir}/%{name}/fastcgi_params.default
 %config(noreplace) %{_sysconfdir}/%{name}/scgi_params
 %config(noreplace) %{_sysconfdir}/%{name}/scgi_params.default
+%config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}
 %attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}/tmp
 
 
 %changelog
+
+* Wed Oct 19 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-3
+- Add systemd init configuration
+- Add logrotate configuration
 
 * Tue Oct 18 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-2
 - Add Lua module
