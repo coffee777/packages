@@ -1,6 +1,6 @@
 Name:           nginx
 Version:        1.0.8
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        Robust, high-performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://nginx.org/
@@ -126,24 +126,18 @@ fi
 
 %changelog
 
-* Tue Oct 18 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-2
+* Tue Oct 18 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-1
 - Install manpage
 - Remove pointless "provides webserver" directive
-- Remove libxslt and libgd dependencies
-- Remove all remaining patches and extra sources
-- Remove most of the extra modules
-- Remove unnecessary core modules
+- Remove libxslt, libgd and Perl dependencies
+- Remove unnecessary patches and extra sources
+- Remove Perl module and all related hacks
+- Remove most extra modules and some unnecessary core modules
 - Remove configuration files for removed core modules
-- Replace and remove custom macros
+- Remove custom macros
 - Clean up files section
-- Remove remaining Perl cruft
 - Clean up grammar and formatting
-
-* Mon Oct 17 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-1
 - Truncate old changelog
-- Remove pointless distro patches
-- Remove Perl from modules and dependencies
-- Fix comments and formatting
 - Remove unnecessary buildroot variable and clean section
 - Update to latest stable release
 
