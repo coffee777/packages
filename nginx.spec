@@ -68,6 +68,9 @@ find %{buildroot} -type f -name '*.so' -exec chmod 0755 {} \;
 rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
 rm %{buildroot}/%{_sysconfdir}/%{name}/{uwsgi_params,uwsgi_params.default}
 chmod 0755 %{buildroot}%{_sbindir}/nginx
+gzip -9 objs/%{name}.8
+%{__install} -p -d -m 0755 %{buildroot}%{_mandir}/man8
+%{__install} -p -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8
 %{__install} -p -d -m 0755 %{buildroot}%{_sysconfdir}/%{name}/conf.d
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/lib/%{name}/tmp
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/log/%{name}
@@ -107,6 +110,7 @@ fi
 %doc LICENSE CHANGES README
 %{_datadir}/%{name}/
 %{_sbindir}/%{name}
+%{_mandir}/man8/%{name}.8.gz
 %dir %{_sysconfdir}/%{name}
 %dir %{_sysconfdir}/%{name}/conf.d
 %dir %{_localstatedir}/log/%{name}
