@@ -9,14 +9,6 @@ Source0:        http://nginx.org/download/nginx-%{version}.tar.gz
 BuildRequires:      pcre-devel,zlib-devel,openssl-devel,GeoIP-devel
 Requires:           pcre,openssl,GeoIP
 
-# for /usr/sbin/useradd
-Requires(pre):      shadow-utils
-Requires(post):     chkconfig
-
-# for /sbin/service
-Requires(preun):    chkconfig, initscripts
-Requires(postun):   initscripts
-
 %description
 Nginx [engine x] is a HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3
 proxy server written by Igor Sysoev.
@@ -61,9 +53,9 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
+chmod 0755 %{buildroot}%{_sbindir}/nginx
 rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
 rm %{buildroot}/%{_sysconfdir}/%{name}/{uwsgi_params,uwsgi_params.default}
-chmod 0755 %{buildroot}%{_sbindir}/nginx
 gzip -9 objs/%{name}.8
 %{__install} -p -d -m 0755 %{buildroot}%{_mandir}/man8
 %{__install} -p -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8
@@ -72,34 +64,12 @@ gzip -9 objs/%{name}.8
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/log/%{name}
 %{__install} -p -d -m 0755 %{buildroot}%{_datadir}/%{name}/html
 
-# convert to UTF-8 all files that give warnings.
-for textfile in CHANGES; do
-    mv $textfile $textfile.old
-    iconv --from-code ISO8859-1 --to-code UTF-8 --output $textfile $textfile.old
-    rm -f $textfile.old
-done
-
 
 %pre
 if [ $1 == 1 ]; then
     %{_sbindir}/useradd -c "Nginx user" -s /bin/false -r -d %{_localstatedir}/lib/%{name} %{name} 2>/dev/null || :
 fi
 
-%post
-if [ $1 == 1 ]; then
-    /sbin/chkconfig --add %{name}
-fi
-
-%preun
-if [ $1 = 0 ]; then
-    /sbin/service %{name} stop >/dev/null 2>&1
-    /sbin/chkconfig --del %{name}
-fi
-
-%postun
-if [ $1 == 2 ]; then
-    /sbin/service %{name} upgrade || :
-fi
 
 %files
 %defattr(-,root,root,-)
@@ -134,6 +104,9 @@ fi
 - Remove Perl module and all related hacks
 - Remove most extra modules and some unnecessary core modules
 - Remove configuration files for removed core modules
+- Remove old style init config and related dependencies
+- Remove unnecessary shadow-utils dependency
+- Remove seemingly obsolete character set conversion script
 - Remove custom macros
 - Clean up files section
 - Clean up grammar and formatting
