@@ -61,10 +61,6 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
-find %{buildroot} -type f -name .packlist -exec rm -f {} \;
-find %{buildroot} -type f -empty -exec rm -f {} \;
-find %{buildroot} -type f -exec chmod 0644 {} \;
-find %{buildroot} -type f -name '*.so' -exec chmod 0755 {} \;
 rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
 rm %{buildroot}/%{_sysconfdir}/%{name}/{uwsgi_params,uwsgi_params.default}
 chmod 0755 %{buildroot}%{_sbindir}/nginx
