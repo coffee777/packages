@@ -1,0 +1,14 @@
+[Unit]
+Description=High performance HTTP and reverse proxy server
+
+[Service]
+Type=forking
+PIDFile=/run/nginx.pid
+ExecStartPre=/usr/sbin/nginx -t -q -g 'pid /run/nginx.pid;'
+ExecStart=/usr/sbin/nginx -g 'pid /run/nginx.pid;'
+ExecReload=/usr/sbin/nginx -g 'pid /run/nginx.pid;' -s reload
+ExecStop=/usr/sbin/nginx -g 'pid /run/nginx.pid;' -s quit
+
+[Install]
+WantedBy=multi-user.target
+

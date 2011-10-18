@@ -1,7 +1,7 @@
 Name:           nginx
 Version:        1.0.8
 Release:        2%{?dist}
-Summary:        Robust, high-performance HTTP and reverse proxy server
+Summary:        High performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://nginx.org/
 
@@ -9,8 +9,11 @@ Source0:        http://nginx.org/download/nginx-%{version}.tar.gz
 Source1:        simpl-ngx_devel_kit-v0.2.17-0-gbc97eea.tar.gz
 Source2:        chaoslawful-lua-nginx-module-v0.3.1rc16-0-gb298984.tar.gz
 
+Source3:        %{name}.service
+Source4:        %{name}.logrotate
+
 BuildRequires:  pcre-devel,zlib-devel,openssl-devel,GeoIP-devel,lua-devel
-Requires:       pcre,openssl,GeoIP
+Requires:       pcre,openssl,GeoIP,logrotate
 
 %description
 Nginx [engine x] is a HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3
@@ -66,8 +69,9 @@ chmod 0755 %{buildroot}%{_sbindir}/nginx
 rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
 rm %{buildroot}/%{_sysconfdir}/%{name}/{uwsgi_params,uwsgi_params.default}
 gzip -9 objs/%{name}.8
-%{__install} -p -d -m 0755 %{buildroot}%{_mandir}/man8
-%{__install} -p -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8
+%{__install} -p -D -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8
+%{__install} -p -D -m 0644 %{source3} %{buildroot}%{_unitdir}/%{source3}
+%{__install} -p -D -m 0644 %{source4} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 %{__install} -p -d -m 0755 %{buildroot}%{_sysconfdir}/%{name}/conf.d
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/lib/%{name}/tmp
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/log/%{name}
