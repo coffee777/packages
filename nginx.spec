@@ -130,7 +130,8 @@ fi
 
 %changelog
 
-* Fri Aug 26 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-2
+* Tue Oct 18 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-2
+- Install manpage
 - Remove pointless "provides webserver" directive
 - Remove libxslt and libgd dependencies
 - Remove all remaining patches and extra sources
@@ -142,7 +143,7 @@ fi
 - Remove remaining Perl cruft
 - Clean up grammar and formatting
 
-* Fri Aug 26 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-1
+* Mon Oct 17 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-1
 - Truncate old changelog
 - Remove pointless distro patches
 - Remove Perl from modules and dependencies
