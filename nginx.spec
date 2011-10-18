@@ -70,8 +70,8 @@ rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
 rm %{buildroot}/%{_sysconfdir}/%{name}/{uwsgi_params,uwsgi_params.default}
 gzip -9 objs/%{name}.8
 %{__install} -p -D -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8/%{name}.8.gz
-%{__install} -p -D -m 0644 %{source3} %{buildroot}%{_unitdir}/%{name}.service
-%{__install} -p -D -m 0644 %{source4} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
+%{__install} -p -D -m 0644 %{SOURCE3} %{buildroot}%{_unitdir}/%{name}.service
+%{__install} -p -D -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 %{__install} -p -d -m 0755 %{buildroot}%{_sysconfdir}/%{name}/conf.d
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/lib/%{name}/tmp
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/log/%{name}
@@ -90,7 +90,7 @@ fi
 %{_datadir}/%{name}/
 %{_sbindir}/%{name}
 %{_mandir}/man8/%{name}.8.gz
-%{_unitdir}/${name}.service
+%{_unitdir}/%{name}.service
 %dir %{_sysconfdir}/%{name}
 %dir %{_sysconfdir}/%{name}/conf.d
 %dir %{_localstatedir}/log/%{name}
