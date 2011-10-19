@@ -41,7 +41,7 @@ export LUA_INC=%{_includedir}
     --http-proxy-temp-path=%{_localstatedir}/lib/%{name}/tmp/proxy \
     --http-fastcgi-temp-path=%{_localstatedir}/lib/%{name}/tmp/fastcgi \
     --http-scgi-temp-path=%{_localstatedir}/lib/%{name}/tmp/scgi \
-    --pid-path=%{_localstatedir}/run/%{name}.pid \
+    --pid-path=/run/%{name}.pid \
     --lock-path=%{_localstatedir}/lock/subsys/%{name} \
     --with-http_ssl_module \
     --with-http_gzip_static_module \
