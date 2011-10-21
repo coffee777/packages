@@ -1,18 +1,15 @@
 Name:           nginx
 Version:        1.0.8
-Release:        3%{?dist}
+Release:        2%{?dist}
 Summary:        High performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://nginx.org/
 
 Source0:        http://nginx.org/download/nginx-%{version}.tar.gz
-Source1:        simpl-ngx_devel_kit-v0.2.17-0-gbc97eea.tar.gz
-Source2:        chaoslawful-lua-nginx-module-v0.3.1rc16-0-gb298984.tar.gz
+Source1:        %{name}.service
+Source2:        %{name}.logrotate
 
-Source3:        %{name}.service
-Source4:        %{name}.logrotate
-
-BuildRequires:  pcre-devel,zlib-devel,openssl-devel,GeoIP-devel,lua-devel
+BuildRequires:  pcre-devel,zlib-devel,openssl-devel,GeoIP-devel
 Requires:       pcre,openssl,GeoIP,logrotate
 
 %description
@@ -22,13 +19,9 @@ proxy server written by Igor Sysoev.
 
 %prep
 %setup -q
-%setup -q -b 1
-%setup -q -b 2
 
 
 %build
-export LUA_LIB=%{_libdir}/lua/5.1
-export LUA_INC=%{_includedir}
 ./configure \
     --user=%{name} \
     --group=%{name} \
@@ -57,9 +50,7 @@ export LUA_INC=%{_includedir}
     --without-http_split_clients_module \
     --without-http_ssi_module \
     --without-http_userid_module \
-    --without-http_uwsgi_module \
-    --add-module=%{_builddir}/simpl-ngx_devel_kit-bc97eea \
-    --add-module=%{_builddir}/chaoslawful-lua-nginx-module-b298984
+    --without-http_uwsgi_module
 make %{?_smp_mflags}
 
 %install
@@ -70,8 +61,8 @@ rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
 rm %{buildroot}/%{_sysconfdir}/%{name}/{uwsgi_params,uwsgi_params.default}
 gzip -9 objs/%{name}.8
 %{__install} -p -D -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8/%{name}.8.gz
-%{__install} -p -D -m 0644 %{SOURCE3} %{buildroot}%{_unitdir}/%{name}.service
-%{__install} -p -D -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
+%{__install} -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
+%{__install} -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 %{__install} -p -d -m 0755 %{buildroot}%{_sysconfdir}/%{name}/conf.d
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/lib/%{name}/tmp
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/log/%{name}
@@ -111,12 +102,9 @@ fi
 
 %changelog
 
-* Wed Oct 19 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-3
+* Wed Oct 19 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-2
 - Add systemd init configuration
 - Add logrotate configuration
-
-* Tue Oct 18 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-2
-- Add Lua module
 
 * Tue Oct 18 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-1
 - Install manpage
