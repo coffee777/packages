@@ -1,6 +1,6 @@
 Name:           nginx
 Version:        1.0.8
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        High performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://nginx.org/
@@ -9,8 +9,8 @@ Source0:        http://nginx.org/download/nginx-%{version}.tar.gz
 Source1:        %{name}.service
 Source2:        %{name}.logrotate
 
-BuildRequires:  pcre-devel,zlib-devel,openssl-devel,GeoIP-devel
-Requires:       pcre,openssl,GeoIP,logrotate
+BuildRequires:  pcre-devel,zlib-devel,openssl-devel
+Requires:       pcre,openssl,logrotate
 
 %description
 Nginx [engine x] is a HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3
@@ -31,24 +31,30 @@ proxy server written by Igor Sysoev.
     --error-log-path=%{_localstatedir}/log/%{name}/error.log \
     --http-log-path=%{_localstatedir}/log/%{name}/access.log \
     --http-client-body-temp-path=%{_localstatedir}/lib/%{name}/tmp/client_body \
-    --http-proxy-temp-path=%{_localstatedir}/lib/%{name}/tmp/proxy \
-    --http-fastcgi-temp-path=%{_localstatedir}/lib/%{name}/tmp/fastcgi \
-    --http-scgi-temp-path=%{_localstatedir}/lib/%{name}/tmp/scgi \
     --pid-path=/run/%{name}.pid \
     --lock-path=%{_localstatedir}/lock/subsys/%{name} \
     --with-http_ssl_module \
     --with-http_gzip_static_module \
-    --with-http_stub_status_module \
-    --with-http_geoip_module \
     --with-file-aio \
     --with-ipv6 \
     --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
+    --without-http_access_module \
     --without-http_auth_basic_module \
+    --without-http_autoindex_module \
+    --without-http_browser_module \
     --without-http_charset_module \
+    --without-http_empty_gif_module \
+    --without-http_fastcgi_module \
+    --without-http_geo_module \
+    --without-http_limit_req_module \
+    --without-http_limit_zone_module \
     --without-http_map_module \
     --without-http_memcached_module \
+    --without-http_proxy_module \
+    --without-http_scgi_module \
     --without-http_split_clients_module \
     --without-http_ssi_module \
+    --without-http_upstream_ip_hash_module \
     --without-http_userid_module \
     --without-http_uwsgi_module
 make %{?_smp_mflags}
@@ -59,6 +65,9 @@ make install DESTDIR=%{buildroot}
 chmod 0755 %{buildroot}%{_sbindir}/nginx
 rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
 rm %{buildroot}/%{_sysconfdir}/%{name}/{uwsgi_params,uwsgi_params.default}
+rm %{buildroot}/%{_sysconfdir}/%{name}/{fastcgi.conf,fastcgi.conf.default}
+rm %{buildroot}/%{_sysconfdir}/%{name}/{fastcgi_params,fastcgi_params.default}
+rm %{buildroot}/%{_sysconfdir}/%{name}/{scgi_params,scgi_params.default}
 gzip -9 objs/%{name}.8
 %{__install} -p -D -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8/%{name}.8.gz
 %{__install} -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
@@ -89,18 +98,19 @@ fi
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf.default
 %config(noreplace) %{_sysconfdir}/%{name}/mime.types
 %config(noreplace) %{_sysconfdir}/%{name}/mime.types.default
-%config(noreplace) %{_sysconfdir}/%{name}/fastcgi.conf
-%config(noreplace) %{_sysconfdir}/%{name}/fastcgi.conf.default
-%config(noreplace) %{_sysconfdir}/%{name}/fastcgi_params
-%config(noreplace) %{_sysconfdir}/%{name}/fastcgi_params.default
-%config(noreplace) %{_sysconfdir}/%{name}/scgi_params
-%config(noreplace) %{_sysconfdir}/%{name}/scgi_params.default
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}
 %attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}/tmp
 
 
 %changelog
+
+* Fri Oct 21 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-3
+- Remove all core modules that aren't necessary for serving static files
+- Remove all configuration files relating to removed modules
+- Remove optional GeoIP module and it's dependencies
+- Remove optional stub status module
+- Clean up files section to reflect changes
 
 * Wed Oct 19 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-2
 - Add systemd init configuration
