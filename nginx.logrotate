@@ -6,7 +6,7 @@
     notifempty
     sharedscripts
     postrotate
-       kill -USR1 $(cat /run/nginx.pid)
+       kill -USR1 $(cat /run/nginx.pid 2>/dev/null)
     endscript
 }
 
