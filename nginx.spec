@@ -63,11 +63,10 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 chmod 0755 %{buildroot}%{_sbindir}/nginx
+rm %{buildroot}/%{_sysconfdir}/%{name}/fastcgi.conf
+rm %{buildroot}/%{_sysconfdir}/%{name}/*.default
+rm %{buildroot}/%{_sysconfdir}/%{name}/{fastcgi,scgi,uwsgi}_params
 rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
-rm %{buildroot}/%{_sysconfdir}/%{name}/{uwsgi_params,uwsgi_params.default}
-rm %{buildroot}/%{_sysconfdir}/%{name}/{fastcgi.conf,fastcgi.conf.default}
-rm %{buildroot}/%{_sysconfdir}/%{name}/{fastcgi_params,fastcgi_params.default}
-rm %{buildroot}/%{_sysconfdir}/%{name}/{scgi_params,scgi_params.default}
 gzip -9 objs/%{name}.8
 %{__install} -p -D -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8/%{name}.8.gz
 %{__install} -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
@@ -95,15 +94,16 @@ fi
 %dir %{_sysconfdir}/%{name}/conf.d
 %dir %{_localstatedir}/log/%{name}
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
-%config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf.default
 %config(noreplace) %{_sysconfdir}/%{name}/mime.types
-%config(noreplace) %{_sysconfdir}/%{name}/mime.types.default
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}
 %attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}/tmp
 
 
 %changelog
+
+* Fri Oct 21 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-4
+- Remove pointless *.default configuration files
 
 * Fri Oct 21 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-3
 - Remove all core modules that aren't necessary for serving static files
