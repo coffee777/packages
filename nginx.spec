@@ -1,6 +1,6 @@
 Name:           nginx
 Version:        1.0.8
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        High performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://nginx.org/
@@ -9,8 +9,11 @@ Source0:        http://nginx.org/download/nginx-%{version}.tar.gz
 Source1:        %{name}.service
 Source2:        %{name}.logrotate
 
-BuildRequires:  pcre-devel,zlib-devel,openssl-devel
-Requires:       pcre,openssl,logrotate
+BuildRequires:      pcre-devel,zlib-devel,openssl-devel
+Requires:           pcre,openssl,logrotate
+Requires(post):     systemd-units
+Requires(preun):    systemd-units
+Requires(postun):   systemd-units
 
 %description
 Nginx [engine x] is a HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3
@@ -78,8 +81,27 @@ gzip -9 objs/%{name}.8
 
 
 %pre
-if [ $1 == 1 ]; then
-    %{_sbindir}/useradd -c "Nginx user" -s /bin/false -r -d %{_localstatedir}/lib/%{name} %{name} 2>/dev/null || :
+if [ $1 -eq 1 ]; then
+    %{_sbindir}/useradd -c "Nginx user" -s /bin/false -r -d %{_localstatedir}/lib/%{name} %{name} &>/dev/null || :
+fi
+
+%post
+if [ $1 -eq 1 ]; then
+    /bin/systemctl daemon-reload &>/dev/null || :
+fi
+
+%preun
+if [ $1 -eq 0 ]; then
+    # Package removal, not upgrade
+    /bin/systemctl --no-reload disable %{name}.service &>/dev/null || :
+    /bin/systemctl stop %{name}.service &>/dev/null || :
+fi
+
+%postun
+/bin/systemctl daemon-reload &>/dev/null || :
+if [ $1 -ge 1 ]; then
+    # Package upgrade, not removal
+    /bin/systemctl try-restart %{name}.service &>/dev/null || :
 fi
 
 
@@ -104,6 +126,7 @@ fi
 
 * Fri Oct 21 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-4
 - Remove pointless *.default configuration files
+- Add standard systemd scriptlet snippets
 
 * Fri Oct 21 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-3
 - Remove all core modules that aren't necessary for serving static files
