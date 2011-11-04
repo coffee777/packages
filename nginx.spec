@@ -11,6 +11,7 @@ Source2:        %{name}.logrotate
 Source3:        %{name}.conf
 Source4:        mime.types
 Source5:        gzip.types
+Source6:        default.conf
 
 BuildRequires:      pcre-devel,zlib-devel,openssl-devel
 Requires:           pcre,openssl,logrotate
@@ -77,7 +78,7 @@ gzip -9 objs/%{name}.8
 %{__install} -p -D -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8/%{name}.8.gz
 %{__install} -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
 %{__install} -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
-%{__install} -p -d -m 0755 %{buildroot}%{_sysconfdir}/%{name}/conf.d
+%{__install} -p -D -m 0644 %{SOURCE6} %{buildroot}%{_sysconfdir}/%{name}/conf.d/default.conf
 %{__install} -p -m 0644 %{SOURCE3} %{SOURCE4} %{SOURCE5} %{buildroot}%{_sysconfdir}/%{name}/
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/lib/%{name}/tmp
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/log/%{name}
@@ -122,6 +123,7 @@ fi
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/%{name}/mime.types
 %config(noreplace) %{_sysconfdir}/%{name}/gzip.types
+%config(noreplace) %{_sysconfdir}/%{name}/conf.d/default.conf
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}
 %attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}/tmp
