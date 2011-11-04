@@ -4,12 +4,13 @@ gzip_types
     text/css
     application/x-javascript
     application/json
-    application/xml
+    text/xml
+    text/csv
     application/rss+xml
+    application/atom+xml
     font/truetype
     font/opentype
     application/vnd.ms-fontobject
-    image/svg+xml
     text/plain
     text/x-component
 ;
