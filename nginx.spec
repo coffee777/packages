@@ -1,6 +1,6 @@
 Name:           nginx
-Version:        1.0.8
-Release:        4%{?dist}
+Version:        1.0.9
+Release:        1%{?dist}
 Summary:        High performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://nginx.org/
@@ -8,6 +8,9 @@ URL:            http://nginx.org/
 Source0:        http://nginx.org/download/nginx-%{version}.tar.gz
 Source1:        %{name}.service
 Source2:        %{name}.logrotate
+Source3:        %{name}.conf
+Source4:        mime.types
+Source5:        gzip.types
 
 BuildRequires:      pcre-devel,zlib-devel,openssl-devel
 Requires:           pcre,openssl,logrotate
@@ -75,6 +78,7 @@ gzip -9 objs/%{name}.8
 %{__install} -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
 %{__install} -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 %{__install} -p -d -m 0755 %{buildroot}%{_sysconfdir}/%{name}/conf.d
+%{__install} -p -m 0644 %{SOURCE3} %{SOURCE4} %{SOURCE5} %{buildroot}%{_sysconfdir}/%{name}/
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/lib/%{name}/tmp
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/log/%{name}
 %{__install} -p -d -m 0755 %{buildroot}%{_datadir}/%{name}/html
@@ -117,12 +121,17 @@ fi
 %dir %{_localstatedir}/log/%{name}
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %{_sysconfdir}/%{name}/mime.types
+%config(noreplace) %{_sysconfdir}/%{name}/gzip.types
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}
 %attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}/tmp
 
 
 %changelog
+
+* Fri Nov 4 2011 Craig Barnes <cr@igbarn.es> - 1.0.9-1
+- Add custom configuration files
+- Update to latest stable release
 
 * Fri Oct 21 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-4
 - Remove pointless *.default configuration files
