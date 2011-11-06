@@ -37,7 +37,7 @@ proxy server written by Igor Sysoev.
     --conf-path=%{_sysconfdir}/%{name}/%{name}.conf \
     --error-log-path=%{_localstatedir}/log/%{name}/error.log \
     --http-log-path=%{_localstatedir}/log/%{name}/access.log \
-    --http-client-body-temp-path=%{_localstatedir}/lib/%{name}/tmp/client_body \
+    --http-client-body-temp-path=%{_sharedstatedir}/%{name}/tmp/client_body \
     --pid-path=/run/%{name}.pid \
     --lock-path=%{_localstatedir}/lock/subsys/%{name} \
     --with-http_ssl_module \
@@ -80,14 +80,14 @@ gzip -9 objs/%{name}.8
 %{__install} -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 %{__install} -p -D -m 0644 %{SOURCE6} %{buildroot}%{_sysconfdir}/%{name}/conf.d/default.conf
 %{__install} -p -m 0644 %{SOURCE3} %{SOURCE4} %{SOURCE5} %{buildroot}%{_sysconfdir}/%{name}/
-%{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/lib/%{name}/tmp
+%{__install} -p -d -m 0755 %{buildroot}%{_sharedstatedir}/%{name}/tmp
 %{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/log/%{name}
 %{__install} -p -d -m 0755 %{buildroot}%{_datadir}/%{name}/html
 
 
 %pre
 if [ $1 -eq 1 ]; then
-    %{_sbindir}/useradd -c "Nginx user" -s /bin/false -r -d %{_localstatedir}/lib/%{name} %{name} &>/dev/null || :
+    %{_sbindir}/useradd -c "Nginx user" -s /bin/false -r -d %{_sharedstatedir}/%{name} %{name} &>/dev/null || :
 fi
 
 %post
@@ -125,8 +125,8 @@ fi
 %config(noreplace) %{_sysconfdir}/%{name}/gzip.types
 %config(noreplace) %{_sysconfdir}/%{name}/conf.d/default.conf
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
-%attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}
-%attr(-,%{name},%{name}) %dir %{_localstatedir}/lib/%{name}/tmp
+%attr(-,%{name},%{name}) %dir %{_sharedstatedir}/%{name}
+%attr(-,%{name},%{name}) %dir %{_sharedstatedir}/%{name}/tmp
 
 
 %changelog
