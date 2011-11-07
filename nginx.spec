@@ -6,9 +6,9 @@ License:        BSD
 URL:            http://nginx.org/
 
 Source0:        http://nginx.org/download/nginx-%{version}.tar.gz
-Source1:        %{name}.service
-Source2:        %{name}.logrotate
-Source3:        %{name}.conf
+Source1:        nginx.service
+Source2:        nginx.logrotate
+Source3:        nginx.conf
 Source4:        mime.types
 Source5:        gzip.types
 Source6:        default.conf
