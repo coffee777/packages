@@ -13,3 +13,9 @@ $(name)-$(ver)-$(rel).$(os).$(arch).rpm:
 	cd $(dir)/SOURCES && wget $(src0)
 	su -c 'cd $(dir) && rpmbuild -ba SPECS/nginx.spec' makerpm
 	cp $(dir)/RPMS/$(arch)/$@ $@
+
+clean:
+	rm -f *.rpm
+
+
+.PHONY: clean
