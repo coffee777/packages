@@ -133,6 +133,7 @@ fi
 
 * Fri Nov 4 2011 Craig Barnes <cr@igbarn.es> - 1.0.9-1
 - Add custom configuration files
+- Fix incorrect macro usage
 - Update to latest stable release
 
 * Fri Oct 21 2011 Craig Barnes <cr@igbarn.es> - 1.0.8-4
