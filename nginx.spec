@@ -1,17 +1,17 @@
-Name:           nginx
-Version:        1.0.9
-Release:        1%{?dist}
-Summary:        High performance HTTP and reverse proxy server
-License:        BSD
-URL:            http://nginx.org/
+Name:               nginx
+Version:            1.0.10
+Release:            1%{?dist}
+Summary:            High performance HTTP and reverse proxy server
+License:            BSD
+URL:                http://nginx.org/
 
-Source0:        http://nginx.org/download/nginx-%{version}.tar.gz
-Source1:        nginx.service
-Source2:        nginx.logrotate
-Source3:        nginx.conf
-Source4:        mime.types
-Source5:        gzip.types
-Source6:        default.conf
+Source0:            http://nginx.org/download/nginx-%{version}.tar.gz
+Source1:            nginx.service
+Source2:            nginx.logrotate
+Source3:            nginx.conf
+Source4:            mime.types
+Source5:            gzip.types
+Source6:            default.conf
 
 BuildRequires:      pcre-devel,zlib-devel,openssl-devel
 Requires:           pcre,openssl,logrotate
@@ -130,6 +130,10 @@ fi
 
 
 %changelog
+
+* Fri Dec 9 2011 Craig Barnes <cr@igbarn.es> - 1.0.10-1
+- Update to latest stable release
+- Pedantic column alignment for package metadata
 
 * Fri Nov 4 2011 Craig Barnes <cr@igbarn.es> - 1.0.9-1
 - Add custom configuration files
