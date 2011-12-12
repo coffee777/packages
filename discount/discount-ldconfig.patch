@@ -1,0 +1,10 @@
+--- configure.inc.orig  2011-09-25 20:45:21.725883371 +0100
++++ configure.inc   2011-09-25 20:46:02.895334671 +0100
+@@ -1265,7 +1265,6 @@
+ install)$PROG_INSTALL -c \$FULLNAME "\$1"
+    $PROG_LN_S -f \$FULLNAME \$1/\$LIBNAME.\$MAJOR
+    $PROG_LN_S -f \$FULLNAME \$1/\$LIBNAME
+-   test "$LDCONFIG" && $LDCONFIG "\$1"
+    ;;
+ esac
+ EOF
