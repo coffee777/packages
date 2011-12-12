@@ -1,6 +1,6 @@
 Name:           discount
 Version:        2.1.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A command-line utility for converting Markdown files into HTML
 License:        BSD
 URL:            http://www.pell.portland.or.us/~orc/Code/%{name}
@@ -42,15 +42,18 @@ implementation, written in C.
 
 
 %build
-./configure.sh --shared --prefix=%{_prefix} --libdir=%{_libdir} --mandir=%{_mandir}
+./configure.sh \
+    --shared \
+    --prefix=%{_prefix} \
+    --execdir=%{_bindir} \
+    --libdir=%{_libdir} \
+    --mandir=%{_mandir}
 make %{?_smp_mflags}
 
 
 %install
 rm -rf %{buildroot}
-make install DESTDIR=%{buildroot}
-make install.man DESTDIR=%{buildroot}
-make install.samples DESTDIR=%{buildroot}
+make install.everything DESTDIR=%{buildroot}
 
 
 %post -n libmarkdown -p /sbin/ldconfig
@@ -86,6 +89,10 @@ make test
 
 
 %changelog
+
+* Mon Dec 12 2011 Craig Barnes <cr@igbarn.es> - 2.1.2-4
+- Split configure script flags across multiple lines for readability
+- Use make install.everything target instead of specifying 3 separate targets
 
 * Sun Oct 16 2011 Craig Barnes <cr@igbarn.es> - 2.1.2-3
 - Get sources from author's website instead of GitHub
