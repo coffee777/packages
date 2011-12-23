@@ -1,0 +1,11 @@
+[org.gnome.desktop.interface]
+font-name='Cantarell 10'
+
+[org.gnome.desktop.media-handling]
+autorun-never=true
+
+[org.gnome.desktop.lockdown]
+disable-user-switching=true
+
+[org.gnome.desktop.screensaver]
+lock-enabled=false

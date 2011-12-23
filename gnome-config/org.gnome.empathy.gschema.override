@@ -1,0 +1,5 @@
+[org.gnome.Empathy.ui]
+show-protocols=true
+
+[org.gnome.Empathy.notifications]
+notifications-contact-signin=true

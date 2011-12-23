@@ -1,0 +1,10 @@
+[org.gnome.gedit.preferences.editor]
+scheme='oblivion'
+tabs-size=4
+insert-spaces=true
+auto-indent=true
+bracket-matching=true
+highlight-current-line=true
+display-line-numbers=true
+display-right-margin=true
+create-backup-copy=false
