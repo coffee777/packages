@@ -1,5 +1,5 @@
+VER   = 0.1
 DIR   = /usr/share/glib-2.0/schemas
-
 FILES = org.gnome.desktop.gschema.override \
         org.gnome.empathy.gschema.override \
         org.gnome.epiphany.gschema.override \
@@ -13,6 +13,12 @@ install: $(FILES)
 
 update:
 	glib-compile-schemas $(DIR)
+
+dist: $(FILES) Makefile
+	tar -czf gnome-config-$(VER).tar.gz $^
+
+clean:
+	rm -f *.tar.gz
 
 
 .PHONY: install update
