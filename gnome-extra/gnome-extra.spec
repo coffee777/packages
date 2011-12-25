@@ -7,7 +7,11 @@ URL:            https://bitbucket.org/craigbarnes/packages
 BuildArch:      noarch
 Source0:        %{name}-%{version}.tar.gz
 
-#Requires:       
+Requires:       epiphany epiphany-extensions
+Requires:       inkscape
+Requires:       gedit-plugins
+Requires:       nautilus-open-terminal
+Requires:       dconf-editor
 
 %description
 Many GNOME applications allow GSettings to centrally manage and store their
