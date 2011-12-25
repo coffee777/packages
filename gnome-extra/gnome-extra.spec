@@ -18,7 +18,7 @@ configure things themself manually.
 This package is a set of opinionated but tasteful default settings for
 a number of the most useful and commonly used GNOME applications. It also
 acts as a "meta-package" for installing a number of very useful applications
-that are not usually not included as part of LiveCD installations.
+that are usually not included as part of a LiveCD installation.
 
 
 %prep
