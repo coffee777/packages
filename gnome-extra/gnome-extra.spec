@@ -13,6 +13,12 @@ Requires:       gedit-plugins
 Requires:       nautilus-open-terminal
 Requires:       dconf-editor
 
+Obsoletes:      gnome-games
+Obsoletes:      aisleriot
+Obsoletes:      sound-juicer
+Obsoletes:      PackageKit-command-not-found
+Obsoletes:      gnome-mplayer
+
 %description
 Many GNOME applications allow GSettings to centrally manage and store their
 configuration settings. The default configuration of most applications
