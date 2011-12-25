@@ -1,5 +1,5 @@
 VER   = 0.1
-DIR   = /usr/share/glib-2.0/schemas
+DIR  ?= /usr/share/glib-2.0/schemas
 FILES = org.gnome.desktop.gschema.override \
         org.gnome.empathy.gschema.override \
         org.gnome.epiphany.gschema.override \
