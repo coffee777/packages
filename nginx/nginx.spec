@@ -1,5 +1,5 @@
 Name:               nginx
-Version:            1.0.10
+Version:            1.1.12
 Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
@@ -44,6 +44,7 @@ proxy server written by Igor Sysoev.
     --with-http_gzip_static_module \
     --with-file-aio \
     --with-ipv6 \
+    --with-pcre-jit \
     --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
     --without-http_access_module \
     --without-http_auth_basic_module \
@@ -130,6 +131,10 @@ fi
 
 
 %changelog
+
+* Mon Dec 26 2011 Craig Barnes <cr@igbarn.es> - 1.1.12-1
+- Update to latest development release
+- Add configure flag for PCRE JIT support
 
 * Fri Dec 9 2011 Craig Barnes <cr@igbarn.es> - 1.0.10-1
 - Update to latest stable release
