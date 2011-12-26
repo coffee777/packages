@@ -30,16 +30,16 @@ proxy server written by Igor Sysoev.
 
 %build
 ./configure \
-    --user=%{name} \
-    --group=%{name} \
-    --prefix=%{_datadir}/%{name} \
-    --sbin-path=%{_sbindir}/%{name} \
-    --conf-path=%{_sysconfdir}/%{name}/%{name}.conf \
-    --error-log-path=%{_localstatedir}/log/%{name}/error.log \
-    --http-log-path=%{_localstatedir}/log/%{name}/access.log \
-    --http-client-body-temp-path=%{_sharedstatedir}/%{name}/tmp/client_body \
-    --pid-path=/run/%{name}.pid \
-    --lock-path=%{_localstatedir}/lock/subsys/%{name} \
+    --user=nginx \
+    --group=nginx \
+    --prefix=%{_datadir}/nginx \
+    --sbin-path=%{_sbindir}/nginx \
+    --conf-path=%{_sysconfdir}/nginx/nginx.conf \
+    --error-log-path=%{_localstatedir}/log/nginx/error.log \
+    --http-log-path=%{_localstatedir}/log/nginx/access.log \
+    --http-client-body-temp-path=%{_sharedstatedir}/nginx/body \
+    --pid-path=/run/nginx.pid \
+    --lock-path=%{_localstatedir}/lock/subsys/nginx \
     --with-http_ssl_module \
     --with-http_gzip_static_module \
     --with-file-aio \
@@ -71,24 +71,24 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 chmod 0755 %{buildroot}%{_sbindir}/nginx
-rm %{buildroot}/%{_sysconfdir}/%{name}/fastcgi.conf
-rm %{buildroot}/%{_sysconfdir}/%{name}/*.default
-rm %{buildroot}/%{_sysconfdir}/%{name}/{fastcgi,scgi,uwsgi}_params
-rm %{buildroot}/%{_sysconfdir}/%{name}/{win-utf,koi-utf,koi-win}
-gzip -9 objs/%{name}.8
-%{__install} -p -D -m 0644 objs/%{name}.8.gz %{buildroot}%{_mandir}/man8/%{name}.8.gz
-%{__install} -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
-%{__install} -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
-%{__install} -p -D -m 0644 %{SOURCE6} %{buildroot}%{_sysconfdir}/%{name}/conf.d/default.conf
-%{__install} -p -m 0644 %{SOURCE3} %{SOURCE4} %{SOURCE5} %{buildroot}%{_sysconfdir}/%{name}/
-%{__install} -p -d -m 0755 %{buildroot}%{_sharedstatedir}/%{name}/tmp
-%{__install} -p -d -m 0755 %{buildroot}%{_localstatedir}/log/%{name}
-%{__install} -p -d -m 0755 %{buildroot}%{_datadir}/%{name}/html
+rm %{buildroot}/%{_sysconfdir}/nginx/fastcgi.conf
+rm %{buildroot}/%{_sysconfdir}/nginx/*.default
+rm %{buildroot}/%{_sysconfdir}/nginx/{fastcgi,scgi,uwsgi}_params
+rm %{buildroot}/%{_sysconfdir}/nginx/{win-utf,koi-utf,koi-win}
+gzip -9 objs/nginx.8
+install -p -D -m 0644 objs/nginx.8.gz %{buildroot}%{_mandir}/man8/nginx.8.gz
+install -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/nginx.service
+install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/nginx
+install -p -D -m 0644 %{SOURCE6} %{buildroot}%{_sysconfdir}/nginx/conf.d/default.conf
+install -p -m 0644 %{SOURCE3} %{SOURCE4} %{SOURCE5} %{buildroot}%{_sysconfdir}/nginx/
+install -p -d -m 0755 %{buildroot}%{_sharedstatedir}/nginx
+install -p -d -m 0755 %{buildroot}%{_localstatedir}/log/nginx
+install -p -d -m 0755 %{buildroot}%{_datadir}/nginx/html
 
 
 %pre
 if [ $1 -eq 1 ]; then
-    %{_sbindir}/useradd -c "Nginx user" -s /bin/false -r -d %{_sharedstatedir}/%{name} %{name} &>/dev/null || :
+    useradd -s /bin/false -r -d %{_sharedstatedir}/nginx nginx &>/dev/null || :
 fi
 
 %post
@@ -99,35 +99,34 @@ fi
 %preun
 if [ $1 -eq 0 ]; then
     # Package removal, not upgrade
-    /bin/systemctl --no-reload disable %{name}.service &>/dev/null || :
-    /bin/systemctl stop %{name}.service &>/dev/null || :
+    /bin/systemctl --no-reload disable nginx.service &>/dev/null || :
+    /bin/systemctl stop nginx.service &>/dev/null || :
 fi
 
 %postun
 /bin/systemctl daemon-reload &>/dev/null || :
 if [ $1 -ge 1 ]; then
     # Package upgrade, not removal
-    /bin/systemctl try-restart %{name}.service &>/dev/null || :
+    /bin/systemctl try-restart nginx.service &>/dev/null || :
 fi
 
 
 %files
 %defattr(-,root,root,-)
 %doc LICENSE CHANGES README
-%{_datadir}/%{name}/
-%{_sbindir}/%{name}
-%{_mandir}/man8/%{name}.8.gz
-%{_unitdir}/%{name}.service
-%dir %{_sysconfdir}/%{name}
-%dir %{_sysconfdir}/%{name}/conf.d
-%dir %{_localstatedir}/log/%{name}
-%config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
-%config(noreplace) %{_sysconfdir}/%{name}/mime.types
-%config(noreplace) %{_sysconfdir}/%{name}/gzip.types
-%config(noreplace) %{_sysconfdir}/%{name}/conf.d/default.conf
-%config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
-%attr(-,%{name},%{name}) %dir %{_sharedstatedir}/%{name}
-%attr(-,%{name},%{name}) %dir %{_sharedstatedir}/%{name}/tmp
+%{_datadir}/nginx/
+%{_sbindir}/nginx
+%{_mandir}/man8/nginx.8.gz
+%{_unitdir}/nginx.service
+%dir %{_sysconfdir}/nginx
+%dir %{_sysconfdir}/nginx/conf.d
+%dir %{_localstatedir}/log/nginx
+%config(noreplace) %{_sysconfdir}/nginx/nginx.conf
+%config(noreplace) %{_sysconfdir}/nginx/mime.types
+%config(noreplace) %{_sysconfdir}/nginx/gzip.types
+%config(noreplace) %{_sysconfdir}/nginx/conf.d/default.conf
+%config(noreplace) %{_sysconfdir}/logrotate.d/nginx
+%attr(-,nginx,nginx) %dir %{_sharedstatedir}/nginx
 
 
 %changelog
@@ -135,6 +134,9 @@ fi
 * Mon Dec 26 2011 Craig Barnes <cr@igbarn.es> - 1.1.12-1
 - Update to latest development release
 - Add configure flag for PCRE JIT support
+- Clean up pointless overuse of macros
+- Move "http-client-body-temp-path" location
+- Remove pointless extras from pre-install useradd command
 
 * Fri Dec 9 2011 Craig Barnes <cr@igbarn.es> - 1.0.10-1
 - Update to latest stable release
