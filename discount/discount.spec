@@ -6,7 +6,6 @@ License:        BSD
 URL:            http://www.pell.portland.or.us/~orc/Code/discount
 Source0:        %{url}/discount-%{version}.tar.bz2
 Patch0:         discount-ldconfig.patch
-
 Requires:       libmarkdown%{?_isa} = %{version}-%{release}
 BuildRequires:  autoconf
 
@@ -17,23 +16,18 @@ extensions, and passes the Markdown test suite.
 
 
 %package -n libmarkdown
-Summary:        A fast implementation of the Markdown language in C
-
+Summary: A fast implementation of the Markdown language in C
 %description -n libmarkdown
 libmarkdown is the library portion of discount, a fast Markdown language
 implementation, written in C.
 
 
 %package -n libmarkdown-devel
-Summary:        Development headers for the libmarkdown library
-Requires:       libmarkdown%{?_isa} = %{version}-%{release}
-
+Summary: Development headers for the libmarkdown library
+Requires: libmarkdown%{?_isa} = %{version}-%{release}
 %description -n libmarkdown-devel
-This package contains development headers and developer-oriented man pages for
-libmarkdown.
-
-libmarkdown is the library portion of discount, a fast Markdown language
-implementation, written in C.
+This package contains development headers and developer-oriented man pages
+for libmarkdown.
 
 
 %prep
