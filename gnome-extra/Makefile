@@ -1,21 +1,17 @@
-VER   = 0.1
-DIR  ?= /usr/share/glib-2.0/schemas
-FILES = org.gnome.desktop.gschema.override \
-        org.gnome.empathy.gschema.override \
-        org.gnome.epiphany.gschema.override \
-        org.gnome.gedit.gschema.override \
-        org.gnome.settings-daemon.peripherals.gschema.override \
-        org.gnome.shell.gschema.override
+VERSION    = 0.2
+SCHEMADIR ?= /usr/share/glib-2.0/schemas
+SEARCHDIR ?= /usr/share/gnome-shell/search_providers
 
-install: $(FILES)
-	install -m 0755 -p -d $(DESTDIR)$(DIR)
-	install -m 0644 -p $^ $(DESTDIR)$(DIR)
+install:
+	install -m 0755 -p -d $(DESTDIR)$(SCHEMADIR) $(DESTDIR)$(SEARCHDIR)
+	install -m 0644 -p *.gschema.override $(DESTDIR)$(SCHEMADIR)
+	install -m 0644 -p google-ssl.xml $(DESTDIR)$(SEARCHDIR)
 
 update:
-	glib-compile-schemas $(DIR)
+	glib-compile-schemas $(SCHEMADIR)
 
-dist: $(FILES) Makefile README
-	tar -czf gnome-extra-$(VER).tar.gz $^
+dist: *.gschema.override google-ssl.xml Makefile README
+	tar -czf gnome-extra-$(VERSION).tar.gz $^
 
 clean:
 	rm -f *.tar.gz

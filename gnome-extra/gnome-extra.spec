@@ -1,5 +1,5 @@
 Name:           gnome-extra
-Version:        0.1
+Version:        0.2
 Release:        1%{?dist}
 Summary:        Various GNOME desktop/application preference overrides
 License:        GPLv3
@@ -37,7 +37,9 @@ that are usually not included as part of a LiveCD installation.
 
 %install
 rm -rf %{buildroot}
-make install DESTDIR=%{buildroot} DIR=%{_datadir}/glib-2.0/schemas
+make install DESTDIR=%{buildroot} \
+             SCHEMADIR=%{_datadir}/glib-2.0/schemas \
+             SEARCHDIR=%{_datadir}/gnome-shell/search_providers
 
 
 %postun
@@ -54,9 +56,15 @@ fi
 %defattr(-,root,root,-)
 %doc README
 %{_datadir}/glib-2.0/schemas/*.gschema.override
+%{_datadir}/gnome-shell/search_providers/google-ssl.xml
 
 
 %changelog
+
+* Tue Dec 27 2011 Craig Barnes <cr@igbarn.es> - 0.2-1
+- Adjust install section to handle updated Makefile
+- Adjust files section to include new gnome-shell search provider file
+- Bump version
 
 * Sat Dec 24 2011 Craig Barnes <cr@igbarn.es> - 0.1-1
 - Initial package
