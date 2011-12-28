@@ -1,4 +1,4 @@
-PKG = jsmin gnome-extra nginx
+PKG = jsmin gnome-extra nginx pngquant
 
 help:
 	@echo "Usage: make PACKAGE"
