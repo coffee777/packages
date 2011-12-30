@@ -1,4 +1,4 @@
-PKG = jsmin gnome-extra nginx pngquant
+PKG = jsmin gnome-extra nginx pngquant md2html
 
 help:
 	@echo "Usage: make PACKAGE"
