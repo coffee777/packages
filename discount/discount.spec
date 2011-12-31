@@ -59,7 +59,6 @@ make test
 
 
 %files
-%defattr(-,root,root,-)
 %doc README COPYRIGHT CREDITS
 %{_bindir}/markdown
 %{_bindir}/makepage
@@ -70,13 +69,11 @@ make test
 
 
 %files -n libmarkdown
-%defattr(-,root,root,-)
 %doc README COPYRIGHT CREDITS
 %{_libdir}/libmarkdown.so.*
 
 
 %files -n libmarkdown-devel
-%defattr(-,root,root,-)
 %{_libdir}/libmarkdown.so
 %{_includedir}/*
 %{_mandir}/man3/*.3*

@@ -29,7 +29,6 @@ rm -rf %{buildroot}
 
 
 %files
-%defattr(-,root,root,-)
 %doc README
 %{_sbindir}/jsmin
 

@@ -112,7 +112,6 @@ fi
 
 
 %files
-%defattr(-,root,root,-)
 %doc LICENSE CHANGES README
 %{_datadir}/nginx/
 %{_sbindir}/nginx

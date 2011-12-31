@@ -53,7 +53,6 @@ fi
 
 
 %files
-%defattr(-,root,root,-)
 %doc README
 %{_datadir}/glib-2.0/schemas/*.gschema.override
 %{_datadir}/gnome-shell/search_providers/google-ssl.xml

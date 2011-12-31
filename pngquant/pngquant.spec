@@ -37,7 +37,6 @@ install -m 0644 -p -D pngquant.1 %{buildroot}/%{_mandir}/man1/pngquant.1
 
 
 %files
-%defattr(-,root,root,-)
 %doc README.md CHANGELOG COPYRIGHT
 %{_bindir}/pngquant
 %{_mandir}/man1/pngquant.1.gz

@@ -23,7 +23,6 @@ install -m 0755 -p -D md2html.10.awk %{buildroot}%{_bindir}/md2html
 
 
 %files
-%defattr(-,root,root,-)
 %{_bindir}/md2html
 
 
