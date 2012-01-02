@@ -19,7 +19,7 @@ $(PKG):
 # FIXME: this is a really hacky, lazy solution
 install: ~/Dropbox/Public/fedora-remix/16
 	cp -f *.src.rpm $</source/packages && cd $< && createrepo source
-	-cp -f *.noarch.rpm $</i386/package
+	-cp -f *.noarch.rpm $</i386/packages
 	-cp -f *.i686.rpm $</i386/packages
 	cd $< && createrepo i386
 
