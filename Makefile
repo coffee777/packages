@@ -16,7 +16,14 @@ $(PKG):
 	sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' /tmp/$@.build | \
 	    while read line; do cp $$line ./; done
 
+# FIXME: this is a really hacky, lazy solution
+install: ~/Dropbox/Public/fedora-remix/16
+	cp -f *.src.rpm $</source/packages && cd $< && createrepo source
+	-cp -f *.noarch.rpm $</i386/package
+	-cp -f *.i686.rpm $</i386/packages
+	cd $< && createrepo i386
+
 clean:
 	rm -f *.rpm
 
-.PHONY: help all clean $(PKG)
+.PHONY: help all install clean $(PKG)
