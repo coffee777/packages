@@ -75,8 +75,7 @@ rm %{buildroot}/%{_sysconfdir}/nginx/fastcgi.conf
 rm %{buildroot}/%{_sysconfdir}/nginx/*.default
 rm %{buildroot}/%{_sysconfdir}/nginx/{fastcgi,scgi,uwsgi}_params
 rm %{buildroot}/%{_sysconfdir}/nginx/{win-utf,koi-utf,koi-win}
-gzip -9 objs/nginx.8
-install -p -D -m 0644 objs/nginx.8.gz %{buildroot}%{_mandir}/man8/nginx.8.gz
+install -p -D -m 0644 objs/nginx.8 %{buildroot}%{_mandir}/man8/nginx.8
 install -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/nginx.service
 install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/nginx
 install -p -D -m 0644 %{SOURCE6} %{buildroot}%{_sysconfdir}/nginx/conf.d/default.conf
@@ -115,7 +114,7 @@ fi
 %doc LICENSE CHANGES README
 %{_datadir}/nginx/
 %{_sbindir}/nginx
-%{_mandir}/man8/nginx.8.gz
+%{_mandir}/man8/nginx.8*
 %{_unitdir}/nginx.service
 %dir %{_sysconfdir}/nginx
 %dir %{_sysconfdir}/nginx/conf.d
