@@ -23,6 +23,9 @@ install: ~/Dropbox/Public/fedora-remix/16
 	-cp -f *.i686.rpm $</i386/packages
 	cd $< && createrepo i386
 
+test:
+	rpmlint *.rpm
+
 clean:
 	rm -f *.rpm
 
