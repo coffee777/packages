@@ -1,4 +1,4 @@
-PKG = jsmin gnome-extra nginx pngquant md2html
+PKG = jsmin gnome-extra nginx pngquant md2html luajit
 
 help:
 	@echo "Usage: make PACKAGE"
