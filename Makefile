@@ -29,4 +29,4 @@ test:
 clean:
 	rm -f *.rpm
 
-.PHONY: help all install clean $(PKG)
+.PHONY: help all install test clean $(PKG)
