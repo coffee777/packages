@@ -1,6 +1,6 @@
 Name:               nginx
 Version:            1.1.12
-Release:            1%{?dist}
+Release:            2%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -12,9 +12,11 @@ Source3:            nginx.conf
 Source4:            mime.types
 Source5:            gzip.types
 Source6:            default.conf
+Source7:            https://github.com/simpl/ngx_devel_kit/tarball/v0.2.17rc2
+Source8:            https://github.com/chaoslawful/lua-nginx-module/tarball/v0.3.1rc45
 
-BuildRequires:      pcre-devel,zlib-devel,openssl-devel
-Requires:           pcre,openssl,logrotate
+BuildRequires:      pcre-devel,zlib-devel,openssl-devel,libluajit-devel
+Requires:           pcre,openssl,logrotate,libluajit
 Requires(post):     systemd-units
 Requires(preun):    systemd-units
 Requires(postun):   systemd-units
@@ -26,9 +28,13 @@ proxy server written by Igor Sysoev.
 
 %prep
 %setup -q
+%setup -q -a 7
+%setup -q -a 8
 
 
 %build
+export LUAJIT_LIB=%{_libdir}
+export LUAJIT_INC=%{_includedir}/luajit-2.0
 ./configure \
     --user=nginx \
     --group=nginx \
@@ -64,8 +70,11 @@ proxy server written by Igor Sysoev.
     --without-http_ssi_module \
     --without-http_upstream_ip_hash_module \
     --without-http_userid_module \
-    --without-http_uwsgi_module
+    --without-http_uwsgi_module \
+    --add-module=../simpl-ngx_devel_kit-bc97eea \
+    --add-module=../chaoslawful-lua-nginx-module-805f6a2
 make %{?_smp_mflags}
+
 
 %install
 rm -rf %{buildroot}
@@ -128,6 +137,9 @@ fi
 
 
 %changelog
+
+* Fri Jan 06 2012 Craig Barnes <cr@igbarn.es> - 1.1.12-2
+- Add Lua module (using libluajit)
 
 * Mon Dec 26 2011 Craig Barnes <cr@igbarn.es> - 1.1.12-1
 - Update to latest development release
