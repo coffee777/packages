@@ -1,13 +1,10 @@
 Name:           pngquant
-Version:        1.6.2
+Version:        1.6.4
 Release:        1%{?dist}
 Summary:        PNG quantization tool for reducing image file size
 License:        BSD
 URL:            http://pornel.net/pngquant
-
 Source0:        https://github.com/pornel/improved-pngquant/tarball/%{version}
-Patch1:         pngquant-buildroot-install.patch
-
 BuildRequires:  libpng-devel%{?_isa} >= 1.2.46-1
 BuildRequires:  zlib-devel%{?_isa} >= 1.2.5-5
 Requires:       libpng%{?_isa} >= 1.2.46-1
@@ -23,8 +20,7 @@ median cut algorithm.
 
 
 %prep
-%setup -q -n pornel-improved-pngquant-f35a1de
-%patch1
+%setup -q -n pornel-improved-pngquant-b4e0619
 
 %build
 make %{?_smp_mflags}
@@ -32,7 +28,7 @@ make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
-make install DESTDIR=%{buildroot}
+make install PREFIX=%{_prefix} DESTDIR=%{buildroot}
 install -m 0644 -p -D pngquant.1 %{buildroot}/%{_mandir}/man1/pngquant.1
 
 
@@ -43,6 +39,11 @@ install -m 0644 -p -D pngquant.1 %{buildroot}/%{_mandir}/man1/pngquant.1
 
 
 %changelog
+
+* Mon Jan 09 2012 Craig Barnes <cr@igbarn.es> - 1.6.4-1
+- Update to latest version
+- Remove Makefile patch (merged upstream)
+- Use prefix macro when installing (upstream changed the default prefix)
 
 * Wed Dec 28 2011 Craig Barnes <cr@igbarn.es> - 1.6.2-1
 - Initial package
