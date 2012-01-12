@@ -24,7 +24,7 @@ BuildRequires:      GeoIP-devel
 Requires:           pcre
 Requires:           openssl
 Requires:           logrotate
-Requires:           libluajit
+Requires:           libluajit%{?_isa} = 2.0.0
 Requires:           GeoIP
 
 Requires(post):     systemd-units
@@ -152,6 +152,7 @@ fi
 * Thu Jan 12 2012 Craig Barnes <cr@igbarn.es> - 1.1.12-3
 - Add GeoIP module
 - Set geoip_country to correct GeoIP database location in nginx.conf
+- Fix RPM explicit-lib-dependency error by specifying libluajit arch/version
 
 * Fri Jan 06 2012 Craig Barnes <cr@igbarn.es> - 1.1.12-2
 - Add Lua module (using libluajit)
