@@ -1,6 +1,6 @@
 Name:               nginx
 Version:            1.1.12
-Release:            2%{?dist}
+Release:            3%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -15,8 +15,18 @@ Source6:            default.conf
 Source7:            https://github.com/simpl/ngx_devel_kit/tarball/v0.2.17rc2
 Source8:            https://github.com/chaoslawful/lua-nginx-module/tarball/v0.3.1rc45
 
-BuildRequires:      pcre-devel,zlib-devel,openssl-devel,libluajit-devel
-Requires:           pcre,openssl,logrotate,libluajit
+BuildRequires:      pcre-devel
+BuildRequires:      zlib-devel
+BuildRequires:      openssl-devel
+BuildRequires:      libluajit-devel
+BuildRequires:      GeoIP-devel
+
+Requires:           pcre
+Requires:           openssl
+Requires:           logrotate
+Requires:           libluajit
+Requires:           GeoIP
+
 Requires(post):     systemd-units
 Requires(preun):    systemd-units
 Requires(postun):   systemd-units
@@ -48,6 +58,7 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --lock-path=%{_localstatedir}/lock/subsys/nginx \
     --with-http_ssl_module \
     --with-http_gzip_static_module \
+    --with-http_geoip_module \
     --with-file-aio \
     --with-ipv6 \
     --with-pcre-jit \
@@ -137,6 +148,10 @@ fi
 
 
 %changelog
+
+* Thu Jan 12 2012 Craig Barnes <cr@igbarn.es> - 1.1.12-3
+- Add GeoIP module
+- Set geoip_country to correct GeoIP database location in nginx.conf
 
 * Fri Jan 06 2012 Craig Barnes <cr@igbarn.es> - 1.1.12-2
 - Add Lua module (using libluajit)
