@@ -1,6 +1,6 @@
 Name:           gnome-extra
 Version:        0.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Various GNOME desktop/application preference overrides
 License:        GPLv3
 URL:            https://bitbucket.org/craigbarnes/packages
@@ -48,8 +48,8 @@ if [ $1 -eq 1 ]; then
     # F16 ships an old SysV init script for Privoxy and systemctl interface
     # just gives an error. Use chkconfig for now and change when privoxy
     # is shipped with native systemd unit file (F17?)
-    /sbin/chkconfig privoxy on
-    /sbin/service privoxy start
+    /sbin/chkconfig privoxy on &>/dev/null || :
+    /sbin/service privoxy start &>/dev/null || :
 fi
 
 
@@ -70,6 +70,9 @@ fi
 
 
 %changelog
+
+* Sat Jan 14 2012 Craig Barnes <cr@igbarn.es> - 0.3-2
+- Silence post-install script output
 
 * Sat Jan 14 2012 Craig Barnes <cr@igbarn.es> - 0.3-1
 - Add Privoxy to dependencies
