@@ -1,5 +1,5 @@
 Name:           gnome-extra
-Version:        0.2
+Version:        0.3
 Release:        1%{?dist}
 Summary:        Various GNOME desktop/application preference overrides
 License:        GPLv3
@@ -12,6 +12,7 @@ Requires:       inkscape
 Requires:       gedit-plugins
 Requires:       nautilus-open-terminal
 Requires:       dconf-editor
+Requires:       privoxy
 
 Obsoletes:      gnome-games
 Obsoletes:      aisleriot
@@ -42,6 +43,16 @@ make install DESTDIR=%{buildroot} \
              SEARCHDIR=%{_datadir}/gnome-shell/search_providers
 
 
+%post
+if [ $1 -eq 1 ]; then
+    # F16 ships an old SysV init script for Privoxy and systemctl interface
+    # just gives an error. Use chkconfig for now and change when privoxy
+    # is shipped with native systemd unit file (F17?)
+    /sbin/chkconfig privoxy on
+    /sbin/service privoxy start
+fi
+
+
 %postun
 if [ $1 -eq 0 ]; then
     /usr/bin/glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
@@ -59,6 +70,10 @@ fi
 
 
 %changelog
+
+* Sat Jan 14 2012 Craig Barnes <cr@igbarn.es> - 0.3-1
+- Add Privoxy to dependencies
+- Add gschema override to set Privoxy as http and https proxy
 
 * Tue Dec 27 2011 Craig Barnes <cr@igbarn.es> - 0.2-1
 - Adjust install section to handle updated Makefile

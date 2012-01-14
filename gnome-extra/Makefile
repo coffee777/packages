@@ -1,4 +1,4 @@
-VERSION    = 0.2
+VERSION    = 0.3
 SCHEMADIR ?= /usr/share/glib-2.0/schemas
 SEARCHDIR ?= /usr/share/gnome-shell/search_providers
 
