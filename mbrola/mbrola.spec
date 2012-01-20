@@ -4,7 +4,7 @@ Release:        1%{?dist}
 Summary:        A collection of diphone voices for speech synthesis
 License:        Freeware
 URL:            http://tcts.fpms.ac.be/synthesis/
-BuildArch:      i386
+ExclusiveArch:  i386 i686
 
 Source0:        http://www.tcts.fpms.ac.be/synthesis/mbrola/bin/pclinux/mbr301h.zip
 
