@@ -1,0 +1,4 @@
+# Redirect HTTP requests to HTTPS for domains known to be capable
+{+redirect{s|^http://(.*)$|https://$1|}}
+.google.com
+.google.co.uk
