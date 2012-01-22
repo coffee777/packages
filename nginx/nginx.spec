@@ -1,6 +1,6 @@
 Name:               nginx
-Version:            1.1.12
-Release:            3%{?dist}
+Version:            1.1.13
+Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -37,9 +37,7 @@ proxy server written by Igor Sysoev.
 
 
 %prep
-%setup -q
-%setup -q -a 7
-%setup -q -a 8
+%setup -q -a7 -a8
 
 
 %build
@@ -82,8 +80,8 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --without-http_upstream_ip_hash_module \
     --without-http_userid_module \
     --without-http_uwsgi_module \
-    --add-module=../simpl-ngx_devel_kit-bc97eea \
-    --add-module=../chaoslawful-lua-nginx-module-805f6a2
+    --add-module=simpl-ngx_devel_kit-bc97eea \
+    --add-module=chaoslawful-lua-nginx-module-805f6a2
 make %{?_smp_mflags}
 
 
@@ -148,6 +146,11 @@ fi
 
 
 %changelog
+
+* Sun Jan 22 2012 Craig Barnes <cr@igbarn.es> - 1.1.13-1
+- Update to latest development release
+- Add "Restart=on-abort" directive to systemd unit file
+- Merge 3 hacky setup macros into 1
 
 * Thu Jan 12 2012 Craig Barnes <cr@igbarn.es> - 1.1.12-3
 - Add GeoIP module
