@@ -1,6 +1,6 @@
 Name:           discount
 Version:        2.1.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A command-line utility for converting Markdown files into HTML
 License:        BSD
 URL:            http://www.pell.portland.or.us/~orc/Code/%{name}
@@ -52,24 +52,16 @@ make %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 make install.everything DESTDIR=%{buildroot}
-# Rename markdown binary (clashes with python-markdown)
-mv %{buildroot}%{_bindir}/markdown %{buildroot}%{_bindir}/discount
-# Rename sample programs (names are too generic)
+# Rename sample program (names are too generic) and matching man1 pages
 mv %{buildroot}%{_bindir}/makepage %{buildroot}%{_bindir}/discount-makepage
 mv %{buildroot}%{_bindir}/mkd2html %{buildroot}%{_bindir}/discount-mkd2html
 mv %{buildroot}%{_bindir}/theme %{buildroot}%{_bindir}/discount-theme
-# Rename man1 pages to match their renamed binaries
-mv %{buildroot}%{_mandir}/man1/markdown.1 \
-   %{buildroot}%{_mandir}/man1/discount.1
 mv %{buildroot}%{_mandir}/man1/makepage.1 \
    %{buildroot}%{_mandir}/man1/discount-makepage.1
 mv %{buildroot}%{_mandir}/man1/mkd2html.1 \
    %{buildroot}%{_mandir}/man1/discount-mkd2html.1
 mv %{buildroot}%{_mandir}/man1/theme.1 \
    %{buildroot}%{_mandir}/man1/discount-theme.1
-# Note: Other man pages (including markdown.3 and markdown.7) aren't renamed,
-# since python-markdown doesn't ship with any man pages anyway and these pages
-# correspond to the libmarkdown library (3) and the markdown format (7)
 
 
 %post -n libmarkdown -p /sbin/ldconfig
@@ -82,11 +74,12 @@ make test
 
 %files
 %doc README COPYRIGHT CREDITS
-%{_bindir}/discount
+%{_bindir}/markdown
 %{_bindir}/discount-makepage
 %{_bindir}/discount-mkd2html
 %{_bindir}/discount-theme
-%{_mandir}/man1/discount*.1*
+%{_mandir}/man1/markdown.1*
+%{_mandir}/man1/discount-*.1*
 %{_mandir}/man7/*.7*
 
 
@@ -102,6 +95,12 @@ make test
 
 
 %changelog
+
+* Tue Jan 24 2012 Craig Barnes <cr@igbarn.es> - 2.1.3-2
+- Change renamed "discount" binary back to the upstream default "markdown"
+  (the conflict with "python-markdown" was already resolved in rawhide)
+- Change renamed "discount.1" man page back to "markdown.1"
+- Remove some now unnecessary comments
 
 * Sun Jan 22 2012 Craig Barnes <cr@igbarn.es> - 2.1.3-1
 - Rename "markdown" binary to "discount" (clashed with python-markdown)
