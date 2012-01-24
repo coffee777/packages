@@ -1,6 +1,6 @@
 Name:           discount
 Version:        2.1.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A command-line utility for converting Markdown files into HTML
 License:        BSD
 URL:            http://www.pell.portland.or.us/~orc/Code/%{name}
@@ -45,7 +45,8 @@ libmarkdown.
     --prefix=%{_prefix} \
     --execdir=%{_bindir} \
     --libdir=%{_libdir} \
-    --mandir=%{_mandir}
+    --mandir=%{_mandir} \
+    --enable-all-features
 make %{?_smp_mflags}
 
 
@@ -73,14 +74,14 @@ make test
 
 
 %files
-%doc README COPYRIGHT CREDITS
 %{_bindir}/markdown
 %{_bindir}/discount-makepage
 %{_bindir}/discount-mkd2html
 %{_bindir}/discount-theme
 %{_mandir}/man1/markdown.1*
+%{_mandir}/man7/markdown.7*
 %{_mandir}/man1/discount-*.1*
-%{_mandir}/man7/*.7*
+%{_mandir}/man7/mkd-.7*
 
 
 %files -n libmarkdown
@@ -90,11 +91,19 @@ make test
 
 %files -n libmarkdown-devel
 %{_libdir}/libmarkdown.so
-%{_includedir}/*
-%{_mandir}/man3/*.3*
+%{_includedir}/mkdio.h
+%{_mandir}/man3/markdown.3*
+%{_mandir}/man3/mkd_.3*
+%{_mandir}/man3/mkd-.3*
 
 
 %changelog
+
+* Tue Jan 24 2012 Craig Barnes <cr@igbarn.es> - 2.1.3-3
+- Remove duplicate docs from base package (already included in libmarkdown)
+- Add --enable-all-features flag to "turn on all stable, optional features"
+- Specify single include file (mkdio.h) instead of using glob matching
+- Make man3 and man7 file matching more accurate (specify the "mkd" prefix)
 
 * Tue Jan 24 2012 Craig Barnes <cr@igbarn.es> - 2.1.3-2
 - Change renamed "discount" binary back to the upstream default "markdown"
