@@ -81,7 +81,7 @@ make test
 %{_mandir}/man1/markdown.1*
 %{_mandir}/man7/markdown.7*
 %{_mandir}/man1/discount-*.1*
-%{_mandir}/man7/mkd-.7*
+%{_mandir}/man7/mkd-*.7*
 
 
 %files -n libmarkdown
@@ -93,8 +93,8 @@ make test
 %{_libdir}/libmarkdown.so
 %{_includedir}/mkdio.h
 %{_mandir}/man3/markdown.3*
-%{_mandir}/man3/mkd_.3*
-%{_mandir}/man3/mkd-.3*
+%{_mandir}/man3/mkd_*.3*
+%{_mandir}/man3/mkd-*.3*
 
 
 %changelog
