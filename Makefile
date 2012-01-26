@@ -1,5 +1,4 @@
-PKG = jsmin gnome-extra nginx pngquant md2html luajit weighttp cgit mbrola \
-      mbrola-voices-en discount
+PKG = jsmin gnome-extra nginx pngquant md2html luajit weighttp cgit discount
 
 help:
 	@echo "Usage: make PACKAGE"
