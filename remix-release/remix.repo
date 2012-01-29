@@ -1,0 +1,11 @@
+[remix]
+name=Remix
+baseurl=https://dl.dropbox.com/u/2682668/fedora-remix/$releasever/$basearch/
+enabled=1
+gpgcheck=0
+
+[remix-source]
+name=Remix Source
+baseurl=https://dl.dropbox.com/u/2682668/fedora-remix/$releasever/source/
+enabled=0
+gpgcheck=0
