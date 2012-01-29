@@ -1,6 +1,6 @@
 Name:               nginx
 Version:            1.1.13
-Release:            1%{?dist}
+Release:            2%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -46,21 +46,21 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
 ./configure \
     --user=nginx \
     --group=nginx \
-    --prefix=%{_datadir}/nginx \
-    --sbin-path=%{_sbindir}/nginx \
-    --conf-path=%{_sysconfdir}/nginx/nginx.conf \
-    --error-log-path=%{_localstatedir}/log/nginx/error.log \
-    --http-log-path=%{_localstatedir}/log/nginx/access.log \
-    --http-client-body-temp-path=%{_sharedstatedir}/nginx/body \
-    --pid-path=/run/nginx.pid \
-    --lock-path=%{_localstatedir}/lock/subsys/nginx \
-    --with-http_ssl_module \
-    --with-http_gzip_static_module \
-    --with-http_geoip_module \
     --with-file-aio \
     --with-ipv6 \
     --with-pcre-jit \
+    --prefix=%{_datadir}/nginx \
+    --sbin-path=%{_sbindir}/nginx \
+    --conf-path=%{_sysconfdir}/nginx/nginx.conf \
+    --pid-path=%{_localstatedir}/run/nginx.pid \
+    --lock-path=%{_localstatedir}/lock/subsys/nginx \
+    --error-log-path=%{_localstatedir}/log/nginx/error.log \
+    --http-log-path=%{_localstatedir}/log/nginx/access.log \
+    --http-client-body-temp-path=%{_sharedstatedir}/nginx/body \
     --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
+    --with-http_ssl_module \
+    --with-http_gzip_static_module \
+    --with-http_geoip_module \
     --without-http_access_module \
     --without-http_auth_basic_module \
     --without-http_autoindex_module \
@@ -146,6 +146,12 @@ fi
 
 
 %changelog
+
+* Sun Jan 29 2012 Craig Barnes <cr@igbarn.es> - 1.1.13-2
+- Change /run references back to /var/run
+- Re-order configure flags so that all module related flags are at the bottom
+- Add remote-fs and nss-lookup to the "After" directive in nginx.service
+  (taken from Fedora's latest httpd.spec)
 
 * Sun Jan 22 2012 Craig Barnes <cr@igbarn.es> - 1.1.13-1
 - Update to latest development release
