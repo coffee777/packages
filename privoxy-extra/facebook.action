@@ -1,0 +1,7 @@
+# Block cross-site tracking and nasty spying widgets
+{+block{Facebook tracking} +handle-as-image}
+.facebook.com/(plugins|widgets)/(like|fan|activity).*
+
+# Limit cookie setting
+{+session-cookies-only +filter{content-cookies}}
+.facebook.com
