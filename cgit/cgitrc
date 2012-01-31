@@ -9,7 +9,7 @@ cache-size=1000
 #clone-prefix=git://example.com ssh://example.com/pub/git http://example.com/git
 
 # Specify the css url
-css=/cgit-data/cgit.css
+css=/cgit.css
 
 # Show extra links for each repository on the index page
 enable-index-links=1
@@ -27,7 +27,7 @@ enable-log-linecount=1
 #favicon=/favicon.ico
 
 # Use a custom logo
-logo=/cgit-data/cgit.png
+logo=/cgit.png
 
 # Enable statistics per week, month and quarter
 max-stats=quarter
