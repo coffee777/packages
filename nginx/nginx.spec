@@ -67,7 +67,6 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --without-http_browser_module \
     --without-http_charset_module \
     --without-http_empty_gif_module \
-    --without-http_fastcgi_module \
     --without-http_geo_module \
     --without-http_limit_req_module \
     --without-http_limit_zone_module \
@@ -89,9 +88,8 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 chmod 0755 %{buildroot}%{_sbindir}/nginx
-rm %{buildroot}/%{_sysconfdir}/nginx/fastcgi.conf
 rm %{buildroot}/%{_sysconfdir}/nginx/*.default
-rm %{buildroot}/%{_sysconfdir}/nginx/{fastcgi,scgi,uwsgi}_params
+rm %{buildroot}/%{_sysconfdir}/nginx/{scgi,uwsgi}_params
 rm %{buildroot}/%{_sysconfdir}/nginx/{win-utf,koi-utf,koi-win}
 install -p -D -m 0644 objs/nginx.8 %{buildroot}%{_mandir}/man8/nginx.8
 install -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/nginx.service
@@ -138,6 +136,8 @@ fi
 %dir %{_sysconfdir}/nginx/conf.d
 %dir %{_localstatedir}/log/nginx
 %config(noreplace) %{_sysconfdir}/nginx/nginx.conf
+%config(noreplace) %{_sysconfdir}/nginx/fastcgi.conf
+%config(noreplace) %{_sysconfdir}/nginx/fastcgi_params
 %config(noreplace) %{_sysconfdir}/nginx/mime.types
 %config(noreplace) %{_sysconfdir}/nginx/gzip.types
 %config(noreplace) %{_sysconfdir}/nginx/conf.d/default.conf
@@ -150,6 +150,7 @@ fi
 * Tue Jan 31 2012 Craig Barnes <cr@igbarn.es> - 1.1.14-1
 - Update to latest development release
 - Update Lua module to v0.4.0
+- Include FastCGI module again
 
 * Sun Jan 29 2012 Craig Barnes <cr@igbarn.es> - 1.1.13-2
 - Change /run references back to /var/run
