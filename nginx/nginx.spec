@@ -1,6 +1,6 @@
 Name:               nginx
-Version:            1.1.13
-Release:            2%{?dist}
+Version:            1.1.14
+Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -13,7 +13,7 @@ Source4:            mime.types
 Source5:            gzip.types
 Source6:            default.conf
 Source7:            https://github.com/simpl/ngx_devel_kit/tarball/v0.2.17rc2
-Source8:            https://github.com/chaoslawful/lua-nginx-module/tarball/v0.3.1rc45
+Source8:            https://github.com/chaoslawful/lua-nginx-module/tarball/v0.4.0
 
 BuildRequires:      pcre-devel
 BuildRequires:      zlib-devel
@@ -81,7 +81,7 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --without-http_userid_module \
     --without-http_uwsgi_module \
     --add-module=simpl-ngx_devel_kit-bc97eea \
-    --add-module=chaoslawful-lua-nginx-module-805f6a2
+    --add-module=chaoslawful-lua-nginx-module-7bdd850
 make %{?_smp_mflags}
 
 
@@ -146,6 +146,10 @@ fi
 
 
 %changelog
+
+* Tue Jan 31 2012 Craig Barnes <cr@igbarn.es> - 1.1.14-1
+- Update to latest development release
+- Update Lua module to v0.4.0
 
 * Sun Jan 29 2012 Craig Barnes <cr@igbarn.es> - 1.1.13-2
 - Change /run references back to /var/run
