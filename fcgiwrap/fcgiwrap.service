@@ -6,7 +6,7 @@ After=syslog.target network.target remote-fs.target nss-lookup.target
 Type=forking
 Restart=on-abort
 PIDFile=/var/run/fcgiwrap.pid
-ExecStart=/usr/bin/spawn-fcgi -u nginx -P /var/run/fcgiwrap.pid -s /var/run/fcgiwrap.sock -- /usr/sbin/fcgiwrap
+ExecStart=/usr/bin/spawn-fcgi -u nginx -M 0700 -P /var/run/fcgiwrap.pid -s /var/run/fcgiwrap.sock -- /usr/sbin/fcgiwrap
 ExecStop=/usr/bin/kill -15 $MAINPID
 
 [Install]
