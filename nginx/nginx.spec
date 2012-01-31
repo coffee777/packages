@@ -57,6 +57,7 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --error-log-path=%{_localstatedir}/log/nginx/error.log \
     --http-log-path=%{_localstatedir}/log/nginx/access.log \
     --http-client-body-temp-path=%{_sharedstatedir}/nginx/body \
+    --http-fastcgi-temp-path=%{_sharedstatedir}/nginx/fastcgi \
     --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
     --with-http_ssl_module \
     --with-http_gzip_static_module \

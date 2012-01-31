@@ -1,20 +1,13 @@
 server {
-    listen       80;
-    server_name  git.localhost;
+    listen       82;
+    server_name  localhost;
 
     location ~* ^.+\.(css|png|ico)$ {
         root /usr/share/cgit;
     }
 
     location / {
-        rewrite ^/$             /cgit   permanent;
-        rewrite ^/cgit/$        /cgit   permanent;
-
-        fastcgi_cache           code;
-        fastcgi_cache_valid     200 5m;
-        fastcgi_cache_use_stale off;
-
-        fastcgi_pass            unix:/var/run/spawn-fcgi/cgit;
+        fastcgi_pass            unix:/var/run/fcgiwrap.sock;
         fastcgi_read_timeout    5m;
         fastcgi_index           /;
 
