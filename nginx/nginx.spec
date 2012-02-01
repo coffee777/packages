@@ -1,6 +1,6 @@
 Name:               nginx
 Version:            1.1.14
-Release:            1%{?dist}
+Release:            2%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -62,20 +62,11 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --with-http_ssl_module \
     --with-http_gzip_static_module \
     --with-http_geoip_module \
-    --without-http_access_module \
     --without-http_auth_basic_module \
-    --without-http_autoindex_module \
-    --without-http_browser_module \
     --without-http_charset_module \
-    --without-http_empty_gif_module \
     --without-http_geo_module \
-    --without-http_limit_req_module \
-    --without-http_limit_zone_module \
-    --without-http_map_module \
     --without-http_memcached_module \
-    --without-http_proxy_module \
     --without-http_scgi_module \
-    --without-http_split_clients_module \
     --without-http_ssi_module \
     --without-http_upstream_ip_hash_module \
     --without-http_userid_module \
@@ -147,6 +138,9 @@ fi
 
 
 %changelog
+
+* Tue Jan 31 2012 Craig Barnes <cr@igbarn.es> - 1.1.14-2
+- Include some previously excluded core modules (FastCGI, autoindex etc.)
 
 * Tue Jan 31 2012 Craig Barnes <cr@igbarn.es> - 1.1.14-1
 - Update to latest development release
