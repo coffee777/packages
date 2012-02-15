@@ -2,5 +2,5 @@
 {+redirect{s|^http://(.*)$|https://$1|}}
 google.com
 google.co.uk
-www.google.com
-www.google.co.uk
+wikipedia.org
+
