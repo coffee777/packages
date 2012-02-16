@@ -1,8 +1,0 @@
-# Block Facebook tracking and spying garbage
-{+block{Facebook tracking} +handle-as-image}
-.facebook.com/(plugins|widgets)/(like|fan|activity).*
-
-# Limit Facebook's cookie setting
-{+session-cookies-only +filter{content-cookies}}
-.facebook.com
-
