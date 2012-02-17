@@ -1,6 +1,6 @@
 Name:               nginx
-Version:            1.1.14
-Release:            2%{?dist}
+Version:            1.1.15
+Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -10,7 +10,7 @@ Source1:            nginx.service
 Source2:            nginx.logrotate
 Source3:            nginx.conf
 Source4:            mime.types
-Source5:            gzip.types
+Source5:            gzip.conf
 Source6:            default.conf
 Source7:            https://github.com/simpl/ngx_devel_kit/tarball/v0.2.17rc2
 Source8:            https://github.com/chaoslawful/lua-nginx-module/tarball/v0.4.0
@@ -131,13 +131,21 @@ fi
 %config(noreplace) %{_sysconfdir}/nginx/fastcgi.conf
 %config(noreplace) %{_sysconfdir}/nginx/fastcgi_params
 %config(noreplace) %{_sysconfdir}/nginx/mime.types
-%config(noreplace) %{_sysconfdir}/nginx/gzip.types
+%config(noreplace) %{_sysconfdir}/nginx/gzip.conf
 %config(noreplace) %{_sysconfdir}/nginx/conf.d/default.conf
 %config(noreplace) %{_sysconfdir}/logrotate.d/nginx
 %attr(-,nginx,nginx) %dir %{_sharedstatedir}/nginx
 
 
 %changelog
+
+* Fri Feb 17 2012 Craig Barnes <cr@igbarn.es> - 1.1.15-1
+- Move all gzip directives from nginx.conf and gzip.types to gzip.conf
+- Move "default_type" from nginx.conf to mime.types
+- Remove "pid" from nginx.conf (the configure script sets the correct default)
+- Remove "log_format" from nginx.conf (it was the same as the default anyway)
+- Clean up and add comments to nginx.conf
+- Update to latest development release
 
 * Tue Jan 31 2012 Craig Barnes <cr@igbarn.es> - 1.1.14-2
 - Include some previously excluded core modules (FastCGI, autoindex etc.)

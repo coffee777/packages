@@ -54,3 +54,5 @@ types {
     application/x-x509-ca-cert              der pem crt;
 }
 
+# Default
+default_type application/octet-stream;
