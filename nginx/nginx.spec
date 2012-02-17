@@ -68,7 +68,6 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --without-http_memcached_module \
     --without-http_scgi_module \
     --without-http_ssi_module \
-    --without-http_upstream_ip_hash_module \
     --without-http_userid_module \
     --without-http_uwsgi_module \
     --add-module=simpl-ngx_devel_kit-bc97eea \
@@ -145,6 +144,7 @@ fi
 - Remove "pid" from nginx.conf (the configure script sets the correct default)
 - Remove "log_format" from nginx.conf (it was the same as the default anyway)
 - Clean up and add comments to nginx.conf
+- Remove "--without-http_upstream_ip_hash_module" from configure flags
 - Update to latest development release
 
 * Tue Jan 31 2012 Craig Barnes <cr@igbarn.es> - 1.1.14-2
