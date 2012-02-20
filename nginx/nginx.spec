@@ -1,6 +1,6 @@
 Name:               nginx
 Version:            1.1.15
-Release:            1%{?dist}
+Release:            2%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -14,12 +14,16 @@ Source5:            gzip.conf
 Source6:            default.conf
 Source7:            https://github.com/simpl/ngx_devel_kit/tarball/v0.2.17rc2
 Source8:            https://github.com/chaoslawful/lua-nginx-module/tarball/v0.4.0
+Source9:            http://labs.frickle.com/files/ngx_postgres-0.9.tar.gz
+Source10:           https://github.com/agentzh/rds-json-nginx-module/tarball/v0.12rc7
+Source11:           https://github.com/agentzh/echo-nginx-module/tarball/v0.38rc1
 
 BuildRequires:      pcre-devel
 BuildRequires:      zlib-devel
 BuildRequires:      openssl-devel
 BuildRequires:      libluajit-devel
 BuildRequires:      GeoIP-devel
+BuildRequires:      postgresql-devel
 
 Requires:           pcre
 Requires:           openssl
@@ -37,7 +41,7 @@ proxy server written by Igor Sysoev.
 
 
 %prep
-%setup -q -a7 -a8
+%setup -q -a7 -a8 -a9 -a10 -a11
 
 
 %build
@@ -71,7 +75,10 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --without-http_userid_module \
     --without-http_uwsgi_module \
     --add-module=simpl-ngx_devel_kit-bc97eea \
-    --add-module=chaoslawful-lua-nginx-module-7bdd850
+    --add-module=chaoslawful-lua-nginx-module-7bdd850 \
+    --add-module=ngx_postgres-0.9 \
+    --add-module=agentzh-rds-json-nginx-module-253db2b \
+    --add-module=agentzh-echo-nginx-module-6c1f553
 make %{?_smp_mflags}
 
 
@@ -137,6 +144,9 @@ fi
 
 
 %changelog
+
+* Mon Feb 20 2012 Craig Barnes <cr@igbarn.es> - 1.1.15-2
+- Add postgres, rds-json and echo modules
 
 * Fri Feb 17 2012 Craig Barnes <cr@igbarn.es> - 1.1.15-1
 - Move all gzip directives from nginx.conf and gzip.types to gzip.conf
