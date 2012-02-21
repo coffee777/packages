@@ -1,5 +1,4 @@
-PKG = jsmin gnome-extra nginx pngquant md2html luajit weighttp cgit discount \
-      fcgiwrap httpd
+PKG = jsmin nginx pngquant md2html luajit weighttp cgit discount fcgiwrap httpd
 
 help:
 	@echo "Usage: make PACKAGE"
