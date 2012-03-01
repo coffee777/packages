@@ -1,6 +1,6 @@
 Name:               nginx
-Version:            1.1.15
-Release:            2%{?dist}
+Version:            1.1.16
+Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -61,19 +61,15 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --error-log-path=%{_localstatedir}/log/nginx/error.log \
     --http-log-path=%{_localstatedir}/log/nginx/access.log \
     --http-client-body-temp-path=%{_sharedstatedir}/nginx/body \
+    --http-proxy-temp-path=%{_sharedstatedir}/nginx/proxy \
     --http-fastcgi-temp-path=%{_sharedstatedir}/nginx/fastcgi \
+    --http-scgi-temp-path=%{_sharedstatedir}/nginx/scgi \
+    --http-uwsgi-temp-path=%{_sharedstatedir}/nginx/uwsgi \
     --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
     --with-http_ssl_module \
     --with-http_gzip_static_module \
     --with-http_geoip_module \
-    --without-http_auth_basic_module \
     --without-http_charset_module \
-    --without-http_geo_module \
-    --without-http_memcached_module \
-    --without-http_scgi_module \
-    --without-http_ssi_module \
-    --without-http_userid_module \
-    --without-http_uwsgi_module \
     --add-module=simpl-ngx_devel_kit-bc97eea \
     --add-module=chaoslawful-lua-nginx-module-7bdd850 \
     --add-module=ngx_postgres-0.9 \
@@ -87,7 +83,6 @@ rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 chmod 0755 %{buildroot}%{_sbindir}/nginx
 rm %{buildroot}/%{_sysconfdir}/nginx/*.default
-rm %{buildroot}/%{_sysconfdir}/nginx/{scgi,uwsgi}_params
 rm %{buildroot}/%{_sysconfdir}/nginx/{win-utf,koi-utf,koi-win}
 install -p -D -m 0644 objs/nginx.8 %{buildroot}%{_mandir}/man8/nginx.8
 install -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/nginx.service
@@ -135,7 +130,7 @@ fi
 %dir %{_localstatedir}/log/nginx
 %config(noreplace) %{_sysconfdir}/nginx/nginx.conf
 %config(noreplace) %{_sysconfdir}/nginx/fastcgi.conf
-%config(noreplace) %{_sysconfdir}/nginx/fastcgi_params
+%config(noreplace) %{_sysconfdir}/nginx/*_params
 %config(noreplace) %{_sysconfdir}/nginx/mime.types
 %config(noreplace) %{_sysconfdir}/nginx/gzip.conf
 %config(noreplace) %{_sysconfdir}/nginx/conf.d/default.conf
@@ -144,6 +139,11 @@ fi
 
 
 %changelog
+
+* Thu Mar 01 2012 Craig Barnes <cr@igbarn.es> - 1.1.16-1
+- Remove all "--without-*" flags except for "--without-http_charset_module"
+- Update build, install and files sections to reflect full build
+- Update to latest development release
 
 * Mon Feb 20 2012 Craig Barnes <cr@igbarn.es> - 1.1.15-2
 - Add postgres, rds-json and echo modules
