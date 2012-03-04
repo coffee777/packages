@@ -1,6 +1,9 @@
 PKG = jsmin nginx pngquant md2html luajit weighttp cgit discount fcgiwrap \
       httpd luarocks lua-cosmo lua-lgi
 
+# Null glob expansion is required for glob patterns used in install target
+SHELL:=/bin/bash -O nullglob
+
 help:
 	@echo "Usage: make PACKAGE"
 	@echo "Available packages: $(PKG)"
@@ -17,12 +20,10 @@ $(PKG):
 	sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' /tmp/$@.build | \
 	    while read line; do cp $$line ./; done
 
-# FIXME: this is a really hacky, lazy solution
 install: ~/Dropbox/Public/fedora-remix/16
+	rm -f *-debuginfo-*.rpm
 	cp -f *.src.rpm $</source/packages && cd $< && createrepo source
-	-cp -f *.noarch.rpm $</i386/packages
-	-cp -f *.i686.rpm $</i386/packages
-	cd $< && createrepo i386
+	cp -f *.{noarch,i686}.rpm $</i386/packages && cd $< && createrepo i386
 
 test:
 	rpmlint *.rpm
