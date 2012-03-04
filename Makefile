@@ -1,5 +1,5 @@
 PKG = jsmin nginx pngquant md2html luajit weighttp cgit discount fcgiwrap \
-      httpd luarocks lua-cosmo
+      httpd luarocks lua-cosmo lua-lgi
 
 help:
 	@echo "Usage: make PACKAGE"
