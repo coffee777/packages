@@ -6,6 +6,7 @@ License:        MIT
 URL:            https://github.com/pavouk/lgi
 Source0:        https://github.com/downloads/pavouk/lgi/lgi-%{version}.tar.gz
 BuildRequires:  gobject-introspection-devel >= 1.30
+BuildRequires:  lua-devel >= 5.1
 Requires:       gobject-introspection >= 1.30
 Requires:       lua >= 5.1
 
