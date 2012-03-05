@@ -6,6 +6,7 @@ License:   MIT
 URL:       http://cosmo.luaforge.net
 Source0:   http://github.com/downloads/mascarenhas/cosmo/cosmo-%{version}.tar.gz
 BuildArch: noarch
+Requires:  lua >= 5.1
 Requires:  lua-lpeg
 
 %description

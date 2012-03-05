@@ -7,6 +7,7 @@ URL:            https://github.com/pavouk/lgi
 Source0:        https://github.com/downloads/pavouk/lgi/lgi-%{version}.tar.gz
 BuildRequires:  gobject-introspection-devel >= 1.30
 Requires:       gobject-introspection >= 1.30
+Requires:       lua >= 5.1
 
 %description
 LGI is gobject-introspection based dynamic Lua binding to GObject based
