@@ -1,5 +1,5 @@
 PKG = jsmin nginx pngquant md2html luajit weighttp cgit discount fcgiwrap \
-      httpd luarocks lua-cosmo lua-lgi
+      httpd luarocks lua-cosmo lua-lgi tidy
 
 # Null glob expansion is required for glob patterns used in install target
 SHELL:=/bin/bash -O nullglob
