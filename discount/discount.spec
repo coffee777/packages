@@ -1,6 +1,6 @@
 Name:           discount
 Version:        2.1.3
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A command-line utility for converting Markdown files into HTML
 License:        BSD
 URL:            http://www.pell.portland.or.us/~orc/Code/%{name}
@@ -40,7 +40,7 @@ libmarkdown.
 
 
 %build
-./configure.sh \
+CC='cc %{optflags}' ./configure.sh \
     --shared \
     --prefix=%{_prefix} \
     --execdir=%{_bindir} \
@@ -98,6 +98,9 @@ make test
 
 
 %changelog
+
+* Thu Mar 08 2012 Craig Barnes <cr@igbarn.es> - 2.1.3-4
+- Pass optflags to configure script
 
 * Tue Jan 24 2012 Craig Barnes <cr@igbarn.es> - 2.1.3-3
 - Remove duplicate docs from base package (already included in libmarkdown)
