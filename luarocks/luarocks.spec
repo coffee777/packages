@@ -29,12 +29,12 @@ Note: some packages may require that lua-devel is installed.
 ./configure \
     --prefix="%{_prefix}" \
     --sysconfdir="%{_sysconfdir}/%{name}/" \
+    --rocks-tree=%{_libdir} \
     --with-lua="%{_prefix}" \
     --with-lua-include="%{_includedir}" \
     --with-lua-lib="%{_libdir}" \
     --with-downloader="wget" \
-    --with-md5-checker="md5sum" \
-    --force-config="%{_prefix}"
+    --with-md5-checker="md5sum"
 make
 
 %install
