@@ -1,6 +1,6 @@
 Name:           luarocks
 Version:        2.0.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Package management system for Lua
 Group:          Development/System
 License:        MIT
@@ -33,7 +33,7 @@ Note: some packages may require that lua-devel is installed.
     --with-lua="%{_prefix}" \
     --with-lua-include="%{_includedir}" \
     --with-lua-lib="%{_libdir}" \
-    --with-downloader="wget" \
+    --with-downloader="curl" \
     --with-md5-checker="md5sum"
 make
 
@@ -53,6 +53,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+
+* Fri Apr 27 2012 Craig Barnes <cr@igbarn.es> - 2.0.8-2
+- Use curl as downloader instead of wget
 
 * Fri Mar 02 2012 Craig Barnes <cr@igbarn.es> - 2.0.8-1
 - Initial package
