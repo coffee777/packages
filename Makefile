@@ -1,22 +1,14 @@
-PKG = jsmin nginx pngquant md2html luajit weighttp cgit discount fcgiwrap \
-      httpd lua-json lua-cosmo lua-lgi lua-unicode lua-bit32 lunamark tidy \
-      luarocks
-
-# Null glob expansion is required for glob patterns used in install target
-SHELL:=/bin/bash -O nullglob
+PKG = $(patsubst SPECS/%.spec,%,$(wildcard SPECS/*.spec))
 
 help:
-	@echo "Usage: make PACKAGE"
-	@echo "Available packages: $(PKG)"
-	@echo "Example: make nginx"
-	@echo 'Use "make all" to build all available packages'
+	@echo 'Usage: make PACKAGE...'
 
 all: $(PKG)
 
 $(PKG):
-	spectool -S -C ~makerpm/rpmbuild/SOURCES -g $@/$@.spec
-	cp -f $@/* ~makerpm/rpmbuild/SOURCES/
-	cp -f $@/$@.spec ~makerpm/rpmbuild/SPECS/
+	spectool -S -C ~makerpm/rpmbuild/SOURCES -g SPECS/$@.spec
+	test ! -d SOURCES/$@ || cp -f SOURCES/$@/* ~makerpm/rpmbuild/SOURCES/
+	cp -f SPECS/$@.spec ~makerpm/rpmbuild/SPECS/
 	su -c 'cd ~/rpmbuild && rpmbuild -ba SPECS/$@.spec 1>/tmp/$@.build' makerpm
 	sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' /tmp/$@.build | \
 	    while read line; do cp $$line ./; done
