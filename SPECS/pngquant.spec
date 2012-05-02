@@ -1,5 +1,5 @@
 Name:           pngquant
-Version:        1.7.0
+Version:        1.7.2
 Release:        1%{?dist}
 Summary:        PNG quantization tool for reducing image file size
 License:        BSD
@@ -20,7 +20,7 @@ median cut algorithm.
 
 
 %prep
-%setup -q -n pornel-improved-pngquant-e53e4bb
+%setup -q -n pornel-improved-pngquant-b625d3e
 
 %build
 make %{?_smp_mflags}
@@ -39,6 +39,9 @@ install -m 0644 -p -D pngquant.1 %{buildroot}/%{_mandir}/man1/pngquant.1
 
 
 %changelog
+
+* Thu May 03 2012 Craig Barnes <cr@igbarn.es> - 1.7.2-1
+- Update to latest upstream version
 
 * Sun Jan 15 2012 Craig Barnes <cr@igbarn.es> - 1.7.0-1
 - Update to latest upstream version
