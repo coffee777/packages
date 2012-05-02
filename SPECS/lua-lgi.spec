@@ -1,5 +1,5 @@
 Name:           lua-lgi
-Version:        0.4
+Version:        0.5
 Release:        1%{?dist}
 Summary:        Dynamic Lua binding to GObject libraries using GObject-Introspection
 License:        MIT
