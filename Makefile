@@ -1,4 +1,4 @@
-PKG = $(patsubst SPECS/%.spec,%,$(wildcard SPECS/*.spec))
+PKG = $(patsubst %.spec,%,$(wildcard *.spec))
 
 help:
 	@echo 'Usage: make PACKAGE...'
@@ -6,9 +6,9 @@ help:
 all: $(PKG)
 
 $(PKG):
-	spectool -S -C ~makerpm/rpmbuild/SOURCES -g SPECS/$@.spec
+	spectool -S -C ~makerpm/rpmbuild/SOURCES -g $@.spec
 	test ! -d SOURCES/$@ || cp -f SOURCES/$@/* ~makerpm/rpmbuild/SOURCES/
-	cp -f SPECS/$@.spec ~makerpm/rpmbuild/SPECS/
+	cp -f $@.spec ~makerpm/rpmbuild/SPECS/
 	su -c 'cd ~/rpmbuild && rpmbuild -ba SPECS/$@.spec 1>/tmp/$@.build' makerpm
 	sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' /tmp/$@.build | \
 	    while read line; do cp $$line ./; done
