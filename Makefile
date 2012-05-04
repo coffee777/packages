@@ -18,10 +18,15 @@ install: ~/Dropbox/Public/fedora-remix/16
 	cp -f *.src.rpm $</source/packages && cd $< && createrepo source
 	cp -f *.{noarch,i686}.rpm $</i386/packages && cd $< && createrepo i386
 
+init:
+	useradd --system --create-home makerpm
+	passwd makerpm
+	su -c rpmdev-setuptree makerpm
+
 test:
 	rpmlint *.rpm
 
 clean:
 	rm -f *.rpm
 
-.PHONY: help all install test clean $(PKG)
+.PHONY: help all install init test clean $(PKG)
