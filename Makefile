@@ -18,7 +18,10 @@ install: ~/Dropbox/Public/fedora-remix/16
 	cp -f *.src.rpm $</source/packages && cd $< && createrepo source
 	cp -f *.{noarch,i686}.rpm $</i386/packages && cd $< && createrepo i386
 
-init:
+init: ~makerpm/rpmbuild
+
+~makerpm/rpmbuild:
+	yum -y install fedora-packager spin-kickstarts livecd-tools
 	useradd --system --create-home makerpm
 	passwd makerpm
 	su -c rpmdev-setuptree makerpm
