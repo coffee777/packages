@@ -15,6 +15,7 @@ Requires:       nautilus-open-terminal
 Requires:       dconf-editor
 Requires:       privoxy
 Requires:       emerillon
+Requires:       devhelp
 
 %description
 This is a meta-package for installing various GNOME applications
