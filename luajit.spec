@@ -1,4 +1,4 @@
-%define beta beta9
+%define beta beta10
 
 Name:       luajit
 Version:    2.0.0
@@ -9,7 +9,6 @@ URL:        http://luajit.org/
 Source0:    http://luajit.org/download/LuaJIT-%{version}-%{beta}.tar.gz
 Requires:   libluajit%{?_isa} = %{version}-%{release}
 
-
 %description
 LuaJIT implements the full set of language features defined by Lua 5.1.
 The virtual machine is API- and ABI-compatible to the standard
@@ -17,18 +16,16 @@ Lua interpreter and can be deployed as a drop-in replacement.
 
 
 %package -n libluajit
-Summary:    Library for LuaJIT
-
+Summary: Library for LuaJIT
 %description -n libluajit
-TODO
+%{summary}
 
 
 %package -n libluajit-devel
-Summary:    Development files for libluajit library
-Requires:   libluajit%{?_isa} = %{version}-%{release}
-
+Summary: Development files for libluajit library
+Requires: libluajit%{?_isa} = %{version}-%{release}
 %description -n libluajit-devel
-TODO
+%{summary}
 
 
 %prep
@@ -70,6 +67,9 @@ mv -T %{buildroot}%{_bindir}/luajit-%{version}-%{beta} %{buildroot}%{_bindir}/lu
 
 
 %changelog
+
+* Thu May 10 2012 Craig Barnes <cr@igbarn.es> - 2.0.0-1.beta10
+- Update to latest beta
 
 * Thu Jan 05 2012 Craig Barnes <cr@igbarn.es> - 2.0.0-1.beta9
 - Initial package
