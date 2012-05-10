@@ -1,18 +1,18 @@
 PACKAGES = $(patsubst %.spec,%,$(wildcard *.spec))
-BUILDLOG = `sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' /tmp/$@.build`
+BUILDLOG = /tmp/$@.build
+FINDRPMS = `sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' $(BUILDLOG)`
 
 help:
 	@echo 'Usage: make PACKAGE...'
 
 all: $(PACKAGES)
 
-
 $(PACKAGES):
 	spectool -S -C ~makerpm/rpmbuild/SOURCES -g $@.spec
 	test ! -d sources/$@ || cp -f sources/$@/* ~makerpm/rpmbuild/SOURCES/
 	cp -f $@.spec ~makerpm/rpmbuild/SPECS/
-	su -c 'cd ~/rpmbuild && rpmbuild -ba SPECS/$@.spec 1>/tmp/$@.build' makerpm
-	for rpm in $(BUILDLOG); do cp $$rpm .; done
+	su -c 'cd ~/rpmbuild && rpmbuild -ba SPECS/$@.spec > $(BUILDLOG)' makerpm
+	for rpm in $(FINDRPMS); do cp $$rpm .; done
 
 install: ~/Dropbox/Public/fedora-remix/16
 	rm -f *-debuginfo-*.rpm
@@ -32,5 +32,6 @@ test:
 
 clean:
 	rm -f *.rpm
+
 
 .PHONY: help all install init test clean $(PACKAGES)
