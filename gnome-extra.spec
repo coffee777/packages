@@ -16,6 +16,7 @@ Requires:       dconf-editor
 Requires:       privoxy
 Requires:       emerillon
 Requires:       devhelp gtk3-devel-docs
+Requires:       meld
 
 %description
 This is a meta-package for installing various GNOME applications
