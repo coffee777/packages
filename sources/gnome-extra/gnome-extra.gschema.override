@@ -79,3 +79,7 @@ cookies-policy='no-third-party'
 enable-user-css=true
 cache-size=200
 
+[org.gnome.packagekit]
+enable-codec-helper=false
+enable-font-helper=false
+enable-mime-type-helper=false
