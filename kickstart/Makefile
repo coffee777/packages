@@ -2,7 +2,7 @@ FUSIONDL = http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-sta
 PACKAGES = `sed -nr '/^\%packages/,/%end/s/^(\w[A-Za-z0-9_-]+).*/\1/p' $<`
 EXCLUDED = `sed -nr '/^\%packages/,/%end/s/^-([A-Za-z0-9_-]+).*/\1/p' $<`
 
-install: remix.ks
+install: desktop.ks
 	@-yum -y --nogpgcheck install $(FUSIONDL)
 	@yum -y remove  $(EXCLUDED)
 	@yum -y install $(PACKAGES)

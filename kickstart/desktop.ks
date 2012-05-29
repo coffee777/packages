@@ -34,6 +34,7 @@ mutt
 newsbeuter
 ncmpc
 weechat
+htop
 
 lua
 git
