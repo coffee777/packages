@@ -25,6 +25,9 @@ pk-gtk-module=false
 [org.gnome.settings-daemon.plugins.media-keys]
 logout=''
 
+[org.gnome.libgnomekbd.keyboard]
+options=['caps\tcaps:ctrl_modifier']
+
 [org.gnome.Empathy.ui]
 show-protocols=true
 
