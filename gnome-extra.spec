@@ -1,7 +1,7 @@
 Name:           gnome-extra
-Version:        0.0.1
+Version:        0.0.2
 Release:        1%{?dist}
-Summary:        Various GNOME applications and preference overrides
+Summary:        GNOME preference overrides
 License:        GPLv3
 URL:            https://bitbucket.org/craigbarnes/packages
 BuildArch:      noarch
@@ -9,9 +9,7 @@ Source0:        gnome-extra.gschema.override
 Source1:        google-ssl.xml
 
 %description
-This is a meta-package for installing various GNOME applications
-and preferences that are not included in Fedora by default.
-
+Custom GNOME preference overrides and Open Search providers.
 
 %prep
 cp %{SOURCE0} %{SOURCE1} %{_builddir}
@@ -20,7 +18,7 @@ cp %{SOURCE0} %{SOURCE1} %{_builddir}
 %install
 rm -rf %{buildroot}
 install -Dpm644 %{SOURCE0} %{buildroot}%{_datadir}/glib-2.0/schemas/gnome-extra.gschema.override
-install -Dpm644 %{SOURCE1} %{buildroot}%{_datadir}/gnome-shell/search_providers/google-ssl.xml
+install -Dpm644 %{SOURCE1} %{buildroot}%{_datadir}/gnome-shell/open-search-providers/google-ssl.xml
 
 
 %postun
@@ -35,10 +33,13 @@ fi
 
 %files
 %{_datadir}/glib-2.0/schemas/gnome-extra.gschema.override
-%{_datadir}/gnome-shell/search_providers/google-ssl.xml
+%{_datadir}/gnome-shell/open-search-providers/google-ssl.xml
 
 
 %changelog
+
+* Wed May 30 2012 Craig Barnes <cr@igbarn.es> - 0.0.2-1
+- Update install location (search_providers -> open-search-providers)
 
 * Sun May 06 2012 Craig Barnes <cr@igbarn.es> - 0.0.1-1
 - Initial package (based on previously deleted spec)
