@@ -17,6 +17,20 @@ repo --name=remix --baseurl=http://dl.dropbox.com/u/2682668/fedora-remix/$releas
 -sound-juicer
 -fedora-release-notes
 
+epiphany
+epiphany-extensions
+inkscape
+gimp
+blender
+gedit-plugins
+nautilus-open-terminal
+dconf-editor
+privoxy
+emerillon
+devhelp
+gtk3-devel-docs
+meld
+
 gstreamer-plugins-ugly
 gstreamer-ffmpeg
 
