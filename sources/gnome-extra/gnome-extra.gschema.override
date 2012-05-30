@@ -66,7 +66,6 @@ display-right-margin=true
 create-backup-copy=false
 
 [org.gnome.Epiphany]
-homepage-url=''
 keyword-search-url='https://encrypted.google.com/search?q=%s'
 enabled-extensions=["extensions-manager-ui", "adblock", "html5tube", "tab-key-tab-navigate"]
 new-windows-in-tabs=true
