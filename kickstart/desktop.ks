@@ -19,6 +19,7 @@ repo --name=remix --baseurl=http://dl.dropbox.com/u/2682668/fedora-remix/$releas
 
 epiphany
 epiphany-extensions
+luakit
 inkscape
 gimp
 blender
