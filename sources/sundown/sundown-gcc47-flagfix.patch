@@ -1,0 +1,11 @@
+--- Makefile.orig	2012-06-06 10:04:50.912816963 +0100
++++ Makefile	2012-06-06 10:05:01.910670430 +0100
+@@ -44,7 +44,7 @@
+ 	ln -f -s $^ $@
+ 
+ libsundown.so.1: $(SUNDOWN_SRC)
+-	$(CC) $(LDFLAGS) -shared -Wl $^ -o $@
++	$(CC) $(LDFLAGS) -shared $^ -o $@
+ 
+ # executables
+ 
