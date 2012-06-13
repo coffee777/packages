@@ -1,7 +1,7 @@
 Packages
 ========
 
-Additional packages for Fedora Linux
+Additional packages for [Fedora] Linux
 
 
 Building packages
@@ -15,7 +15,7 @@ Where `[package]` is the name of one or more `.spec` files. For example:
 
     sudo make jsmin pngquant tidy
 
-If sucessful, all built RPM files will be copied to the current directory.
+If sucessful, all built [RPM] files will be copied to the current directory.
 
 The Makefile knows how to set up a packaging environment, install build-time
 dependencies, copy spec files and download sources. This is all automatic and
@@ -26,3 +26,6 @@ priviledges are dropped and any downloaded build scripts are executed as the
 dummy user `makerpm`. This means that the worst a rogue script can do is
 read/write `/home/makerpm`. At *no* point does any downloaded script have root
 access or even access to your own user account.
+
+[Fedora]: http://fedoraproject.org/
+[RPM]: http://www.rpm.org/
