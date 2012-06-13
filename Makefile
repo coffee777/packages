@@ -5,7 +5,7 @@ FINDRPMS = `sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' $(BUILDLOG)`
 
 help:
 	@printf 'Usage: make PACKAGE...\n\nPackages:\n'
-	@echo $(PACKAGES) | tr " " "\n" | column; echo
+	@echo $(sort $(PACKAGES)) | tr " " "\n" | column -x; echo
 
 all: $(PACKAGES)
 
