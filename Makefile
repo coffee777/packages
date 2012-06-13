@@ -26,7 +26,6 @@ init: ~makerpm/rpmbuild
 ~makerpm/rpmbuild:
 	yum -y install fedora-packager spin-kickstarts livecd-tools
 	useradd --system --create-home makerpm
-	passwd makerpm
 	su -c rpmdev-setuptree makerpm
 
 test:
