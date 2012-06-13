@@ -8,7 +8,7 @@ help:
 
 all: $(PACKAGES)
 
-$(PACKAGES):
+$(PACKAGES): ~makerpm
 	@test -z "$(REQUIRES)" || rpm -q $(REQUIRES) || yum install -y $(REQUIRES)
 	spectool -S -C ~makerpm/rpmbuild/SOURCES -g $@.spec
 	test ! -d sources/$@ || cp -f sources/$@/* ~makerpm/rpmbuild/SOURCES/
