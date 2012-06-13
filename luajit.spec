@@ -1,5 +1,4 @@
-%define beta beta10
-
+%global     beta beta10
 Name:       luajit
 Version:    2.0.0
 Release:    1.%{beta}%{?dist}

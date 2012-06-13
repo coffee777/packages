@@ -1,4 +1,4 @@
-%define         gitcommit  f212c3f
+%global         gitcommit f212c3f
 Name:           tidy
 Version:        1
 Release:        2.git%{gitcommit}%{?dist}

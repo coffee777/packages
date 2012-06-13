@@ -1,5 +1,4 @@
-%define gitcommit       1328862
-
+%global         gitcommit 1328862
 Name:           fcgiwrap
 Version:        1.0.3
 Release:        1.git%{gitcommit}%{?dist}

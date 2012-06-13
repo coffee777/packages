@@ -1,4 +1,4 @@
-%define         gitcommit  c744346
+%global         gitcommit c744346
 Name:           sundown
 Version:        1
 Release:        1.git%{gitcommit}%{?dist}
