@@ -1,5 +1,5 @@
 PACKAGES = $(patsubst %.spec,%,$(wildcard *.spec))
-REQUIRES = `sed -nr "s/(Build)?Requires:\s*([A-Za-z0-9-]+).*/\2/p" *.spec`
+REQUIRES = `rpmspec -q --buildrequires $@.spec | cut -d' ' -f1 | cut -d'(' -f1`
 BUILDLOG = /tmp/$@.build
 FINDRPMS = `sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' $(BUILDLOG)`
 
@@ -9,6 +9,7 @@ help:
 all: $(PACKAGES)
 
 $(PACKAGES):
+	@test -z "$(REQUIRES)" || rpm -q $(REQUIRES) || yum install -y $(REQUIRES)
 	spectool -S -C ~makerpm/rpmbuild/SOURCES -g $@.spec
 	test ! -d sources/$@ || cp -f sources/$@/* ~makerpm/rpmbuild/SOURCES/
 	cp -f $@.spec ~makerpm/rpmbuild/SPECS/
@@ -21,7 +22,6 @@ install: ~/Dropbox/Public/fedora-remix/16
 	cp -f *.{noarch,i686}.rpm $</i386/packages && cd $< && createrepo i386
 
 init: ~makerpm/rpmbuild
-	yum install -y $(REQUIRES)
 
 ~makerpm/rpmbuild:
 	yum -y install fedora-packager spin-kickstarts livecd-tools
