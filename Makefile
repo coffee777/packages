@@ -8,12 +8,12 @@ help:
 
 all: $(PACKAGES)
 
-$(PACKAGES): ~makerpm
+$(PACKAGES): ~makerpm/rpmbuild
 	@test -z "$(REQUIRES)" || rpm -q $(REQUIRES) || yum install -y $(REQUIRES)
-	spectool -S -C ~makerpm/rpmbuild/SOURCES -g $@.spec
-	test ! -d sources/$@ || cp -f sources/$@/* ~makerpm/rpmbuild/SOURCES/
-	cp -f $@.spec ~makerpm/rpmbuild/SPECS/
-	su -c 'cd ~/rpmbuild && rpmbuild -ba SPECS/$@.spec > $(BUILDLOG)' makerpm
+	spectool -S -C $</SOURCES -g $@.spec
+	test ! -d sources/$@ || cp -f sources/$@/* $</SOURCES/
+	cp -f $@.spec $</SPECS/
+	su -c 'cd $< && rpmbuild -ba SPECS/$@.spec > $(BUILDLOG)' makerpm
 	for rpm in $(FINDRPMS); do cp $$rpm .; done
 
 install: ~/Dropbox/Public/fedora-remix/16
@@ -21,9 +21,9 @@ install: ~/Dropbox/Public/fedora-remix/16
 	cp -f *.src.rpm $</source/packages && cd $< && createrepo source
 	cp -f *.{noarch,i686}.rpm $</i386/packages && cd $< && createrepo i386
 
-init: ~makerpm
+init: ~makerpm/rpmbuild
 
-~makerpm:
+~makerpm/rpmbuild:
 	rpm -q fedora-packager || yum -y install fedora-packager
 	useradd --system --create-home makerpm
 	su -c rpmdev-setuptree makerpm
