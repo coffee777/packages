@@ -4,7 +4,8 @@ BUILDLOG = /tmp/$@.build
 FINDRPMS = `sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' $(BUILDLOG)`
 
 help:
-	@echo 'Usage: make PACKAGE...'
+	@printf 'Usage: make PACKAGE...\n\nPackages:\n'
+	@echo $(PACKAGES) | tr " " "\n" | column; echo
 
 all: $(PACKAGES)
 
