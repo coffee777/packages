@@ -1,5 +1,5 @@
 Name:           gnome-extra
-Version:        0.0.2
+Version:        0.0.3
 Release:        1%{?dist}
 Summary:        GNOME preference overrides
 License:        GPLv3
@@ -10,6 +10,7 @@ Source1:        google-ssl.xml
 
 %description
 Custom GNOME preference overrides and Open Search providers.
+
 
 %prep
 cp %{SOURCE0} %{SOURCE1} %{_builddir}
@@ -37,6 +38,9 @@ fi
 
 
 %changelog
+
+* Fri Jun 15 2012 Craig Barnes <cr@igbarn.es> - 0.0.3-1
+- Disable Google autocomplete in search provider URLs
 
 * Wed May 30 2012 Craig Barnes <cr@igbarn.es> - 0.0.2-1
 - Update install location (search_providers -> open-search-providers)
