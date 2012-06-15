@@ -9,6 +9,8 @@ repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rpmfusion.org/mir
 repo --name=remix --baseurl=http://dl.dropbox.com/u/2682668/fedora-remix/$releasever/$basearch/
 
 %packages
+
+# Junk
 -@office
 -PackageKit-command-not-found
 -gnome-games
@@ -17,6 +19,7 @@ repo --name=remix --baseurl=http://dl.dropbox.com/u/2682668/fedora-remix/$releas
 -sound-juicer
 -fedora-release-notes
 
+# GNOME
 epiphany
 epiphany-extensions
 luakit
@@ -26,44 +29,45 @@ blender
 gedit-plugins
 nautilus-open-terminal
 dconf-editor
-privoxy
 emerillon
 devhelp
 gtk3-devel-docs
 meld
-
 gstreamer-plugins-ugly
 gstreamer-ffmpeg
 
-discount
-xclip
-inotify-tools
-source-highlight
-nginx
-mpd
-mpc
-
+# Curses
 nano
 hexedit
 mutt
-newsbeuter
 ncmpc
 weechat
 htop
 
-lua
-git
-
-strace
-valgrind
-gcc
-qemu
-man-pages
-
-httpd-tools
-GraphicsMagick
+# Command-line
+mpc
+xclip
 optipng
 libjpeg-turbo-utils
 advancecomp
+GraphicsMagick
+discount
+inotify-tools
+source-highlight
+httpd-tools
+
+# Services
+nginx
+privoxy
+mpd
+
+# Development
+lua
+git
+gcc
+man-pages
+qemu
+strace
+valgrind
 
 %end
