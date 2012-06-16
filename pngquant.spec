@@ -22,6 +22,7 @@ median cut algorithm.
 %prep
 %setup -q -n pornel-improved-pngquant-b625d3e
 
+
 %build
 make %{?_smp_mflags}
 
