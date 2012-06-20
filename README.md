@@ -7,7 +7,7 @@ Additional packages for [Fedora] Linux
 Building packages
 -----------------
 
-To build packages, use the command
+To build packages, use the command:
 
     sudo make [package]...
 

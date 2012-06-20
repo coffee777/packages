@@ -1,5 +1,5 @@
 Name:           lua-lgi
-Version:        0.5
+Version:        0.6.1
 Release:        1%{?dist}
 Summary:        Dynamic Lua binding to GObject libraries using GObject-Introspection
 License:        MIT
@@ -44,6 +44,9 @@ make install PREFIX=%{_prefix} DESTDIR=%{buildroot}
 
 
 %changelog
+
+* Wed Jun 20 2012 Craig Barnes <cr@igbarn.es> - 0.6.1-1
+- Update to latest release
 
 * Sun Mar 04 2012 Craig Barnes <cr@igbarn.es> - 0.4-1
 - Initial package
