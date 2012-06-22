@@ -1,5 +1,5 @@
 Name:               nginx
-Version:            1.2.0
+Version:            1.2.1
 Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
@@ -42,6 +42,7 @@ proxy server written by Igor Sysoev.
 
 %prep
 %setup -q -a7 -a8 -a9 -a10 -a11
+sed -i 's/-Werror//g' auto/cc/gcc
 
 
 %build
@@ -139,6 +140,10 @@ fi
 
 
 %changelog
+
+* Fri Jun 22 2012 Craig Barnes <cr@igbarn.es> - 1.2.1-1
+- Update to latest stable release
+- Remove -Werror flag (turns warnings from "FORTIFY_SOURCE=2" into errors)
 
 * Thu Apr 26 2012 Craig Barnes <cr@igbarn.es> - 1.2.0-1
 - Update to latest stable release
