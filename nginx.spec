@@ -14,7 +14,7 @@ Source4:            mime.types
 Source5:            gzip.conf
 Source6:            default.conf
 Source7:            https://github.com/simpl/ngx_devel_kit/tarball/v0.2.17rc2
-Source8:            https://github.com/chaoslawful/lua-nginx-module/tarball/v0.5.0rc24
+Source8:            https://github.com/chaoslawful/lua-nginx-module/tarball/v0.5.2
 Source9:            http://labs.frickle.com/files/ngx_postgres-0.9.tar.gz
 Source10:           https://github.com/agentzh/rds-json-nginx-module/tarball/v0.12rc7
 Source11:           https://github.com/agentzh/echo-nginx-module/tarball/v0.38rc1
@@ -73,7 +73,7 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --with-http_geoip_module \
     --without-http_charset_module \
     --add-module=simpl-ngx_devel_kit-bc97eea \
-    --add-module=chaoslawful-lua-nginx-module-6ff5df6 \
+    --add-module=chaoslawful-lua-nginx-module-553432b \
     --add-module=ngx_postgres-0.9 \
     --add-module=agentzh-rds-json-nginx-module-253db2b \
     --add-module=agentzh-echo-nginx-module-6c1f553
@@ -144,6 +144,7 @@ fi
 
 * Fri Jun 22 2012 Craig Barnes <cr@igbarn.es> - 5:1.2.1-1
 - Use Epoch 5 to take precedence over Nginx builds in the Fedora repository
+- Update Lua module to v0.5.2
 
 * Fri Jun 22 2012 Craig Barnes <cr@igbarn.es> - 1.2.1-1
 - Update to latest stable release
