@@ -1,4 +1,5 @@
 Name:               nginx
+Epoch:              5
 Version:            1.2.1
 Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
@@ -140,6 +141,9 @@ fi
 
 
 %changelog
+
+* Fri Jun 22 2012 Craig Barnes <cr@igbarn.es> - 5:1.2.1-1
+- Use Epoch 5 to take precedence over Nginx builds in the Fedora repository
 
 * Fri Jun 22 2012 Craig Barnes <cr@igbarn.es> - 1.2.1-1
 - Update to latest stable release
