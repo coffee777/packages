@@ -4,7 +4,7 @@ Release:        1%{?dist}
 Summary:        Lightweight and small benchmarking tool for webservers
 License:        MIT
 URL:            http://redmine.lighttpd.net/projects/weighttp/wiki
-Source0:        http://cgit.lighttpd.net/weighttp/snapshot/weighttp-1bdbe4003c8d7d61568ed45548fccf354ab19018.tar.gz
+Source0:        http://cgit.lighttpd.net/weighttp.git/snapshot/weighttp-1bdbe4003c8d7d61568ed45548fccf354ab19018.tar.gz
 BuildRequires:  libev-devel python
 
 %description
