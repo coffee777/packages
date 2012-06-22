@@ -18,14 +18,14 @@ Source9:            http://labs.frickle.com/files/ngx_postgres-0.9.tar.gz
 Source10:           https://github.com/agentzh/rds-json-nginx-module/tarball/v0.12rc7
 Source11:           https://github.com/agentzh/echo-nginx-module/tarball/v0.38rc1
 
-BuildRequires:      pcre-devel
+BuildRequires:      pcre-devel >= 8.20
 BuildRequires:      zlib-devel
 BuildRequires:      openssl-devel
 BuildRequires:      libluajit-devel
 BuildRequires:      GeoIP-devel
 BuildRequires:      postgresql-devel
 
-Requires:           pcre
+Requires:           pcre >= 8.20
 Requires:           openssl
 Requires:           logrotate
 Requires:           libluajit%{?_isa} = 2.0.0
@@ -144,6 +144,7 @@ fi
 * Fri Jun 22 2012 Craig Barnes <cr@igbarn.es> - 1.2.1-1
 - Update to latest stable release
 - Remove -Werror flag (turns warnings from "FORTIFY_SOURCE=2" into errors)
+- Enable "pcre_jit" option in nginx.conf (requires pcre version 8.20 or above)
 
 * Thu Apr 26 2012 Craig Barnes <cr@igbarn.es> - 1.2.0-1
 - Update to latest stable release
