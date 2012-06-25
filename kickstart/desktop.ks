@@ -55,6 +55,7 @@ discount
 inotify-tools
 source-highlight
 httpd-tools
+cclive
 
 # Services
 nginx
