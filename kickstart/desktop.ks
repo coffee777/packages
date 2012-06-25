@@ -13,6 +13,7 @@ repo --name=remix --baseurl=http://dl.dropbox.com/u/2682668/fedora-remix/$releas
 # Junk
 -@office
 -PackageKit-command-not-found
+-PackageKit-gtk3-module
 -gnome-games
 -deja-dup
 -aisleriot
