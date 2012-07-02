@@ -1,5 +1,4 @@
 PACKAGES = $(patsubst %.spec,%,$(wildcard *.spec))
-REQUIRES = `rpmspec -q --buildrequires $@.spec | cut -d' ' -f1 | cut -d'(' -f1`
 BUILDLOG = /tmp/$@.build
 FINDRPMS = `sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' $(BUILDLOG)`
 
@@ -10,7 +9,7 @@ help:
 all: $(PACKAGES)
 
 $(PACKAGES): ~makerpm/rpmbuild
-	@test -z "$(REQUIRES)" || rpm -q $(REQUIRES) || yum install -y $(REQUIRES)
+	yum-builddep $@.spec
 	spectool -S -C $</SOURCES -g $@.spec
 	test ! -d sources/$@ || cp -f sources/$@/* $</SOURCES/
 	cp -f $@.spec $</SPECS/
