@@ -72,4 +72,7 @@ qemu
 strace
 valgrind
 
+# Other
+words
+
 %end
