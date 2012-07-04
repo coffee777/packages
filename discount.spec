@@ -1,6 +1,6 @@
 Name:           discount
 Version:        2.1.3
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A command-line utility for converting Markdown files into HTML
 License:        BSD
 URL:            http://www.pell.portland.or.us/~orc/Code/%{name}
