@@ -4,12 +4,9 @@ Release:        4%{?dist}
 Summary:        A command-line utility for converting Markdown files into HTML
 License:        BSD
 URL:            http://www.pell.portland.or.us/~orc/Code/%{name}
-
 Source0:        %{url}/%{name}-%{version}.tar.bz2
 Patch0:         discount-ldconfig.patch
-
 Requires:       libmarkdown%{?_isa} = %{version}-%{release}
-BuildRequires:  autoconf
 
 %description
 DISCOUNT is an implementation of John Gruber's Markdown language in C.
@@ -40,7 +37,7 @@ libmarkdown.
 
 
 %build
-CC='cc %{optflags}' ./configure.sh \
+CC='gcc %{optflags}' ./configure.sh \
     --shared \
     --prefix=%{_prefix} \
     --execdir=%{_bindir} \
@@ -51,9 +48,8 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot}
 make install.everything DESTDIR=%{buildroot}
-# Rename sample program (names are too generic) and matching man1 pages
+# Rename sample programs (names are too generic) and matching man1 pages
 mv %{buildroot}%{_bindir}/makepage %{buildroot}%{_bindir}/discount-makepage
 mv %{buildroot}%{_bindir}/mkd2html %{buildroot}%{_bindir}/discount-mkd2html
 mv %{buildroot}%{_bindir}/theme %{buildroot}%{_bindir}/discount-theme
@@ -98,6 +94,12 @@ make test
 
 
 %changelog
+
+* Wed Jul 04 2012 Craig Barnes <cbgnome@gmail.com> - 2.1.3-5
+- Remove spurious autoconf dependency
+- Remove unnecessary manual buildroot cleaning
+- Use gcc as CC instead of "cc"
+- Fix typo in comment
 
 * Thu Mar 08 2012 Craig Barnes <cr@igbarn.es> - 2.1.3-4
 - Pass optflags to configure script
