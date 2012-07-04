@@ -28,7 +28,6 @@ using a PEG grammar and can also be modified by the user.
 
 
 %install
-rm -rf %{buildroot}
 install -dm755 %{buildroot}%{_datadir}/lua/5.1/
 cp -rf lunamark %{buildroot}%{_datadir}/lua/5.1/
 cp lunamark.lua %{buildroot}%{_datadir}/lua/5.1/

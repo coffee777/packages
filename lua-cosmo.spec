@@ -20,7 +20,6 @@ without without the downside of allowing arbitrary code in the templates.
 
 
 %install
-rm -rf %{buildroot}
 install -d -m 755     %{buildroot}%{_datadir}/lua/5.1/cosmo
 install -p -m 644 -t  %{buildroot}%{_datadir}/lua/5.1        src/cosmo.lua
 install -p -m 644 -t  %{buildroot}%{_datadir}/lua/5.1/cosmo  src/cosmo/*.lua

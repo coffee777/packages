@@ -24,7 +24,6 @@ flexibility.
 
 
 %install
-rm -rf %{buildroot}
 make install PREFIX=%{_prefix} DESTDIR=%{buildroot}
 
 

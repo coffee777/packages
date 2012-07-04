@@ -17,7 +17,6 @@ cp %{SOURCE0} %{SOURCE1} %{_builddir}
 
 
 %install
-rm -rf %{buildroot}
 install -Dpm644 %{SOURCE0} %{buildroot}%{_datadir}/glib-2.0/schemas/gnome-extra.gschema.override
 install -Dpm644 %{SOURCE1} %{buildroot}%{_datadir}/gnome-shell/open-search-providers/google-ssl.xml
 

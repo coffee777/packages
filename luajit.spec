@@ -36,7 +36,6 @@ make amalg PREFIX=%{_prefix} CFLAGS="%{optflags}" %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot}
 make install PREFIX=%{_prefix} DESTDIR=%{buildroot}
 mv -T %{buildroot}%{_bindir}/luajit-%{version}-%{beta} %{buildroot}%{_bindir}/luajit
 

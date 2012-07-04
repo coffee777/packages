@@ -35,7 +35,6 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 install -p -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/fcgiwrap.service
 

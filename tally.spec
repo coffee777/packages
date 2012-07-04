@@ -16,7 +16,6 @@ Source0:        %{url}/downloads/%{name}-%{version}.tar.gz
 
 
 %install
-rm -rf %{buildroot}
 make install PREFIX=%{_prefix} BINDIR=%{_bindir} DESTDIR=%{buildroot}
 
 

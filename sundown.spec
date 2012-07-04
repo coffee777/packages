@@ -38,7 +38,6 @@ make %{?_smp_mflags} CFLAGS='%{optflags} -c -fPIC -Isrc -Ihtml'
 
 
 %install
-rm -rf %{buildroot}
 install -Dpm0755 sundown %{buildroot}%{_bindir}/sundown
 install -Dpm0755 libsundown.so.1 %{buildroot}%{_libdir}/libsundown.so.1
 install -Dp libsundown.so %{buildroot}%{_libdir}/libsundown.so

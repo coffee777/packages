@@ -28,7 +28,6 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot}
 make install PREFIX=%{_prefix} DESTDIR=%{buildroot}
 
 

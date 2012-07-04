@@ -21,7 +21,6 @@ sed -i '51s|\\.)|)\\.|' man3/luaL_Buffer.3
 
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}%{_mandir}/man3
 install -pm0644 man3/*.3 %{buildroot}%{_mandir}/man3
 

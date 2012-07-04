@@ -34,7 +34,6 @@ for concurrent requests within a single thread.
 
 
 %install
-rm -rf %{buildroot}
 ./waf install --destdir=%{buildroot}
 
 

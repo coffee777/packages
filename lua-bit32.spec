@@ -23,7 +23,6 @@ gcc -shared -fPIC -o bit32.so -L%{_libdir} bit32.o
 
 
 %install
-rm -rf %{buildroot}
 install -Dpm0755 bit32.so %{buildroot}%{_libdir}/lua/5.1/bit32.so
 
 

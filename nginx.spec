@@ -81,7 +81,6 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 chmod 0755 %{buildroot}%{_sbindir}/nginx
 rm %{buildroot}/%{_sysconfdir}/nginx/*.default

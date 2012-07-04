@@ -16,7 +16,6 @@ cp %{SOURCE0} %{_builddir}
 
 
 %install
-rm -rf %{buildroot}
 install -Dpm644 %{SOURCE0} %{buildroot}%{_sysconfdir}/yum.repos.d/remix.repo
 
 

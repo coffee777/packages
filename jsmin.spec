@@ -24,7 +24,6 @@ cc -o jsmin jsmin.c
 
 
 %install
-rm -rf %{buildroot}
 %{__install} -p -D -m 0755 jsmin %{buildroot}%{_sbindir}/jsmin
 
 

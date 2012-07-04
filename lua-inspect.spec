@@ -19,7 +19,6 @@ serialization or compactness.
 
 
 %install
-rm -rf %{buildroot}
 install -Dpm644 inspect.lua %{buildroot}%{_datadir}/lua/5.1/inspect.lua
 
 

@@ -50,7 +50,6 @@ popd
 
 
 %install
-rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 install -Dpm 644 htmldoc/tidy.1 %{buildroot}%{_mandir}/man1/tidy.1
 rm -f %{buildroot}%{_libdir}/libtidy.la

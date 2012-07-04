@@ -38,7 +38,6 @@ Note: some packages may require that lua-devel is installed.
 make
 
 %install
-rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 
 

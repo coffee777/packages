@@ -28,7 +28,6 @@ gcc -shared -o unicode.so -L%{_libdir} slnunico.o ./slnudata.o
 
 
 %install
-rm -rf %{buildroot}
 install -Dpm0755 unicode.so %{buildroot}%{_libdir}/lua/5.1/unicode.so
 
 
