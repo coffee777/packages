@@ -1,7 +1,7 @@
-%global         gitcommit f212c3f
+%global         gitcommit d3440ed
 Name:           tidy
 Version:        1
-Release:        2.git%{gitcommit}%{?dist}
+Release:        3.git%{gitcommit}%{?dist}
 Summary:        Utility to clean, validate and pretty print HTML
 Group:          Applications/Text
 License:        W3C
@@ -34,6 +34,8 @@ Requires:       libtidy%{?_isa} = %{version}-%{release}
 
 %prep
 %setup -q -n w3c-tidy-html5-%{gitcommit}
+sed -i 's|mappedio.c|mappedio.c gdoc.c|' build/gnuauto/src/Makefile.am
+sed -i   's|version.h|version.h gdoc.h|' build/gnuauto/src/Makefile.am
 sh build/gnuauto/setup.sh
 
 
@@ -78,6 +80,10 @@ rm -f %{buildroot}%{_bindir}/tab2space
 
 
 %changelog
+
+* Fri Jul 06 2012 Craig Barnes <cr@igbarn.es> - 1-3.gitd3440ed
+- Update to latest git master
+- Add temporary fix for upstream error in autotools build
 
 * Tue Jun 05 2012 Craig Barnes <cr@igbarn.es> - 1-2.gitf212c3f
 - Update to latest git master
