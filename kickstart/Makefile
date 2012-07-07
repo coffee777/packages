@@ -6,8 +6,8 @@ install: desktop.ks
 	@-yum -y --nogpgcheck install $(FUSIONDL)
 	@yum -y remove  $(EXCLUDED)
 	@yum -y install $(PACKAGES)
-	@systemctl enable privoxy.service
-	@systemctl start privoxy.service
+	@systemctl is-enabled privoxy.service || systemctl enable privoxy.service
+	@systemctl is-active  privoxy.service || systemctl start  privoxy.service
 
 
 .PHONY: install
