@@ -29,7 +29,7 @@ make %{?_smp_mflags}
 
 %install
 make install PREFIX=%{_prefix} DESTDIR=%{buildroot}
-install -m 0644 -p -D pngquant.1 %{buildroot}/%{_mandir}/man1/pngquant.1
+install -Dpm0644 pngquant.1 %{buildroot}/%{_mandir}/man1/pngquant.1
 
 
 %files
