@@ -15,6 +15,8 @@ Where `[package]` is the name of one or more `.spec` files. For example:
 
 If sucessful, all built `.rpm` files will be copied to the current directory.
 
+You can also use `make help` to show a list valid targets.
+
 The Makefile knows how to set up a packaging environment, install build-time
 dependencies, copy spec files and download sources. This is all automatic and
 fairly robust.
