@@ -1,7 +1,7 @@
-%global         gitcommit 79439b0
+%global         gitcommit 1b4dcd0
 Name:           tidy
 Version:        1
-Release:        4.git%{gitcommit}%{?dist}
+Release:        5.git%{gitcommit}%{?dist}
 Summary:        Utility to clean, validate and pretty print HTML
 Group:          Applications/Text
 License:        W3C
@@ -78,6 +78,9 @@ rm -f %{buildroot}%{_bindir}/tab2space
 
 
 %changelog
+
+* Sun Jul 22 2012 Craig Barnes <cr@igbarn.es> - 1-5.git1b4dcd0
+- Update to latest git master
 
 * Fri Jul 06 2012 Craig Barnes <cr@igbarn.es> - 1-4.git79439b0
 - Update to latest git master
