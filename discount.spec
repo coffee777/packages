@@ -1,6 +1,6 @@
 Name:           discount
 Version:        2.1.3
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        A command-line utility for converting Markdown files into HTML
 License:        BSD
 URL:            http://www.pell.portland.or.us/~orc/Code/%{name}
@@ -37,7 +37,7 @@ libmarkdown.
 
 
 %build
-CC='gcc %{optflags}' ./configure.sh \
+CFLAGS='%{optflags}' ./configure.sh \
     --shared \
     --prefix=%{_prefix} \
     --execdir=%{_bindir} \
@@ -94,6 +94,9 @@ make test
 
 
 %changelog
+
+* Wed Jul 25 2012 Craig Barnes <cbgnome@gmail.com> - 2.1.3-6
+- Add optflags to CFLAGS instead of appending to CC
 
 * Wed Jul 04 2012 Craig Barnes <cbgnome@gmail.com> - 2.1.3-5
 - Remove spurious autoconf dependency
