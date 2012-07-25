@@ -50,10 +50,9 @@ popd
 
 
 %install
-make install DESTDIR=%{buildroot}
-install -Dpm 644 htmldoc/tidy.1 %{buildroot}%{_mandir}/man1/tidy.1
-rm -f %{buildroot}%{_libdir}/libtidy.la
-rm -f %{buildroot}%{_bindir}/tab2space
+%make_install
+install -Dpm0644 htmldoc/tidy.1 %{buildroot}%{_mandir}/man1/tidy.1
+rm -f %{buildroot}%{_libdir}/libtidy.la %{buildroot}%{_bindir}/tab2space
 
 
 %post   -n libtidy -p /sbin/ldconfig
