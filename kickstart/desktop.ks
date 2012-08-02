@@ -62,9 +62,11 @@ privoxy
 mpd
 
 # Development
-lua
-git
 gcc
+gdb
+make
+git
+lua
 man-pages
 qemu
 strace
