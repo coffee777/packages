@@ -68,6 +68,9 @@ display-line-numbers=true
 display-right-margin=true
 create-backup-copy=false
 
+[org.gnome.gedit.preferences.ui]
+statusbar-visible=false
+
 [org.gnome.Epiphany]
 keyword-search-url='https://www.google.com/search?q=%s&complete=0&hl=en'
 enabled-extensions=["extensions-manager-ui", "adblock", "html5tube", "tab-key-tab-navigate"]
