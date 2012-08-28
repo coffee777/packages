@@ -9,7 +9,7 @@ help:
 all: $(PACKAGES)
 
 $(PACKAGES): ~makerpm/rpmbuild
-	yum-builddep $@.spec
+	yum-builddep -qyC --noplugins $@.spec
 	spectool -S -C $</SOURCES -g $@.spec
 	test ! -d sources/$@ || cp -f sources/$@/* $</SOURCES/
 	cp -f $@.spec $</SPECS/
