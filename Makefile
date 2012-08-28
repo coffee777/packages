@@ -8,12 +8,12 @@ help:
 
 all: $(PACKAGES)
 
-$(PACKAGES): ~makerpm/rpmbuild
+$(PACKAGES): | ~makerpm/rpmbuild
 	yum-builddep -qyC --noplugins $@.spec
-	spectool -S -C $</SOURCES -g $@.spec
-	test ! -d sources/$@ || cp -f sources/$@/* $</SOURCES/
-	cp -f $@.spec $</SPECS/
-	su -c 'cd $< && rpmbuild -ba SPECS/$@.spec > $(BUILDLOG)' makerpm
+	spectool -S -C $|/SOURCES -g $@.spec
+	test ! -d sources/$@ || cp -f sources/$@/* $|/SOURCES/
+	cp -f $@.spec $|/SPECS/
+	su -c 'cd $| && rpmbuild -ba SPECS/$@.spec > $(BUILDLOG)' makerpm
 	for rpm in $(FINDRPMS); do cp $$rpm .; done
 
 install: ~/Dropbox/Public/fedora-remix/16
