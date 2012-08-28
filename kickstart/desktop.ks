@@ -42,6 +42,7 @@ mutt
 ncmpc
 weechat
 htop
+tig
 
 # Command-line
 mpc
