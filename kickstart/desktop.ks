@@ -43,6 +43,7 @@ ncmpc
 weechat
 htop
 tig
+nload
 
 # Command-line
 mpc
