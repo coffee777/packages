@@ -57,6 +57,7 @@ inotify-tools
 source-highlight
 httpd-tools
 cclive
+rlwrap
 
 # Services
 nginx
