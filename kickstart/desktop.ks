@@ -35,6 +35,9 @@ meld
 gstreamer-plugins-ugly
 gstreamer-ffmpeg
 
+# Fonts
+gdouros-symbola-fonts
+
 # Curses
 nano
 hexedit
