@@ -10,6 +10,7 @@ ExecStartPre=/usr/sbin/nginx -t -q
 ExecStart=/usr/sbin/nginx
 ExecReload=/usr/sbin/nginx -s reload
 ExecStop=/usr/sbin/nginx -s quit
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target

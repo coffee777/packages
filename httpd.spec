@@ -1,24 +1,22 @@
 Name:           httpd
-Epoch:          1
-Version:        1
+Epoch:          10
+Version:        10
 Release:        1%{?dist}
 Summary:        Nginx high performance HTTP and reverse proxy server
 License:        BSD
 URL:            http://www.nginx.org/
 BuildArch:      noarch
+Provides:       httpd-mmn webserver
+Obsoletes:      httpd-mmn
 Requires:       nginx
-Source0:        README
 
 %description
-Nginx [engine x] is a HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3
-proxy server written by Igor Sysoev.
-
-In the presence of this meta-package, all dependencies on
-"httpd" will be satisfied by Nginx instead of the former default Apache.
+In the presence of this meta-package, all dependencies on "httpd" will be
+satisfied by Nginx instead of Apache.
 
 
-%prep
-cp %{SOURCE0} %{_builddir}
+%build
+echo '%{description}' > README
 
 
 %files
@@ -26,6 +24,13 @@ cp %{SOURCE0} %{_builddir}
 
 
 %changelog
+
+* Fri Aug 24 2012 Craig Barnes <cr@igbarn.es> - 10:10-1
+- Add "httpd-mmn" to "Obsoletes:" to prevent pulling in Apache
+- Add "httpd-mmn" and "webserver" to "Provides:" to satify PHP dependencies
+- Simplify description
+- Use description to generate README instead of using external sources
+- Bump epoch and version to 10 to avoid any later surprises
 
 * Thu Jan 02 2012 Craig Barnes <cr@igbarn.es> - 1:1-1
 - Initial package

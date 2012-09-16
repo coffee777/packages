@@ -35,6 +35,9 @@ meld
 gstreamer-plugins-ugly
 gstreamer-ffmpeg
 
+# Fonts
+gdouros-symbola-fonts
+
 # Curses
 nano
 hexedit
@@ -42,6 +45,8 @@ mutt
 ncmpc
 weechat
 htop
+tig
+nload
 
 # Command-line
 mpc
@@ -55,6 +60,7 @@ inotify-tools
 source-highlight
 httpd-tools
 cclive
+rlwrap
 
 # Services
 nginx

@@ -1,5 +1,5 @@
 Name:           lua-lgi
-Version:        0.6.1
+Version:        0.6.2
 Release:        1%{?dist}
 Summary:        Dynamic Lua binding to GObject libraries using GObject-Introspection
 License:        MIT
@@ -14,9 +14,7 @@ Requires:       lua >= 5.1
 LGI is gobject-introspection based dynamic Lua binding to GObject based
 libraries. It allows using GObject-based libraries directly from Lua.
 
-LGI is tested and compatible with standard Lua 5.1 and Lua 5.2 and recent
-LuaJIT 2 betas. Compatibility with other Lua implementations is not tested
-yet.
+LGI is tested and compatible with standard Lua 5.1 and 5.2 and also LuaJIT 2.
 
 
 %prep
@@ -43,6 +41,10 @@ make install PREFIX=%{_prefix} DESTDIR=%{buildroot}
 
 
 %changelog
+
+* Tue Aug 28 2012 Craig Barnes <cr@igbarn.es> - 0.6.2-1
+- Update to latest release
+- Simplify description
 
 * Wed Jun 20 2012 Craig Barnes <cr@igbarn.es> - 0.6.1-1
 - Update to latest release
