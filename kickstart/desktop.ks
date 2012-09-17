@@ -61,6 +61,7 @@ source-highlight
 httpd-tools
 cclive
 rlwrap
+tree
 
 # Services
 nginx
