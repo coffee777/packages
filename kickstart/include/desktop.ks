@@ -13,8 +13,6 @@ gstreamer-plugins-ugly
 gstreamer-ffmpeg
 gdouros-symbola-fonts
 google-chrome-stable
-
--@office
 -PackageKit-command-not-found
 -PackageKit-gtk3-module
 -gnome-games
