@@ -7,17 +7,17 @@ desktop thai:
 	livecd-creator -c $@.ks -f F$(VERSION)-$@ --tmpdir=tmp --cache=cache \
 	--releasever=$(VERSION) --title="$(TITLE)" --product="$(TITLE)"
 
-install: desktop.ks | $(FUSIONREPO)
+install: desktop.ks | /etc/rpm/macros.lang /etc/yum.repos.d/rpmfusion-free.repo
 	@rpm -q --quiet $(PACKAGES) || yum -y install $(PACKAGES)
 	@$(SCTL) is-enabled privoxy.service || $(SCTL) enable privoxy.service
 	@$(SCTL) is-active  privoxy.service || $(SCTL) start  privoxy.service
 	@echo "OK"
 
-FUSIONREPO = /etc/yum.repos.d/rpmfusion-free.repo
-FUSIONDL = http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
+/etc/rpm/macros.lang:
+	@echo '%_install_langs en_GB:th_TH' > $@
 
-$(FUSIONREPO):
-	@yum -y --nogpgcheck install $(FUSIONDL)
+/etc/yum.repos.d/rpmfusion-free.repo:
+	@yum -y --nogpgcheck install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
 
 check: *.ks
 	@for KS in $^; do echo $$KS:; ksvalidator -iv F$(VERSION) $$KS; echo; done
