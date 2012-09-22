@@ -1,6 +1,14 @@
+VERSION  = 17
+MAKEISO  = livecd-creator --tmpdir=tmp --cache=cache --releasever=$(VERSION)
 PACKAGES = `sed -nr '/^\%packages/,/%end/s/^(\w[A-Za-z0-9_-]+).*/\1/p' $<`
 VALIDATE = ksvalidator -iv F17
 SCTL     = systemctl --quiet 2>/dev/null
+
+thai: F$(VERSION)-Thai.iso
+desktop: F$(VERSION)-desktop.iso
+
+F$(VERSION)-%.iso: %.ks
+	$(MAKEISO) -c $< -f $(@:.iso=) --title "Fedora $(VERSION) $*"
 
 install: desktop.ks | $(FUSIONREPO)
 	@rpm -q --quiet $(PACKAGES) || yum -y install $(PACKAGES)

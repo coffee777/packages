@@ -1,24 +1,12 @@
-%include /usr/share/spin-kickstarts/fedora-live-desktop.ks
+%include include/desktop.ks
 
 keyboard uk
 lang en_GB
 timezone --utc Europe/London
 
-repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
-repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch
 repo --name=remix --baseurl=http://dl.dropbox.com/u/2682668/fedora-remix/$releasever/$basearch/
 
 %packages
-
-# Junk
--@office
--PackageKit-command-not-found
--PackageKit-gtk3-module
--gnome-games
--deja-dup
--aisleriot
--sound-juicer
--fedora-release-notes
 
 # GNOME
 luakit
@@ -32,11 +20,6 @@ emerillon
 devhelp
 gtk3-devel-docs
 meld
-gstreamer-plugins-ugly
-gstreamer-ffmpeg
-
-# Fonts
-gdouros-symbola-fonts
 
 # Curses
 nano
