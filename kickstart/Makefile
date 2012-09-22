@@ -3,12 +3,9 @@ TITLE    = Fedora $(VERSION) Remix
 PACKAGES = `sed -nr '/^\%packages/,/%end/s/^(\w[A-Za-z0-9_-]+).*/\1/p' $<`
 SCTL     = systemctl --quiet 2>/dev/null
 
-thai: F$(VERSION)-Thai.iso
-desktop: F$(VERSION)-desktop.iso
-
-F$(VERSION)-%.iso: %.ks
-	livecd-creator -c $< -f $(@:.iso=) --tmpdir=tmp --cache=cache \
-		--releasever=$(VERSION) --title="$(TITLE)" --product="$(TITLE)"
+desktop thai:
+	livecd-creator -c $@.ks -f F$(VERSION)-$@ --tmpdir=tmp --cache=cache \
+	--releasever=$(VERSION) --title="$(TITLE)" --product="$(TITLE)"
 
 install: desktop.ks | $(FUSIONREPO)
 	@rpm -q --quiet $(PACKAGES) || yum -y install $(PACKAGES)
