@@ -7,18 +7,19 @@ rootpw --iscrypted $6$Gy7TJjee52fs$zAES8PyxmHVqEnjBvNnEw5XWINhDRx.6PEXPLZ0ZVKxeK
 authconfig --enableshadow --passalgo=sha512
 
 %packages
+gstreamer-plugins-ugly
+gstreamer-ffmpeg
+gdouros-symbola-fonts
+
 -@office
 -PackageKit-command-not-found
 -PackageKit-gtk3-module
 -gnome-games
+-gnome-mplayer
 -deja-dup
 -aisleriot
 -sound-juicer
 -fedora-release-notes
 -abrt*
 -setroubleshoot*
-
-gstreamer-plugins-ugly
-gstreamer-ffmpeg
-gdouros-symbola-fonts
 %end
