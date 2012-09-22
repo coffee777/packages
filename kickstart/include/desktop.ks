@@ -28,4 +28,5 @@ google-chrome-stable
 -yelp
 -firefox
 -xulrunner
+-evolution
 %end
