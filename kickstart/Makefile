@@ -1,14 +1,14 @@
 VERSION  = 17
-MAKEISO  = livecd-creator --tmpdir=tmp --cache=cache --releasever=$(VERSION)
+TITLE    = Fedora $(VERSION) Remix
 PACKAGES = `sed -nr '/^\%packages/,/%end/s/^(\w[A-Za-z0-9_-]+).*/\1/p' $<`
-VALIDATE = ksvalidator -iv F17
 SCTL     = systemctl --quiet 2>/dev/null
 
 thai: F$(VERSION)-Thai.iso
 desktop: F$(VERSION)-desktop.iso
 
 F$(VERSION)-%.iso: %.ks
-	$(MAKEISO) -c $< -f $(@:.iso=) --title "Fedora $(VERSION) $*"
+	livecd-creator -c $< -f $(@:.iso=) --tmpdir=tmp --cache=cache \
+		--releasever=$(VERSION) --title="$(TITLE)" --product="$(TITLE)"
 
 install: desktop.ks | $(FUSIONREPO)
 	@rpm -q --quiet $(PACKAGES) || yum -y install $(PACKAGES)
@@ -22,8 +22,11 @@ FUSIONDL = http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-sta
 $(FUSIONREPO):
 	@yum -y --nogpgcheck install $(FUSIONDL)
 
-check: desktop.ks
-	$(VALIDATE) $^
+check: *.ks
+	@for KS in $^; do echo $$KS:; ksvalidator -iv F$(VERSION) $$KS; echo; done
+
+clean:
+	rm -rf *.iso tmp cache
 
 
-.PHONY: install check
+.PHONY: install check clean
