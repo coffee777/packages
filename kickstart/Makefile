@@ -20,9 +20,12 @@ install:
 	@$(SCTL) is-active  privoxy.service || $(SCTL) start  privoxy.service
 	@echo "OK"
 
-desktop thai:
+desktop thai: | /usr/bin/livecd-creator
 	livecd-creator -c $@.ks -f F$(VERSION)-$@ --tmpdir=tmp --cache=cache \
 	--releasever=$(VERSION) --title="$(TITLE)" --product="$(TITLE)"
+
+/usr/bin/livecd-creator:
+	rpm -q --quiet livecd-tools || yum -y install livecd-tools
 
 check:
 	@for K in *.ks; do echo $$K:; ksvalidator -iv F$(VERSION) $$K; done
@@ -31,4 +34,4 @@ clean:
 	rm -rf *.iso tmp cache
 
 
-.PHONY: install check clean
+.PHONY: help install desktop thai check clean
