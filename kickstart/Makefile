@@ -1,23 +1,23 @@
 VERSION  = 17
 TITLE    = Fedora $(VERSION) Remix
-PACKAGES = `sed -nr '/^\%packages/,/%end/s/^(\w[A-Za-z0-9_-]+).*/\1/p' $<`
+
+PACKAGES = $(shell sed -nr '/^%packages/,/^%end/s/^(\w[^ ]+)/\1/p' desktop.ks)
+FUSN     = rpmfusion-free-release
+URL      = http://download1.rpmfusion.org/free/fedora/$(FUSN)-stable.noarch.rpm
+MACROS   = /etc/rpm/macros.lang
 SCTL     = systemctl --quiet 2>/dev/null
 
-desktop thai:
-	livecd-creator -c $@.ks -f F$(VERSION)-$@ --tmpdir=tmp --cache=cache \
-	--releasever=$(VERSION) --title="$(TITLE)" --product="$(TITLE)"
-
-install: desktop.ks | /etc/rpm/macros.lang /etc/yum.repos.d/rpmfusion-free.repo
+install:
+	@test -f $(MACROS) || echo '%_install_langs en_GB:th_TH' > $(MACROS)
+	@rpm -q --quiet $(FUSN) || yum -y --nogpgcheck install $(URL)
 	@rpm -q --quiet $(PACKAGES) || yum -y install $(PACKAGES)
 	@$(SCTL) is-enabled privoxy.service || $(SCTL) enable privoxy.service
 	@$(SCTL) is-active  privoxy.service || $(SCTL) start  privoxy.service
 	@echo "OK"
 
-/etc/rpm/macros.lang:
-	@echo '%_install_langs en_GB:th_TH' > $@
-
-/etc/yum.repos.d/rpmfusion-free.repo:
-	@yum -y --nogpgcheck install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm
+desktop thai:
+	livecd-creator -c $@.ks -f F$(VERSION)-$@ --tmpdir=tmp --cache=cache \
+	--releasever=$(VERSION) --title="$(TITLE)" --product="$(TITLE)"
 
 check: *.ks
 	@for KS in $^; do echo $$KS:; ksvalidator -iv F$(VERSION) $$KS; echo; done
