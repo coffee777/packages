@@ -7,6 +7,11 @@ URL      = http://download1.rpmfusion.org/free/fedora/$(FUSN)-stable.noarch.rpm
 MACROS   = /etc/rpm/macros.lang
 SCTL     = systemctl --quiet 2>/dev/null
 
+help:
+	@echo 'Usage:  make desktop   Create live image from desktop.ks'
+	@echo '        make thai      Create live image from thai.ks'
+	@echo '        make install   Install packages from desktop.ks'
+
 install:
 	@test -f $(MACROS) || echo '%_install_langs en_GB:th_TH' > $(MACROS)
 	@rpm -q --quiet $(FUSN) || yum -y --nogpgcheck install $(URL)
@@ -19,8 +24,8 @@ desktop thai:
 	livecd-creator -c $@.ks -f F$(VERSION)-$@ --tmpdir=tmp --cache=cache \
 	--releasever=$(VERSION) --title="$(TITLE)" --product="$(TITLE)"
 
-check: *.ks
-	@for KS in $^; do echo $$KS:; ksvalidator -iv F$(VERSION) $$KS; echo; done
+check:
+	@for K in *.ks; do echo $$K:; ksvalidator -iv F$(VERSION) $$K; done
 
 clean:
 	rm -rf *.iso tmp cache
