@@ -1,6 +1,6 @@
 Name:           luarocks
-Version:        2.0.8
-Release:        2%{?dist}
+Version:        2.0.11
+Release:        1%{?dist}
 Summary:        Package management system for Lua
 Group:          Development/System
 License:        MIT
@@ -52,6 +52,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+
+* Mon Oct 01 2012 Craig Barnes <cr@igbarn.es> - 2.0.11-1
+- Update to latest stable release
 
 * Fri Apr 27 2012 Craig Barnes <cr@igbarn.es> - 2.0.8-2
 - Use curl as downloader instead of wget
