@@ -20,6 +20,7 @@ emerillon
 devhelp
 gtk3-devel-docs
 meld
+gmpc
 
 # Curses
 nano
