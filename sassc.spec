@@ -6,8 +6,8 @@ Summary:        Command line Sass compiler
 License:        MIT
 URL:            https://github.com/hcatlin/sassc
 Source0:        %{url}/tarball/%{gitcommit}
-#BuildRequires:  libsass-devel
-#Requires:       libsass%{?_isa} = 1-1
+BuildRequires:  libsass-devel >= 1-1
+Requires:       libsass >= 1-1
 
 %description
 %{summary}.

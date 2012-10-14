@@ -36,7 +36,7 @@ make %{?_smp_mflags} shared CFLAGS='-c %{optflags} -fPIC'
 
 %install
 install -Dpm0755 libsass.so %{buildroot}%{_libdir}/libsass.so.1
-ln -s %{_libdir}/libsass.so.1 %{buildroot}%{_libdir}/libsass.so
+ln -s libsass.so.1 %{buildroot}%{_libdir}/libsass.so
 install -Dpm0644 sass_interface.h %{buildroot}%{_includedir}/sass_interface.h
 
 
