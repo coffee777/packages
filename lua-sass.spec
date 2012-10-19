@@ -1,4 +1,4 @@
-%global         gitcommit 09fd6dc
+%global         gitcommit 694e592
 Name:           lua-sass
 Version:        0.0.1
 Release:        1%{?dist}
