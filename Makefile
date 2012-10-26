@@ -10,7 +10,7 @@ all: $(PACKAGES)
 
 $(PACKAGES): | ~makerpm/rpmbuild
 	yum-builddep -qy --noplugins $@.spec
-	spectool -S -C $|/SOURCES -g $@.spec
+	spectool -A -g -C $|/SOURCES $@.spec
 	test ! -d sources/$@ || cp -f sources/$@/* $|/SOURCES/
 	cp -f $@.spec $|/SPECS/
 	su -c 'cd $| && rpmbuild -ba SPECS/$@.spec > $(BUILDLOG)' makerpm

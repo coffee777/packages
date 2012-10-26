@@ -1,4 +1,4 @@
-%global     beta beta10
+%global     beta beta11
 Name:       luajit
 Version:    2.0.0
 Release:    1.%{beta}%{?dist}
@@ -6,6 +6,7 @@ Summary:    Just-In-Time Compiler for Lua
 License:    MIT
 URL:        http://luajit.org/
 Source0:    http://luajit.org/download/LuaJIT-%{version}-%{beta}.tar.gz
+Patch0:     http://luajit.org/download/beta11_hotfix1.patch
 Requires:   libluajit%{?_isa} = %{version}-%{release}
 
 %description
@@ -17,18 +18,25 @@ Lua interpreter and can be deployed as a drop-in replacement.
 %package -n libluajit
 Summary: Library for LuaJIT
 %description -n libluajit
-%{summary}
+%{summary}.
+
+
+%package -n libluajit-static
+Summary: Static library for LuaJIT
+%description -n libluajit-static
+%{summary}.
 
 
 %package -n libluajit-devel
-Summary: Development files for libluajit library
+Summary: Development files for libluajit
 Requires: libluajit%{?_isa} = %{version}-%{release}
 %description -n libluajit-devel
-%{summary}
+%{summary}.
 
 
 %prep
 %setup -q -n LuaJIT-%{version}-%{beta}
+%patch0 -p1
 
 
 %build
@@ -57,14 +65,22 @@ mv -T %{buildroot}%{_bindir}/luajit-%{version}-%{beta} %{buildroot}%{_bindir}/lu
 %dir %{_datadir}/%{name}-%{version}-%{beta}/jit
 
 
-%files -n libluajit-devel
+%files -n libluajit-static
 %{_libdir}/libluajit-5.1.a
+
+
+%files -n libluajit-devel
 %{_libdir}/libluajit-5.1.so
 %{_libdir}/pkgconfig/luajit.pc
 %{_includedir}/luajit-2.0/*.h*
 
 
 %changelog
+
+* Fri Oct 26 2012 Craig Barnes <cr@igbarn.es> - 2.0.0-1.beta11
+- Update to latest beta
+- Add latest hotfix patch
+- Split static library into separate libluajit-static package
 
 * Thu May 10 2012 Craig Barnes <cr@igbarn.es> - 2.0.0-1.beta10
 - Update to latest beta
