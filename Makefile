@@ -1,6 +1,8 @@
 PACKAGES = $(patsubst %.spec,%,$(wildcard *.spec))
 BUILDLOG = /tmp/$@.build
 FINDRPMS = `sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' $(BUILDLOG)`
+DEPSLIST = rpmspec -q --buildrequires $@.spec | cut -f1 -d' ' | cut -f1 -d'('
+HAVEDEPS = test -z "`$(DEPSLIST)`" || $(DEPSLIST) | xargs rpm -q
 
 help:
 	@printf 'Usage: sudo make PACKAGE...\n\nPackages:\n'
@@ -9,7 +11,7 @@ help:
 all: $(PACKAGES)
 
 $(PACKAGES): | ~makerpm/rpmbuild
-	yum-builddep -qy --noplugins $@.spec
+	$(HAVEDEPS) || yum-builddep -qy --noplugins $@.spec
 	spectool -A -g -C $|/SOURCES $@.spec
 	test ! -d sources/$@ || cp -f sources/$@/* $|/SOURCES/
 	cp -f $@.spec $|/SPECS/
