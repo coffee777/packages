@@ -1,4 +1,4 @@
-%global         gitcommit 5bd4581
+%global         gitcommit a0e50db
 Name:           libsass
 Version:        1
 Release:        1%{?dist}
@@ -27,11 +27,11 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n hcatlin-libsass-%{gitcommit}
-sed -i 's| -shared | -shared -fPIC -Wl,-soname,libsass.so.1 |' Makefile
 
 
 %build
-make %{?_smp_mflags} shared CFLAGS='-c %{optflags} -fPIC'
+make %{?_smp_mflags} shared CFLAGS='%{optflags} -fPIC' \
+                            LDFLAGS='-Wl,-soname,libsass.so.1'
 
 
 %install
