@@ -25,7 +25,7 @@ init: ~makerpm/rpmbuild
 
 ~makerpm/rpmbuild:
 	rpm -q fedora-packager || yum -y install fedora-packager
-	useradd --system --create-home makerpm
+	useradd --system --create-home --groups=mock makerpm
 	su -c rpmdev-setuptree makerpm
 
 test:
