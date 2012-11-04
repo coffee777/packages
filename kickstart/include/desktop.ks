@@ -27,12 +27,4 @@ google-chrome-stable
 -firefox
 -xulrunner
 -evolution
-
-# Totem requires libzeitgeist/tracker, Brasero requires tracker - bitch please
-mplayer
--brasero*
--totem*
--tracker*
--zeitgeist*
--libzeitgeist*
 %end

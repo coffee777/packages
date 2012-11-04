@@ -66,4 +66,12 @@ valgrind
 # Other
 words
 
+# Totem requires libzeitgeist/tracker, Brasero requires tracker
+mplayer
+-brasero*
+-totem*
+-tracker*
+-zeitgeist*
+-libzeitgeist*
+
 %end
