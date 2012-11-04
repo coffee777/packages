@@ -1,12 +1,14 @@
 %include desktop.ks
 
 keyboard uk
-lang en_GB
+lang en_GB.UTF-8
 timezone --utc Europe/London
 
 repo --name=remix --baseurl=http://dl.dropbox.com/u/2682668/fedora-remix/$releasever/$basearch/
 
-%packages
+%packages --instLangs=en_GB:th_TH
+
+@thai-support
 
 # GNOME
 luakit

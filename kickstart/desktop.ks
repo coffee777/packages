@@ -7,8 +7,7 @@ repo --name=google-chrome --baseurl=http://dl.google.com/linux/chrome/rpm/stable
 rootpw --iscrypted $6$Gy7TJjee52fs$zAES8PyxmHVqEnjBvNnEw5XWINhDRx.6PEXPLZ0ZVKxeKKYjpth8wfbQIN3LY7RwZyU87q6Z/tyUMmGqpMnuH0
 authconfig --enableshadow --passalgo=sha512
 
-%packages --instLangs=en_GB:th_TH
-@thai-support
+%packages
 gstreamer-plugins-ugly
 gstreamer-ffmpeg
 gdouros-symbola-fonts
