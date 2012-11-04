@@ -1,77 +1,30 @@
-%include include/desktop.ks
+%include /usr/share/spin-kickstarts/fedora-livecd-desktop.ks
 
-keyboard uk
-lang en_GB
-timezone --utc Europe/London
+repo --name=rpmfusion-free --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
+repo --name=rpmfusion-free-updates --mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch
+repo --name=google-chrome --baseurl=http://dl.google.com/linux/chrome/rpm/stable/$basearch
 
-repo --name=remix --baseurl=http://dl.dropbox.com/u/2682668/fedora-remix/$releasever/$basearch/
+rootpw --iscrypted $6$Gy7TJjee52fs$zAES8PyxmHVqEnjBvNnEw5XWINhDRx.6PEXPLZ0ZVKxeKKYjpth8wfbQIN3LY7RwZyU87q6Z/tyUMmGqpMnuH0
+authconfig --enableshadow --passalgo=sha512
 
-%packages
-
-# GNOME
-luakit
-inkscape
-gimp
-blender
-gedit-plugins
-nautilus-open-terminal
-dconf-editor
-emerillon
-devhelp
-gtk3-devel-docs
-meld
-gmpc
-
-# Curses
-nano
-hexedit
-mutt
-ncmpc
-weechat
-htop
-tig
-nload
-
-# Command-line
-mpc
-xclip
-optipng
-libjpeg-turbo-utils
-advancecomp
-GraphicsMagick
-discount
-inotify-tools
-source-highlight
-httpd-tools
-cclive
-rlwrap
-tree
-
-# Services
-nginx
-privoxy
-mpd
-
-# Development
-gcc
-gdb
-make
-git
-lua
-man-pages
-qemu
-strace
-valgrind
-
-# Other
-words
-
-# Totem requires libzeitgeist/tracker, Brasero requires tracker
-mplayer
--brasero*
--totem*
--tracker*
--zeitgeist*
--libzeitgeist*
-
+%packages --instLangs=en_GB:th_TH
+@thai-support
+gstreamer-plugins-ugly
+gstreamer-ffmpeg
+gdouros-symbola-fonts
+google-chrome-stable
+-PackageKit-command-not-found
+-PackageKit-gtk3-module
+-gnome-games
+-gnome-mplayer
+-deja-dup
+-aisleriot
+-sound-juicer
+-fedora-release-notes
+-abrt*
+-setroubleshoot*
+-yelp
+-firefox
+-xulrunner
+-evolution
 %end

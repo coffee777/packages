@@ -1,4 +1,4 @@
-%include include/desktop.ks
+%include desktop.ks
 
 keyboard us
 lang th_TH.UTF-8
