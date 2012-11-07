@@ -1,12 +1,11 @@
-%global     beta beta11
+%global     prerel rc2
 Name:       luajit
 Version:    2.0.0
-Release:    1.%{beta}%{?dist}
+Release:    1.%{prerel}%{?dist}
 Summary:    Just-In-Time Compiler for Lua
 License:    MIT
 URL:        http://luajit.org/
-Source0:    http://luajit.org/download/LuaJIT-%{version}-%{beta}.tar.gz
-Patch0:     http://luajit.org/download/beta11_hotfix1.patch
+Source0:    http://luajit.org/download/LuaJIT-%{version}-%{prerel}.tar.gz
 Requires:   libluajit%{?_isa} = %{version}-%{release}
 
 %description
@@ -35,8 +34,7 @@ Requires: libluajit%{?_isa} = %{version}-%{release}
 
 
 %prep
-%setup -q -n LuaJIT-%{version}-%{beta}
-%patch0 -p1
+%setup -q -n LuaJIT-%{version}
 
 
 %build
@@ -44,8 +42,8 @@ make amalg PREFIX=%{_prefix} CFLAGS="%{optflags}" %{?_smp_mflags}
 
 
 %install
-make install PREFIX=%{_prefix} DESTDIR=%{buildroot}
-mv -T %{buildroot}%{_bindir}/luajit-%{version}-%{beta} %{buildroot}%{_bindir}/luajit
+%make_install PREFIX=%{_prefix} XCFLAGS=-DLUAJIT_ENABLE_LUA52COMPAT
+mv -T %{buildroot}%{_bindir}/luajit-%{version} %{buildroot}%{_bindir}/luajit
 
 
 %post -n libluajit -p /sbin/ldconfig
@@ -60,9 +58,9 @@ mv -T %{buildroot}%{_bindir}/luajit-%{version}-%{beta} %{buildroot}%{_bindir}/lu
 
 %files -n libluajit
 %{_libdir}/libluajit-5.1.so.*
-%{_datadir}/%{name}-%{version}-%{beta}/jit/*.lua
-%dir %{_datadir}/%{name}-%{version}-%{beta}
-%dir %{_datadir}/%{name}-%{version}-%{beta}/jit
+%{_datadir}/%{name}-%{version}/jit/*.lua
+%dir %{_datadir}/%{name}-%{version}
+%dir %{_datadir}/%{name}-%{version}/jit
 
 
 %files -n libluajit-static
@@ -76,6 +74,12 @@ mv -T %{buildroot}%{_bindir}/luajit-%{version}-%{beta} %{buildroot}%{_bindir}/lu
 
 
 %changelog
+
+* Wed Nov 07 2012 Craig Barnes <cr@igbarn.es> - 2.0.0-1.rc2
+- Update to latest release candidate
+- Drop hotfix patch
+- Remove beta suffix from installation paths
+- Add -DLUAJIT_ENABLE_LUA52COMPAT to XCFLAGS, to enable some Lua 5.2 features
 
 * Fri Oct 26 2012 Craig Barnes <cr@igbarn.es> - 2.0.0-1.beta11
 - Update to latest beta
