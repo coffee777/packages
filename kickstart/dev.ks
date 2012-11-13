@@ -10,7 +10,8 @@ repo --name=remix --baseurl=http://dl.dropbox.com/u/2682668/fedora-remix/$releas
 
 @thai-support
 
-# GNOME
+# GUI
+vim-X11
 luakit
 inkscape
 gimp
@@ -26,6 +27,7 @@ gmpc
 
 # Curses
 nano
+vim-enhanced
 hexedit
 mutt
 ncmpc
