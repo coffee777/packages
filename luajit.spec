@@ -1,11 +1,10 @@
-%global     prerel rc2
 Name:       luajit
 Version:    2.0.0
-Release:    1.%{prerel}%{?dist}
+Release:    1%{?dist}
 Summary:    Just-In-Time Compiler for Lua
 License:    MIT
 URL:        http://luajit.org/
-Source0:    http://luajit.org/download/LuaJIT-%{version}-%{prerel}.tar.gz
+Source0:    http://luajit.org/download/LuaJIT-%{version}.tar.gz
 Requires:   libluajit%{?_isa} = %{version}-%{release}
 
 %description
@@ -51,7 +50,7 @@ mv -T %{buildroot}%{_bindir}/luajit-%{version} %{buildroot}%{_bindir}/luajit
 
 
 %files
-%doc COPYRIGHT README
+%doc COPYRIGHT README doc/*
 %{_bindir}/luajit
 %{_mandir}/man1/luajit.1.gz
 
@@ -74,6 +73,10 @@ mv -T %{buildroot}%{_bindir}/luajit-%{version} %{buildroot}%{_bindir}/luajit
 
 
 %changelog
+
+* Tue Nov 13 2012 Craig Barnes <cr@igbarn.es> - 2.0.0-1
+- Update to stable release
+- Include doc directory in base package
 
 * Wed Nov 07 2012 Craig Barnes <cr@igbarn.es> - 2.0.0-1.rc2
 - Update to latest release candidate
