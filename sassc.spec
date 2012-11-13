@@ -1,4 +1,4 @@
-%global         gitcommit cbcaa8c
+%global         gitcommit 57f687d
 Name:           sassc
 Version:        1
 Release:        1%{?dist}
