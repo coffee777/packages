@@ -65,7 +65,8 @@ install -Dpm0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/tidy
 %doc README.md htmldoc/quickref.html
 %{_bindir}/tidy
 %{_mandir}/man1/tidy.1*
-%{_sysconfdir}/bash_completion.d
+%dir %{_sysconfdir}/bash_completion.d
+%{_sysconfdir}/bash_completion.d/tidy
 
 
 %files -n libtidy
