@@ -1,6 +1,6 @@
 Name:               nginx
 Epoch:              5
-Version:            1.2.1
+Version:            1.2.5
 Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
@@ -13,11 +13,11 @@ Source3:            nginx.conf
 Source4:            mime.types
 Source5:            gzip.conf
 Source6:            default.conf
-Source7:            https://github.com/simpl/ngx_devel_kit/tarball/v0.2.17rc2
-Source8:            https://github.com/chaoslawful/lua-nginx-module/tarball/v0.5.2
-Source9:            http://labs.frickle.com/files/ngx_postgres-0.9.tar.gz
-Source10:           https://github.com/agentzh/rds-json-nginx-module/tarball/v0.12rc7
-Source11:           https://github.com/agentzh/echo-nginx-module/tarball/v0.38rc1
+Source7:            https://github.com/simpl/ngx_devel_kit/archive/v0.2.17rc2.tar.gz
+Source8:            https://github.com/chaoslawful/lua-nginx-module/archive/v0.6.10.tar.gz
+Source9:            https://github.com/FRiCKLE/ngx_postgres/archive/1.0rc2.tar.gz
+Source10:           https://github.com/agentzh/rds-json-nginx-module/archive/v0.12rc10.tar.gz
+Source11:           https://github.com/agentzh/echo-nginx-module/archive/v0.41.tar.gz
 
 BuildRequires:      pcre-devel >= 8.20
 BuildRequires:      zlib-devel
@@ -32,6 +32,7 @@ Requires:           logrotate
 Requires:           libluajit%{?_isa} = 2.0.0
 Requires:           GeoIP
 
+Requires(pre):      shadow-utils
 Requires(post):     systemd-units
 Requires(preun):    systemd-units
 Requires(postun):   systemd-units
@@ -58,7 +59,7 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --prefix=%{_datadir}/nginx \
     --sbin-path=%{_sbindir}/nginx \
     --conf-path=%{_sysconfdir}/nginx/nginx.conf \
-    --pid-path=%{_localstatedir}/run/nginx.pid \
+    --pid-path=/run/nginx.pid \
     --lock-path=%{_localstatedir}/lock/subsys/nginx \
     --error-log-path=%{_localstatedir}/log/nginx/error.log \
     --http-log-path=%{_localstatedir}/log/nginx/access.log \
@@ -72,11 +73,11 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --with-http_gzip_static_module \
     --with-http_geoip_module \
     --without-http_charset_module \
-    --add-module=simpl-ngx_devel_kit-bc97eea \
-    --add-module=chaoslawful-lua-nginx-module-553432b \
-    --add-module=ngx_postgres-0.9 \
-    --add-module=agentzh-rds-json-nginx-module-253db2b \
-    --add-module=agentzh-echo-nginx-module-6c1f553
+    --add-module=ngx_devel_kit-0.2.17rc2 \
+    --add-module=lua-nginx-module-0.6.10 \
+    --add-module=ngx_postgres-1.0rc2 \
+    --add-module=rds-json-nginx-module-0.12rc10 \
+    --add-module=echo-nginx-module-0.41
 make %{?_smp_mflags}
 
 
@@ -97,7 +98,10 @@ install -p -d -m 0755 %{buildroot}%{_datadir}/nginx/html
 
 %pre
 if [ $1 -eq 1 ]; then
-    useradd -s /bin/false -r -d %{_sharedstatedir}/nginx nginx &>/dev/null || :
+    getent group nginx >/dev/null || groupadd -r nginx
+    getent passwd nginx >/dev/null || useradd -r -d %{_sharedstatedir}/nginx \
+        -g nginx -s /sbin/nologin -c "Nginx web server" nginx >/dev/null
+    exit 0
 fi
 
 %post
@@ -140,6 +144,17 @@ fi
 
 
 %changelog
+
+* Thu Nov 15 2012 Craig Barnes <cr@igbarn.es> - 5:1.2.5-1
+- Update Nginx to latest stable release
+- Update Lua module to 0.6.10
+- Update PostgreSQL module to 1.0rc2
+- Update RDS JSON module to 0.12rc10
+- Update echo module to 0.41
+- Update sources to use new GitHub archive links
+- Use new "auto" value for "worker_processes" in nginx.conf
+- Add shadow-utils as "Requires(pre)"
+- Make pre scriptlet more robust
 
 * Fri Jun 22 2012 Craig Barnes <cr@igbarn.es> - 5:1.2.1-1
 - Use Epoch 5 to take precedence over Nginx builds in the Fedora repository
