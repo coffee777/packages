@@ -1,12 +1,13 @@
 %global         gitcommit 1b4dcd0
 Name:           tidy
 Version:        1
-Release:        5.git%{gitcommit}%{?dist}
+Release:        6.git%{gitcommit}%{?dist}
 Summary:        Utility to clean, validate and pretty print HTML
 Group:          Applications/Text
 License:        W3C
 URL:            https://github.com/w3c/tidy-html5
 Source0:        %{url}/tarball/%{gitcommit}
+Source1:        tidy-completion.bash
 BuildRequires:  libtool
 BuildRequires:  libxslt
 Requires:       libtidy%{?_isa} = %{version}-%{release}
@@ -53,6 +54,7 @@ popd
 %make_install
 install -Dpm0644 htmldoc/tidy.1 %{buildroot}%{_mandir}/man1/tidy.1
 rm -f %{buildroot}%{_libdir}/libtidy.la %{buildroot}%{_bindir}/tab2space
+install -Dpm0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/tidy
 
 
 %post   -n libtidy -p /sbin/ldconfig
@@ -63,6 +65,7 @@ rm -f %{buildroot}%{_libdir}/libtidy.la %{buildroot}%{_bindir}/tab2space
 %doc README.md htmldoc/quickref.html
 %{_bindir}/tidy
 %{_mandir}/man1/tidy.1*
+%{_sysconfdir}/bash_completion.d
 
 
 %files -n libtidy
@@ -77,6 +80,9 @@ rm -f %{buildroot}%{_libdir}/libtidy.la %{buildroot}%{_bindir}/tab2space
 
 
 %changelog
+
+* Thu Nov 15 2012 Craig Barnes <cr@igbarn.es> - 1-6.git1b4dcd0
+- Add bash completion script
 
 * Sun Jul 22 2012 Craig Barnes <cr@igbarn.es> - 1-5.git1b4dcd0
 - Update to latest git master
