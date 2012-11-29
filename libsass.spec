@@ -1,4 +1,4 @@
-%global         gitcommit 135e02c
+%global         gitcommit 57a2f62
 Name:           libsass
 Version:        1
 Release:        1%{?dist}
