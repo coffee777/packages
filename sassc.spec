@@ -1,11 +1,10 @@
-%global         gitcommit 57f687d
 Name:           sassc
 Version:        1
 Release:        2%{?dist}
 Summary:        Command line Sass compiler
 License:        MIT
 URL:            https://github.com/hcatlin/sassc
-Source0:        %{url}/tarball/%{gitcommit}
+Source0:        %{url}/archive/master.tar.gz
 BuildRequires:  libsass-devel >= 1-1
 Requires:       libsass >= 1-1
 
@@ -14,11 +13,9 @@ Requires:       libsass >= 1-1
 
 
 %prep
-%setup -q -n hcatlin-sassc-%{gitcommit}
+%setup -q -n sassc-master
 # Fix sass_interface.h location
 sed -ri '/^#include/s|libsass/(sass_interface.h)|\1|' sassc.c
-# Add /usr/share/sass to default sassc include path
-sed -i '/^\s*ctx->options.include_paths = "";$/s|""|"%{_datadir}/sass"|' sassc.c
 
 
 %build

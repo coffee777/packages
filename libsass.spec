@@ -1,11 +1,10 @@
-%global         gitcommit 57a2f62
 Name:           libsass
 Version:        1
 Release:        1%{?dist}
 Summary:        A C++ implementation of the Sass CSS precompiler
 License:        MIT
 URL:            https://github.com/hcatlin/libsass
-Source0:        %{url}/tarball/%{gitcommit}
+Source0:        %{url}/archive/master.tar.gz
 
 %description
 Libsass is a C/C++ port of the Sass CSS precompiler. The original version
@@ -26,7 +25,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q -n hcatlin-libsass-%{gitcommit}
+%setup -q -n libsass-master
 
 
 %build
