@@ -1,7 +1,7 @@
 Name:           lua-lgi
 Version:        0.6.2
 Release:        1%{?dist}
-Summary:        Dynamic Lua binding to GObject libraries using GObject-Introspection
+Summary:        Dynamic Lua binding to GObject introspection libraries
 License:        MIT
 URL:            https://github.com/pavouk/lgi
 Source0:        https://github.com/downloads/pavouk/lgi/lgi-%{version}.tar.gz
