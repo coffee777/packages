@@ -1,9 +1,9 @@
-Name:           lua-date
+Name:           lua-rfc3339
 Version:        0.0.1
 Release:        1%{?dist}
-Summary:        Serialized date parsing for Lua
+Summary:        RFC 3339 date parsing for Lua
 License:        MIT
-URL:            https://github.com/craigbarnes/lua-date
+URL:            https://github.com/craigbarnes/%{name}
 Source0:        %{url}/archive/master.tar.gz
 BuildArch:      noarch
 BuildRequires:  lua >= 5.1, lua-lpeg >= 0.8.1
