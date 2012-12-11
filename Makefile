@@ -12,6 +12,7 @@ all: $(PACKAGES)
 
 $(PACKAGES): | ~makerpm/rpmbuild
 	$(HAVEDEPS) || yum-builddep -qy --noplugins $@.spec
+	rm -f $|/SOURCES/master.tar.gz
 	spectool -A -g -C $|/SOURCES $@.spec
 	test ! -d sources/$@ || cp -f sources/$@/* $|/SOURCES/
 	cp -f $@.spec $|/SPECS/
