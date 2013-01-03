@@ -22,6 +22,7 @@ dconf-editor
 emerillon
 devhelp
 gtk3-devel-docs
+webkitgtk3-doc
 meld
 gmpc
 
