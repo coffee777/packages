@@ -1,7 +1,7 @@
 Name:               nginx
 Epoch:              5
-Version:            1.2.5
-Release:            2%{?dist}
+Version:            1.2.6
+Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -14,7 +14,7 @@ Source4:            mime.types
 Source5:            gzip.conf
 Source6:            default.conf
 Source7:            https://github.com/simpl/ngx_devel_kit/archive/v0.2.17rc2.tar.gz
-Source8:            https://github.com/chaoslawful/lua-nginx-module/archive/v0.6.10.tar.gz
+Source8:            https://github.com/chaoslawful/lua-nginx-module/archive/v0.7.13.tar.gz
 Source9:            https://github.com/FRiCKLE/ngx_postgres/archive/1.0rc2.tar.gz
 Source10:           https://github.com/agentzh/rds-json-nginx-module/archive/v0.12rc10.tar.gz
 Source11:           https://github.com/agentzh/echo-nginx-module/archive/v0.41.tar.gz
@@ -74,7 +74,7 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --with-http_geoip_module \
     --without-http_charset_module \
     --add-module=ngx_devel_kit-0.2.17rc2 \
-    --add-module=lua-nginx-module-0.6.10 \
+    --add-module=lua-nginx-module-0.7.13 \
     --add-module=ngx_postgres-1.0rc2 \
     --add-module=rds-json-nginx-module-0.12rc10 \
     --add-module=echo-nginx-module-0.41
@@ -146,6 +146,10 @@ fi
 
 
 %changelog
+
+* Sat Jan 05 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.6-1
+- Update to latest stable release
+- Update Lua module to v0.7.13
 
 * Sat Jan 05 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.5-2
 - Clean up commands in install section
