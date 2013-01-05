@@ -1,7 +1,7 @@
 Name:               nginx
 Epoch:              5
 Version:            1.2.5
-Release:            1%{?dist}
+Release:            2%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -86,14 +86,16 @@ make install DESTDIR=%{buildroot}
 chmod 0755 %{buildroot}%{_sbindir}/nginx
 rm %{buildroot}/%{_sysconfdir}/nginx/*.default
 rm %{buildroot}/%{_sysconfdir}/nginx/{win-utf,koi-utf,koi-win}
-install -p -D -m 0644 objs/nginx.8 %{buildroot}%{_mandir}/man8/nginx.8
-install -p -D -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/nginx.service
-install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/nginx
-install -p -D -m 0644 %{SOURCE6} %{buildroot}%{_sysconfdir}/nginx/conf.d/default.conf
-install -p -m 0644 %{SOURCE3} %{SOURCE4} %{SOURCE5} %{buildroot}%{_sysconfdir}/nginx/
-install -p -d -m 0755 %{buildroot}%{_sharedstatedir}/nginx
-install -p -d -m 0755 %{buildroot}%{_localstatedir}/log/nginx
-install -p -d -m 0755 %{buildroot}%{_datadir}/nginx/html
+install -Dpm0644 objs/nginx.8 %{buildroot}%{_mandir}/man8/nginx.8
+install -Dpm0644 %{SOURCE1} %{buildroot}%{_unitdir}/nginx.service
+install -Dpm0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/nginx
+install -Dpm0644 %{SOURCE3} %{buildroot}%{_sysconfdir}/nginx/nginx.conf
+install -Dpm0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/nginx/mime.types
+install -Dpm0644 %{SOURCE5} %{buildroot}%{_sysconfdir}/nginx/gzip.conf
+install -Dpm0644 %{SOURCE6} %{buildroot}%{_sysconfdir}/nginx/conf.d/default.conf
+install -dpm0755 %{buildroot}%{_sharedstatedir}/nginx
+install -dpm0755 %{buildroot}%{_localstatedir}/log/nginx
+install -dpm0755 %{buildroot}%{_datadir}/nginx/html
 
 
 %pre
@@ -144,6 +146,9 @@ fi
 
 
 %changelog
+
+* Sat Jan 05 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.5-2
+- Clean up commands in install section
 
 * Thu Nov 15 2012 Craig Barnes <cr@igbarn.es> - 5:1.2.5-1
 - Update Nginx to latest stable release
