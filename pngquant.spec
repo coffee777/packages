@@ -1,10 +1,12 @@
+%global         commit 35d2664135c5f62c123535eda4edb0e888d6452a
+%global         shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:           pngquant
-Version:        1.7.2
+Version:        1.8.1
 Release:        1%{?dist}
 Summary:        PNG quantization tool for reducing image file size
 License:        BSD
-URL:            http://pornel.net/pngquant
-Source0:        https://github.com/pornel/improved-pngquant/tarball/%{version}
+URL:            http://pngquant.org/
+Source0:        https://github.com/pornel/improved-pngquant/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
 BuildRequires:  libpng-devel%{?_isa} >= 1.2.46-1
 BuildRequires:  zlib-devel%{?_isa} >= 1.2.5-5
 Requires:       libpng%{?_isa} >= 1.2.46-1
@@ -20,16 +22,16 @@ median cut algorithm.
 
 
 %prep
-%setup -q -n pornel-improved-pngquant-b625d3e
+%setup -qn improved-pngquant-%{commit}
 
 
 %build
-make %{?_smp_mflags}
+make %{?_smp_mflags} CFLAGSADD='%{optflags}'
 
 
 %install
-make install PREFIX=%{_prefix} DESTDIR=%{buildroot}
-install -Dpm0644 pngquant.1 %{buildroot}/%{_mandir}/man1/pngquant.1
+%make_install PREFIX=%{_prefix}
+install -Dpm0644 pngquant.1 %{buildroot}%{_mandir}/man1/pngquant.1
 
 
 %files
@@ -39,6 +41,14 @@ install -Dpm0644 pngquant.1 %{buildroot}/%{_mandir}/man1/pngquant.1
 
 
 %changelog
+
+* Thu Jan 10 2013 Craig Barnes <cr@igbarn.es> - 1.8.1-1
+- Update to latest stable release
+- Conform to Fedora packaging guidelines for GitHub
+- Build with optflags
+- Remove slash between buildroot and _mandir macros
+- Use make_install macro
+- Update to new project URL
 
 * Thu May 03 2012 Craig Barnes <cr@igbarn.es> - 1.7.2-1
 - Update to latest upstream version
