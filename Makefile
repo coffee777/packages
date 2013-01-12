@@ -27,8 +27,9 @@ install: ~/Dropbox/Public/fedora-remix/16
 init: ~makerpm/rpmbuild
 
 ~makerpm/rpmbuild:
+	@test -w ~root || exit 1
 	rpm -q fedora-packager || yum -y install fedora-packager
-	useradd --system --create-home --groups=mock makerpm
+	useradd --system --create-home --groups=mock makerpm || :
 	su -c rpmdev-setuptree makerpm
 
 test:
