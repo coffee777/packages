@@ -45,9 +45,10 @@ libjpeg-turbo-utils
 advancecomp
 GraphicsMagick
 discount
-inotify-tools
 source-highlight
+inotify-tools
 httpd-tools
+android-tools
 cclive
 rlwrap
 tree
