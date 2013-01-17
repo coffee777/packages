@@ -52,6 +52,7 @@ android-tools
 cclive
 rlwrap
 tree
+units
 
 # Services
 nginx
