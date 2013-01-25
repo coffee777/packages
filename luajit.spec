@@ -1,6 +1,6 @@
 Name:       luajit
 Version:    2.0.0
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Just-In-Time Compiler for Lua
 License:    MIT
 URL:        http://luajit.org/
@@ -37,11 +37,11 @@ Requires: libluajit%{?_isa} = %{version}-%{release}
 
 
 %build
-make amalg PREFIX=%{_prefix} CFLAGS="%{optflags}" %{?_smp_mflags}
+make amalg PREFIX=%{_prefix} CFLAGS="%{optflags} -DLUAJIT_ENABLE_LUA52COMPAT"
 
 
 %install
-%make_install PREFIX=%{_prefix} XCFLAGS=-DLUAJIT_ENABLE_LUA52COMPAT
+%make_install PREFIX=%{_prefix}
 mv -T %{buildroot}%{_bindir}/luajit-%{version} %{buildroot}%{_bindir}/luajit
 
 
@@ -73,6 +73,10 @@ mv -T %{buildroot}%{_bindir}/luajit-%{version} %{buildroot}%{_bindir}/luajit
 
 
 %changelog
+
+* Fri Jan 25 2013 Craig Barnes <cr@igbarn.es> - 2.0.0-2
+- Use -DLUAJIT_ENABLE_LUA52COMPAT for build, not installation
+- Remove smp_mflags from build section (not useful for amalg target)
 
 * Tue Nov 13 2012 Craig Barnes <cr@igbarn.es> - 2.0.0-1
 - Update to stable release
