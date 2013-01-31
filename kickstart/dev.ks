@@ -36,6 +36,7 @@ weechat
 htop
 tig
 nload
+pinfo
 
 # Command-line
 mpc
