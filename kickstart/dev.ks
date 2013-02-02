@@ -11,8 +11,6 @@ repo --name=remix --baseurl=http://dl.dropbox.com/u/2682668/fedora-remix/$releas
 @thai-support
 
 # GUI
-vim-X11
-luakit
 inkscape
 gimp
 blender

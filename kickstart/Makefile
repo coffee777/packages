@@ -1,10 +1,9 @@
-VERSION  = 17
+VERSION  = 18
 TITLE    = Fedora $(VERSION) Remix
-
 PREREQS  = spin-kickstarts pykickstart
 PACKAGES = `ksflatten dev.ks | sed -nr '/^%packages/,/^%end/s/^(\w[^ ]+)/\1/p'`
-FUSN     = rpmfusion-free-release
-URL      = http://download1.rpmfusion.org/free/fedora/$(FUSN)-stable.noarch.rpm
+FUSION   = rpmfusion-free-release-$(VERSION)
+URL      = http://download1.rpmfusion.org/free/fedora/$(FUSION).noarch.rpm
 MACROS   = /etc/rpm/macros.lang
 SCTL     = systemctl --quiet 2>/dev/null
 
@@ -16,7 +15,7 @@ help:
 install:
 	@test -f $(MACROS) || echo '%_install_langs en_GB:th_TH' > $(MACROS)
 	@rpm -q --quiet $(PREREQS) || yum -y install $(PREREQS)
-	@rpm -q --quiet $(FUSN) || yum -y --nogpgcheck install $(URL)
+	@rpm -q --quiet $(FUSION) || yum -y --nogpgcheck localinstall $(URL)
 	@rpm -q --quiet $(PACKAGES) || yum -y install $(PACKAGES)
 	@$(SCTL) is-enabled privoxy.service || $(SCTL) enable privoxy.service
 	@$(SCTL) is-active  privoxy.service || $(SCTL) start  privoxy.service
