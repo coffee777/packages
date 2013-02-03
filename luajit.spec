@@ -1,6 +1,6 @@
 Name:       luajit
 Version:    2.0.0
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    Just-In-Time Compiler for Lua
 License:    MIT
 URL:        http://luajit.org/
@@ -43,6 +43,10 @@ make amalg PREFIX=%{_prefix} CFLAGS="%{optflags} -DLUAJIT_ENABLE_LUA52COMPAT"
 %install
 %make_install PREFIX=%{_prefix}
 mv -T %{buildroot}%{_bindir}/luajit-%{version} %{buildroot}%{_bindir}/luajit
+# Add binfmt_misc configuration to binfmt.d(5) directory
+mkdir -p %{buildroot}%{_libdir}/binfmt.d
+echo ':luajit:M::\x1b\x4c\x4a::%{_bindir}/luajit:' > \
+      %{buildroot}%{_libdir}/binfmt.d/luajit.conf
 
 
 %post -n libluajit -p /sbin/ldconfig
@@ -53,6 +57,7 @@ mv -T %{buildroot}%{_bindir}/luajit-%{version} %{buildroot}%{_bindir}/luajit
 %doc COPYRIGHT README doc/*
 %{_bindir}/luajit
 %{_mandir}/man1/luajit.1.gz
+%{_libdir}/binfmt.d/luajit.conf
 
 
 %files -n libluajit
@@ -73,6 +78,9 @@ mv -T %{buildroot}%{_bindir}/luajit-%{version} %{buildroot}%{_bindir}/luajit
 
 
 %changelog
+
+* Sun Feb 03 2013 Craig Barnes <cr@igbarn.es> - 2.0.0-3
+- Add binfmt_misc configuration to binfmt.d(5) directory
 
 * Fri Jan 25 2013 Craig Barnes <cr@igbarn.es> - 2.0.0-2
 - Use -DLUAJIT_ENABLE_LUA52COMPAT for build, not installation
