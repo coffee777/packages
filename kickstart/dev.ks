@@ -65,6 +65,7 @@ gdb
 make
 git
 lua
+luarocks
 man-pages
 qemu
 strace
