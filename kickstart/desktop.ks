@@ -22,7 +22,6 @@ google-chrome-stable
 -fedora-release-notes
 -abrt*
 -setroubleshoot*
--yelp
 -firefox
 -xulrunner
 -evolution

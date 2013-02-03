@@ -23,6 +23,7 @@ gtk3-devel-docs
 webkitgtk3-doc
 meld
 gmpc
+-brasero
 
 # Curses
 nano
@@ -71,13 +72,5 @@ valgrind
 
 # Other
 words
-
-# Totem requires libzeitgeist/tracker, Brasero requires tracker
-mplayer
--brasero*
--totem*
--tracker*
--zeitgeist*
--libzeitgeist*
 
 %end
