@@ -28,7 +28,7 @@ dev thai: | /usr/bin/livecd-creator /usr/share/spin-kickstarts/
 	@echo '%_install_langs en_GB:th_TH' > $@
 
 /etc/yum.repos.d/rpmfusion-free.repo:
-	@yum -y --nogpgcheck localinstall http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-18.noarch.rpm
+	@yum -y --nogpgcheck localinstall http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(VERSION).noarch.rpm
 
 /etc/yum.repos.d/google-chrome.repo: google-chrome.repo
 	@install -Dm0644 $< $@
