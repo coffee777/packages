@@ -64,12 +64,22 @@ gcc
 gdb
 make
 git
-lua
-luarocks
 man-pages
 qemu
 strace
 valgrind
+
+# Lua
+lua
+luarocks
+lua-filesystem
+lua-socket
+lua-lpeg
+lua-lgi
+lua-json
+lua-copas
+lua-wsapi
+lua-posix
 
 # Other
 words
