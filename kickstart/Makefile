@@ -2,6 +2,7 @@ VERSION = 18
 TITLE   = Fedora $(VERSION) Remix
 
 REPOS   = /etc/yum.repos.d/google-chrome.repo \
+          /etc/yum.repos.d/google-talkplugin.repo \
           /etc/yum.repos.d/rpmfusion-free.repo
 
 help:
@@ -30,7 +31,7 @@ dev thai: | /usr/bin/livecd-creator /usr/share/spin-kickstarts/
 /etc/yum.repos.d/rpmfusion-free.repo:
 	@yum -y --nogpgcheck localinstall http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(VERSION).noarch.rpm
 
-/etc/yum.repos.d/google-chrome.repo: google-chrome.repo
+/etc/yum.repos.d/%.repo: %.repo
 	@install -Dm0644 $< $@
 
 /usr/bin/livecd-creator:
