@@ -4,6 +4,11 @@ FINDRPMS = `sed -nr 's|^Wrote: (/.*\.rpm)|\1|p' $(BUILDLOG)`
 DEPSLIST = rpmspec -q --buildrequires $@.spec | cut -f1 -d' ' | cut -f1 -d'('
 HAVEDEPS = test -z "`$(DEPSLIST)`" || $(DEPSLIST) | xargs rpm -q
 
+# http://fedoraproject.org/wiki/Packaging:Guidelines#Exceptions_2
+MINDEPS  = bash bzip2 coreutils cpio diffutils fedora-release findutils gawk \
+           gcc gcc-c++ grep gzip info make patch redhat-rpm-config rpm-build \
+           sed shadow-utils tar unzip util-linux which xz fedora-packager
+
 help:
 	@printf 'Usage: sudo make PACKAGE...\n\nPackages:\n'
 	@echo $(sort $(PACKAGES)) | tr " " "\n" | column -x; echo
@@ -28,7 +33,7 @@ init: ~makerpm/rpmbuild
 
 ~makerpm/rpmbuild:
 	@test -w ~root || exit 1
-	rpm -q fedora-packager || yum -y install fedora-packager
+	yum -y install $(MINDEPS)
 	useradd --system --create-home --groups=mock makerpm || :
 	su -c rpmdev-setuptree makerpm
 
