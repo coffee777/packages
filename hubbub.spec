@@ -30,8 +30,8 @@ developing applications that use %{name}.
 
 
 %build
-make %{?_smp_mflags} COMPONENT_TYPE=lib-shared \
-     CFLAGS='%{optflags} -I./include -I./src'
+export CFLAGS='%{optflags}'
+make %{?_smp_mflags} COMPONENT_TYPE=lib-shared
 
 
 %install
