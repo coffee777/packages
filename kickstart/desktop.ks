@@ -27,4 +27,5 @@ google-talkplugin
 -firefox
 -xulrunner
 -evolution
+-java
 %end
