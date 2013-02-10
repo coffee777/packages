@@ -1,6 +1,6 @@
 Name:           discount
-Version:        2.1.3
-Release:        6%{?dist}
+Version:        2.1.5a
+Release:        1%{?dist}
 Summary:        A command-line utility for converting Markdown files into HTML
 License:        BSD
 URL:            http://www.pell.portland.or.us/~orc/Code/%{name}
@@ -94,6 +94,9 @@ make test
 
 
 %changelog
+
+* Sun Feb 10 2013 Craig Barnes <cbgnome@gmail.com> - 2.1.5a-1
+- Update to latest release
 
 * Wed Jul 25 2012 Craig Barnes <cbgnome@gmail.com> - 2.1.3-6
 - Add optflags to CFLAGS instead of appending to CC
