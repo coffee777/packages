@@ -14,7 +14,7 @@ ifndef VERSION_ID
   $(error Unable to determine version from /etc/os-release)
 endif
 
-ifndef $(wildcard *.rpm)
+ifeq ($(shell test -z '$(wildcard *.rpm)' && echo 1),1)
   $(error No RPMs)
 endif
 
