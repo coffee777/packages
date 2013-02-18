@@ -1,9 +1,5 @@
 include /etc/os-release
 
-ifndef VERSION_ID
-  $(error Unable to determine version from /etc/os-release)
-endif
-
 all:
 	@rm -f *-debuginfo-*.rpm
 	@mv -f *.src.rpm $(VERSION_ID)/source/ || :
@@ -11,6 +7,15 @@ all:
 	@git rm -rf $(VERSION_ID)/{source,i386}/repodata || :
 	@cd $(VERSION_ID)/source/ && createrepo .
 	@cd $(VERSION_ID)/i386/ && createrepo .
+	@git add $(VERSION_ID)/{source,i386}/repodata
 
+
+ifndef VERSION_ID
+  $(error Unable to determine version from /etc/os-release)
+endif
+
+ifndef $(wildcard *.rpm)
+  $(error No RPMs)
+endif
 
 .PHONY: all
