@@ -1,6 +1,6 @@
 Name:               nginx
 Epoch:              5
-Version:            1.2.6
+Version:            1.2.7
 Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
@@ -29,7 +29,7 @@ BuildRequires:      postgresql-devel
 Requires:           pcre >= 8.20
 Requires:           openssl
 Requires:           logrotate
-Requires:           libluajit%{?_isa} = 2.0.0
+Requires:           libluajit%{?_isa} >= 2.0.0
 Requires:           GeoIP
 
 Requires(pre):      shadow-utils
@@ -146,6 +146,10 @@ fi
 
 
 %changelog
+
+* Sat Mar 09 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.7-1
+- Update to latest stable release
+- Fix overly specific libluajit version dependency
 
 * Sat Jan 05 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.6-1
 - Update to latest stable release
