@@ -1,10 +1,11 @@
 Name:       luajit
-Version:    2.0.0
-Release:    3%{?dist}
+Version:    2.0.1
+Release:    1%{?dist}
 Summary:    Just-In-Time Compiler for Lua
 License:    MIT
 URL:        http://luajit.org/
 Source0:    http://luajit.org/download/LuaJIT-%{version}.tar.gz
+Patch0:     http://luajit.org/download/v2.0.1_hotfix1.patch
 Requires:   libluajit%{?_isa} = %{version}-%{release}
 
 %description
@@ -34,6 +35,7 @@ Requires: libluajit%{?_isa} = %{version}-%{release}
 
 %prep
 %setup -q -n LuaJIT-%{version}
+%patch0 -p1
 
 
 %build
@@ -78,6 +80,10 @@ echo ':luajit:M::\x1b\x4c\x4a::%{_bindir}/luajit:' > \
 
 
 %changelog
+
+* Sat Mar 09 2013 Craig Barnes <cr@igbarn.es> - 2.0.1-1
+- Update to latest release
+- Add hotfix patch for latest release
 
 * Sun Feb 03 2013 Craig Barnes <cr@igbarn.es> - 2.0.0-3
 - Add binfmt_misc configuration to binfmt.d(5) directory
