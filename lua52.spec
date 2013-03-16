@@ -1,13 +1,12 @@
-Name:           lua
+Name:           lua52
 Version:        5.2.1
 Release:        1%{?dist}
 Summary:        Powerful, fast, lightweight, embeddable scripting language
 License:        MIT
 URL:            http://www.lua.org
 Source0:        %{url}/ftp/lua-%{version}.tar.gz
-Source1:        lua-5.2.mk
+Source1:        lua52.mk
 BuildRequires:  readline-devel ncurses-devel
-Provides:       lua(abi) = 5.2
 
 %description
 Lua combines simple procedural syntax with powerful data description
@@ -19,13 +18,13 @@ prototyping.
 
 
 %prep
-%setup -q
+%setup -qn lua-%{version}
 
 
 %build
 cd src
 cp %{SOURCE1} .
-make %{?_smp_mflags} -f lua-5.2.mk CFLAGS='%{optflags} -fPIC'
+make %{?_smp_mflags} -f lua52.mk CFLAGS='%{optflags} -fPIC'
 
 
 %install
