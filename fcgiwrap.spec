@@ -1,7 +1,7 @@
 %global         gitcommit 1328862
 Name:           fcgiwrap
 Version:        1.0.3
-Release:        1.git%{gitcommit}%{?dist}
+Release:        2.git%{gitcommit}%{?dist}
 Summary:        Simple FastCGI wrapper for CGI scripts
 License:        MIT
 URL:            http://nginx.localdomain.pl/
@@ -12,9 +12,9 @@ Source1:        fcgiwrap.service
 BuildRequires:      autoconf
 BuildRequires:      fcgi-devel
 Requires:           spawn-fcgi
-Requires(post):     systemd-units
-Requires(preun):    systemd-units
-Requires(postun):   systemd-units
+Requires(post):     systemd
+Requires(preun):    systemd
+Requires(postun):   systemd
 
 %description
 fcgiwrap is a simple server for running CGI applications over FastCGI.
@@ -40,23 +40,13 @@ install -p -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/fcgiwrap.service
 
 
 %post
-if [ $1 -eq 1 ]; then
-    /bin/systemctl daemon-reload &>/dev/null || :
-fi
-
+%systemd_post fcgiwrap.service
 
 %preun
-if [ $1 -eq 0 ]; then
-    /bin/systemctl --no-reload disable fcgiwrap.service &>/dev/null || :
-    /bin/systemctl stop fcgiwrap.service &>/dev/null || :
-fi
-
+%systemd_preun fcgiwrap.service
 
 %postun
-/bin/systemctl daemon-reload &>/dev/null || :
-if [ $1 -ge 1 ]; then
-    /bin/systemctl try-restart fcgiwrap.service &>/dev/null || :
-fi
+%systemd_postun_with_restart fcgiwrap.service
 
 
 %files
@@ -67,6 +57,9 @@ fi
 
 
 %changelog
+
+* Sun Mar 17 2013 Craig Barnes <cr@igbarn.es> - 1.0.3-2.git1328862
+- Use systemd macro scriptlets
 
 * Tue Jan 31 2012 Craig Barnes <cr@igbarn.es> - 1.0.3-1.git1328862
 - Initial package
