@@ -1,7 +1,7 @@
 Name:               nginx
 Epoch:              5
 Version:            1.2.7
-Release:            1%{?dist}
+Release:            2%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
 URL:                http://nginx.org/
@@ -33,9 +33,9 @@ Requires:           libluajit%{?_isa} >= 2.0.0
 Requires:           GeoIP
 
 Requires(pre):      shadow-utils
-Requires(post):     systemd-units
-Requires(preun):    systemd-units
-Requires(postun):   systemd-units
+Requires(post):     systemd
+Requires(preun):    systemd
+Requires(postun):   systemd
 
 %description
 Nginx [engine x] is a HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3
@@ -107,23 +107,13 @@ if [ $1 -eq 1 ]; then
 fi
 
 %post
-if [ $1 -eq 1 ]; then
-    /bin/systemctl daemon-reload &>/dev/null || :
-fi
+%systemd_post nginx.service
 
 %preun
-if [ $1 -eq 0 ]; then
-    # Package removal, not upgrade
-    /bin/systemctl --no-reload disable nginx.service &>/dev/null || :
-    /bin/systemctl stop nginx.service &>/dev/null || :
-fi
+%systemd_preun nginx.service
 
 %postun
-/bin/systemctl daemon-reload &>/dev/null || :
-if [ $1 -ge 1 ]; then
-    # Package upgrade, not removal
-    /bin/systemctl try-restart nginx.service &>/dev/null || :
-fi
+%systemd_postun_with_restart nginx.service
 
 
 %files
@@ -146,6 +136,9 @@ fi
 
 
 %changelog
+
+* Sun Mar 17 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.7-2
+- Use systemd macro scriptlets
 
 * Sat Mar 09 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.7-1
 - Update to latest stable release
