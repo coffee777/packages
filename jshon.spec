@@ -6,8 +6,6 @@ License:        MIT
 URL:            https://github.com/keenerd/jshon
 Source0:        %{url}/archive/master.tar.gz
 BuildRequires:  jansson-devel
-Requires:       jansson
-
 
 %description
 %{summary}.

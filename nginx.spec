@@ -26,12 +26,7 @@ BuildRequires:      libluajit-devel
 BuildRequires:      GeoIP-devel
 BuildRequires:      postgresql-devel
 
-Requires:           pcre >= 8.20
-Requires:           openssl
 Requires:           logrotate
-Requires:           libluajit%{?_isa} >= 2.0.0
-Requires:           GeoIP
-
 Requires(pre):      shadow-utils
 Requires(post):     systemd
 Requires(preun):    systemd

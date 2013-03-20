@@ -7,10 +7,7 @@ Summary:        PNG quantization tool for reducing image file size
 License:        BSD
 URL:            http://pngquant.org/
 Source0:        https://github.com/pornel/improved-pngquant/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
-BuildRequires:  libpng-devel%{?_isa} >= 1.2.46-1
-BuildRequires:  zlib-devel%{?_isa} >= 1.2.5-5
-Requires:       libpng%{?_isa} >= 1.2.46-1
-Requires:       zlib%{?isa} >= 1.2.5-5
+BuildRequires:  libpng-devel zlib-devel
 
 %description
 pngquant converts 24/32-bit RGBA PNG images to 8-bit palette with

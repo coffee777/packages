@@ -6,11 +6,7 @@ Summary:        Lua binding to libsass
 License:        ISC
 URL:            https://github.com/craigbarnes/lua-sass
 Source0:        %{url}/tarball/%{gitcommit}
-
-BuildRequires:  libsass-devel%{?_isa} >= 1
-BuildRequires:  lua-devel%{?_isa} >= 5.1
-Requires:       libsass%{?_isa} >= 1
-Requires:       lua%{?_isa} >= 5.1
+BuildRequires:  libsass-devel lua-devel
 
 %description
 %{summary}.
