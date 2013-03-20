@@ -5,6 +5,7 @@ Summary:        HTML5 compliant parsing library, written in C
 License:        MIT
 URL:            http://www.netsurf-browser.org/projects/hubbub/
 Source0:        http://download.netsurf-browser.org/libs/releases/hubbub-0.1.2-src.tar.gz
+BuildRequires:  libparserutils-devel
 
 %description
 Hubbub is an HTML5 compliant parsing library, written in C. It was developed
