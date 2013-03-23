@@ -1,10 +1,12 @@
+%global         commit 9c05850487ecc5ca187d204fcb9b1f443d66f0bf
+%global         shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:           libsass
 Version:        1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A C++ implementation of the Sass CSS precompiler
 License:        MIT
 URL:            https://github.com/hcatlin/libsass
-Source0:        %{url}/archive/master.tar.gz
+Source0:        %{url}/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
 
 %description
 Libsass is a C/C++ port of the Sass CSS precompiler. The original version
@@ -25,7 +27,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q -n libsass-master
+%setup -q -n libsass-%{commit}
 
 
 %build
@@ -54,6 +56,10 @@ install -Dpm0644 sass_interface.h %{buildroot}%{_includedir}/sass_interface.h
 
 
 %changelog
+
+* Sat Mar 23 2013 Craig Barnes <cr@igbarn.es> - 1-2
+- Update to latest git commit
+- Conform to Fedora packaging guidelines for GitHub
 
 * Sun Oct 14 2012 Craig Barnes <cr@igbarn.es> - 1-1
 - Initial package
