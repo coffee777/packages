@@ -1,5 +1,5 @@
 Name:           discount
-Version:        2.1.5a
+Version:        2.1.6
 Release:        1%{?dist}
 Summary:        A command-line utility for converting Markdown files into HTML
 License:        BSD
@@ -94,6 +94,9 @@ make test
 
 
 %changelog
+
+* Wed Apr 03 2013 Craig Barnes <cbgnome@gmail.com> - 2.1.6-1
+- Update to latest release
 
 * Sun Feb 10 2013 Craig Barnes <cbgnome@gmail.com> - 2.1.5a-1
 - Update to latest release
