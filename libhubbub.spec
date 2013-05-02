@@ -1,10 +1,11 @@
-Name:           hubbub
-Version:        0.1.2
+Name:           libhubbub
+Version:        0.2.0
 Release:        1%{?dist}
 Summary:        HTML5 compliant parsing library, written in C
 License:        MIT
 URL:            http://www.netsurf-browser.org/projects/hubbub/
-Source0:        http://download.netsurf-browser.org/libs/releases/hubbub-0.1.2-src.tar.gz
+Source0:        http://download.netsurf-browser.org/libs/releases/%{name}-%{version}-src.tar.gz
+BuildRequires:  netsurf-buildsystem >= 1.0
 BuildRequires:  libparserutils-devel
 
 %description
@@ -32,7 +33,7 @@ developing applications that use %{name}.
 
 %build
 export CFLAGS='%{optflags}'
-make %{?_smp_mflags} COMPONENT_TYPE=lib-shared
+make %{?_smp_mflags} COMPONENT_TYPE=lib-shared PREFIX=%{_prefix}
 
 
 %install
@@ -56,6 +57,10 @@ make %{?_smp_mflags} COMPONENT_TYPE=lib-shared
 
 
 %changelog
+
+* Thu May 02 2013 Craig Barnes <cr@igbarn.es> - 0.2.0-1
+- Update to latest release
+- Rename from "hubbub" to "libhubbub" to reflect upstream
 
 * Fri Feb 08 2013 Craig Barnes <cr@igbarn.es> - 0.1.2-1
 - Initial package
