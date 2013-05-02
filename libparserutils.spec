@@ -1,10 +1,11 @@
 Name:           libparserutils
-Version:        0.1.1
+Version:        0.1.2
 Release:        1%{?dist}
 Summary:        A library for building efficient parsers, written in C
 License:        MIT
 URL:            http://www.netsurf-browser.org/projects/libparserutils/
-Source0:        http://download.netsurf-browser.org/libs/releases/libparserutils-0.1.1-src.tar.gz
+Source0:        http://download.netsurf-browser.org/libs/releases/libparserutils-%{version}-src.tar.gz
+BuildRequires:  netsurf-buildsystem >= 1.0
 
 %description
 LibParserUtils is a library for building efficient parsers, written in C. It
@@ -27,7 +28,7 @@ developing applications that use %{name}.
 
 %build
 export CFLAGS='%{optflags}'
-make %{?_smp_mflags} COMPONENT_TYPE=lib-shared
+make %{?_smp_mflags} COMPONENT_TYPE=lib-shared PREFIX=%{_prefix}
 
 
 %install
@@ -51,6 +52,9 @@ make %{?_smp_mflags} COMPONENT_TYPE=lib-shared
 
 
 %changelog
+
+* Thu May 02 2013 Craig Barnes <cr@igbarn.es> - 0.1.2-1
+- Update to latest release
 
 * Fri Feb 08 2013 Craig Barnes <cr@igbarn.es> - 0.1.1-1
 - Initial package
