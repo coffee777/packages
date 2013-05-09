@@ -24,11 +24,6 @@ $(PACKAGES): | ~makerpm/rpmbuild
 	su -c 'cd $| && rpmbuild -ba SPECS/$@.spec > $(BUILDLOG)' makerpm
 	for rpm in $(FINDRPMS); do cp $$rpm .; done
 
-install: ~/Dropbox/Public/fedora-remix/16
-	rm -f *-debuginfo-*.rpm
-	cp -f *.src.rpm $</source/packages && cd $< && createrepo source
-	cp -f *.{noarch,i686}.rpm $</i386/packages && cd $< && createrepo i386
-
 init: ~makerpm/rpmbuild
 
 ~makerpm/rpmbuild:
@@ -44,4 +39,4 @@ clean:
 	rm -f *.rpm
 
 
-.PHONY: help all install init test clean $(PACKAGES)
+.PHONY: help all init test clean $(PACKAGES)
