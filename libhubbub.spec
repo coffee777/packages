@@ -1,6 +1,6 @@
 Name:           libhubbub
 Version:        0.2.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        HTML5 compliant parsing library, written in C
 License:        MIT
 URL:            http://www.netsurf-browser.org/projects/hubbub/
@@ -50,6 +50,7 @@ make %{?_smp_mflags} COMPONENT_TYPE=lib-shared PREFIX=%{_prefix}
 
 
 %files devel
+%doc docs/Architecture docs/Macros docs/Treebuilder
 %dir %{_includedir}/hubbub/
 %{_includedir}/hubbub/*.h
 %{_libdir}/libhubbub.so
@@ -57,6 +58,9 @@ make %{?_smp_mflags} COMPONENT_TYPE=lib-shared PREFIX=%{_prefix}
 
 
 %changelog
+
+* Fri May 10 2013 Craig Barnes <cr@igbarn.es> - 0.2.0-2
+- Add some documentation files to devel package
 
 * Thu May 02 2013 Craig Barnes <cr@igbarn.es> - 0.2.0-1
 - Update to latest release
