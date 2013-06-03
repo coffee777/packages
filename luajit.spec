@@ -1,11 +1,10 @@
 Name:       luajit
-Version:    2.0.1
+Version:    2.0.2
 Release:    1%{?dist}
 Summary:    Just-In-Time Compiler for Lua
 License:    MIT
 URL:        http://luajit.org/
 Source0:    http://luajit.org/download/LuaJIT-%{version}.tar.gz
-Patch0:     http://luajit.org/download/v2.0.1_hotfix1.patch
 Requires:   libluajit%{?_isa} = %{version}-%{release}
 
 %description
@@ -35,11 +34,11 @@ Requires: libluajit%{?_isa} = %{version}-%{release}
 
 %prep
 %setup -q -n LuaJIT-%{version}
-%patch0 -p1
 
 
 %build
-make amalg PREFIX=%{_prefix} CFLAGS="%{optflags} -DLUAJIT_ENABLE_LUA52COMPAT"
+make amalg PREFIX=%{_prefix} TARGET_STRIP=@: \
+           CFLAGS='%{optflags} -DLUAJIT_ENABLE_LUA52COMPAT'
 
 
 %install
@@ -80,6 +79,11 @@ echo ':luajit:M::\x1b\x4c\x4a::%{_bindir}/luajit:' > \
 
 
 %changelog
+
+* Mon Jun 03 2013 Craig Barnes <cr@igbarn.es> - 2.0.2-1
+- Update to latest release
+- Drop hotfix patch for previous release
+- Disable "TARGET_STRIP" to keep debugging symbols intact
 
 * Sat Mar 09 2013 Craig Barnes <cr@igbarn.es> - 2.0.1-1
 - Update to latest release
