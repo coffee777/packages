@@ -66,6 +66,7 @@ export LUAJIT_INC=%{_includedir}/luajit-2.0
     --http-scgi-temp-path=%{_sharedstatedir}/nginx/scgi \
     --http-uwsgi-temp-path=%{_sharedstatedir}/nginx/uwsgi \
     --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
+    --with-ld-opt='%{?__global_ldflags}' \
     --with-http_ssl_module \
     --with-http_gzip_static_module \
     --with-http_geoip_module \
@@ -137,6 +138,7 @@ fi
 * Mon Jun 03 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.9-1
 - Update to latest "legacy" release
 - Enable hardened build
+- Use __global_ldflags macro for --with-ld-opt configure flag
 
 * Thu Apr 04 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.8-1
 - Update to latest stable release
