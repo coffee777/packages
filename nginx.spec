@@ -1,6 +1,8 @@
+%global             _hardened_build 1
+
 Name:               nginx
 Epoch:              5
-Version:            1.2.8
+Version:            1.2.9
 Release:            1%{?dist}
 Summary:            High performance HTTP and reverse proxy server
 License:            BSD
@@ -131,6 +133,10 @@ fi
 
 
 %changelog
+
+* Mon Jun 03 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.9-1
+- Update to latest "legacy" release
+- Enable hardened build
 
 * Thu Apr 04 2013 Craig Barnes <cr@igbarn.es> - 5:1.2.8-1
 - Update to latest stable release
