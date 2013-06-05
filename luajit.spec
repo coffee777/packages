@@ -42,7 +42,7 @@ make amalg PREFIX=%{_prefix} TARGET_STRIP=@: \
 
 
 %install
-%make_install PREFIX=%{_prefix}
+%make_install PREFIX=%{_prefix} INSTALL_LIB=%{buildroot}%{_libdir}
 mv -T %{buildroot}%{_bindir}/luajit-%{version} %{buildroot}%{_bindir}/luajit
 # Add binfmt_misc configuration to binfmt.d(5) directory
 mkdir -p %{buildroot}%{_libdir}/binfmt.d
