@@ -1,6 +1,6 @@
 Name:       luajit
 Version:    2.0.2
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Just-In-Time Compiler for Lua
 License:    MIT
 URL:        http://luajit.org/
@@ -79,6 +79,9 @@ echo ':luajit:M::\x1b\x4c\x4a::%{_bindir}/luajit:' > \
 
 
 %changelog
+
+* Wed Jun 05 2013 Craig Barnes <cr@igbarn.es> - 2.0.2-2
+- Specify libdir explicitly instead of relying on the Makefile default
 
 * Mon Jun 03 2013 Craig Barnes <cr@igbarn.es> - 2.0.2-1
 - Update to latest release
