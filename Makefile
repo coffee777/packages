@@ -25,11 +25,13 @@ $(PACKAGES): | ~makerpm/rpmbuild
 	cp `rpmspec -q --qf $(RPMQFMT) $@.spec` .
 	cp `rpmspec -q --srpm --qf $(SRPMQFMT) $@.spec` .
 
-sassc: dep-libsass
-lunamark: dep-lua-bit32 dep-lua-unicode dep-lua-cosmo
+sassc: install-libsass
+libparserutils: install-netsurf-buildsystem
+libhubbub: install-libparserutils
+lunamark: lua-bit32 lua-unicode lua-cosmo
 
-dep-%: % | ~makerpm/rpmbuild
-	rpm --replacepkgs -Uvh `rpmspec -q --qf $(RPMQFMT) $*.spec`
+install-%: % | ~makerpm/rpmbuild
+	rpm --replacepkgs --replacefiles -Uvh `rpmspec -q --qf $(RPMQFMT) $*.spec`
 
 init: ~makerpm/rpmbuild
 
