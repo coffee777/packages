@@ -1,4 +1,4 @@
-%global         commit 9c05850487ecc5ca187d204fcb9b1f443d66f0bf
+%global         commit 906a9a139a89f1a26ecd93e6447e9b38d274fa78
 %global         shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:           libsass
 Version:        1

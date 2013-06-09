@@ -1,10 +1,12 @@
+%global         commit ade649abd2bd0d949a7e22baa4a7d8dff9a757f9
+%global         shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:           sassc
 Version:        1
 Release:        2%{?dist}
 Summary:        Command line Sass compiler
 License:        MIT
 URL:            https://github.com/hcatlin/sassc
-Source0:        %{url}/archive/master.tar.gz
+Source0:        %{url}/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
 BuildRequires:  libsass-devel
 
 %description
@@ -12,7 +14,7 @@ BuildRequires:  libsass-devel
 
 
 %prep
-%setup -q -n sassc-master
+%setup -qn sassc-%{commit}
 # Fix sass_interface.h location
 sed -ri '/^#include/s|libsass/(sass_interface.h)|\1|' sassc.c
 
