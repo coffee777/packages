@@ -15,7 +15,6 @@ help:
 
 all: $(PACKAGES)
 
-
 $(PACKAGES): | ~makerpm/rpmbuild
 	$(HAVEDEPS) || yum-builddep -qy --noplugins $@.spec
 	rm -f $|/SOURCES/master.tar.gz
@@ -25,6 +24,12 @@ $(PACKAGES): | ~makerpm/rpmbuild
 	su -c 'cd $| && rpmbuild -ba SPECS/$@.spec' makerpm
 	cp `rpmspec -q --qf $(RPMQFMT) $@.spec` .
 	cp `rpmspec -q --srpm --qf $(SRPMQFMT) $@.spec` .
+
+sassc: dep-libsass
+lunamark: dep-lua-bit32 dep-lua-unicode dep-lua-cosmo
+
+dep-%: % | ~makerpm/rpmbuild
+	rpm --replacepkgs -Uvh `rpmspec -q --qf $(RPMQFMT) $*.spec`
 
 init: ~makerpm/rpmbuild
 
