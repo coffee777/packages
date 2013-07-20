@@ -29,6 +29,7 @@ libparserutils: install-netsurf-buildsystem
 libhubbub: install-libparserutils
 lunamark: lua-bit32 lua-unicode lua-cosmo
 
+# TODO: Only build/install if necessary, not unconditionally
 install-%: % | ~makerpm/rpmbuild
 	rpm --replacepkgs --replacefiles -Uvh `rpmspec -q --qf $(RPMQFMT) $*.spec`
 
