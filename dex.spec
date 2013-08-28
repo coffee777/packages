@@ -1,8 +1,8 @@
-%global     commit cb8136fb8374ad857dd2788b417077e5ac80a81a
+%global     commit 38c9ae5b4652ae28691803e11ae1ae2de568e6e7
 %global     shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:       dex
 Version:    0
-Release:    1.git%{shortcommit}%{?dist}
+Release:    2.git%{shortcommit}%{?dist}
 Summary:    Small and easy to use text editor
 License:    GPLv2
 URL:        https://github.com/tihirvon/dex
@@ -38,6 +38,9 @@ make %{?_smp_mflags} CC='gcc' CFLAGS='%{optflags}'
 
 
 %changelog
+
+* Wed Aug 28 2013 Craig Barnes <cr@igbarn.es> - 0-2.git38c9ae5
+- Update
 
 * Fri Aug 23 2013 Craig Barnes <cr@igbarn.es> - 0-1.gitcb8136f
 - Initial package
