@@ -2,7 +2,7 @@
 %global     shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:       dex
 Version:    0
-Release:    2.git%{shortcommit}%{?dist}
+Release:    3.git%{shortcommit}%{?dist}
 Summary:    Small and easy to use text editor
 License:    GPLv2
 URL:        https://github.com/tihirvon/dex
@@ -17,15 +17,20 @@ Source0:    %{url}/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
 
 
 %build
-make %{?_smp_mflags} CC='gcc' CFLAGS='%{optflags}'
+cat > Config.mk << END
+    CC      = gcc
+    CFLAGS  = %{optflags}
+    INSTALL = install -p
+    prefix  = %{_prefix}
+    bindir  = %{_bindir}
+    datadir = %{_datadir}
+    mandir  = %{_mandir}
+END
+make %{?_smp_mflags}
 
 
 %install
-%make_install prefix=%{_prefix} \
-              bindir=%{_bindir} \
-              datadir=%{_datadir} \
-              mandir=%{_mandir} \
-              INSTALL='install -p'
+%make_install
 
 
 %files
@@ -38,6 +43,9 @@ make %{?_smp_mflags} CC='gcc' CFLAGS='%{optflags}'
 
 
 %changelog
+
+* Thu Aug 29 2013 Craig Barnes <cr@igbarn.es> - 0-3.git38c9ae5
+- Generate a Config.mk file to configure build/installation options
 
 * Wed Aug 28 2013 Craig Barnes <cr@igbarn.es> - 0-2.git38c9ae5
 - Update
