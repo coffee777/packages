@@ -1,8 +1,8 @@
-%global     commit 38c9ae5b4652ae28691803e11ae1ae2de568e6e7
+%global     commit b4bf41ec41a830318b51de7f7464455eb576759d
 %global     shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:       dex
 Version:    0
-Release:    3.git%{shortcommit}%{?dist}
+Release:    4.git%{shortcommit}%{?dist}
 Summary:    Small and easy to use text editor
 License:    GPLv2
 URL:        https://github.com/tihirvon/dex
@@ -43,6 +43,9 @@ make %{?_smp_mflags}
 
 
 %changelog
+
+* Sun Sep 01 2013 Craig Barnes <cr@igbarn.es> - 0-4.gitb4bf41e
+- Update
 
 * Thu Aug 29 2013 Craig Barnes <cr@igbarn.es> - 0-3.git38c9ae5
 - Generate a Config.mk file to configure build/installation options
