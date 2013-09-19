@@ -20,9 +20,11 @@ $(PACKAGES): | ~makerpm/rpmbuild
 	spectool -A -g -C $|/SOURCES $@.spec
 	test ! -d sources/$@ || cp -f sources/$@/* $|/SOURCES/
 	cp -f $@.spec $|/SPECS/
-	su -c 'cd $| && rpmbuild -ba SPECS/$@.spec' makerpm
+	su -c 'cd $| && rpmbuild $(RPMBUILDFLAGS) -ba SPECS/$@.spec' makerpm
 	cp `rpmspec -q --qf $(RPMQFMT) $@.spec` .
 	cp `rpmspec -q --srpm --qf $(SRPMQFMT) $@.spec` .
+
+libgumbo: RPMBUILDFLAGS = --nocheck
 
 sassc: install-libsass
 libparserutils: install-netsurf-buildsystem
