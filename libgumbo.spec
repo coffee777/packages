@@ -11,6 +11,7 @@ URL:        https://github.com/google/gumbo-parser
 Source0:    %{url}/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
 
 BuildRequires: libtool autoconf automake
+BuildRequires: doxygen
 BuildRequires: gtest-devel
 
 %description
@@ -37,6 +38,7 @@ developing applications that use %{name}.
 ./autogen.sh
 %configure --disable-static
 make %{?_smp_mflags}
+doxygen
 
 
 %check
