@@ -1,10 +1,10 @@
-%global     commit b646374dcf702532b89a6eb77efc90d3949c59e0
+%global     commit d90ea2b2d01b27a7adf0501f644a7782e50362fe
 %global     shortcommit %(c=%{commit}; echo ${c:0:7})
 %global     _hardened_build 1
 
 Name:       libgumbo
 Version:    0
-Release:    4.git%{shortcommit}%{?dist}
+Release:    5.git%{shortcommit}%{?dist}
 Summary:    A C99 implementation of the HTML5 parsing algorithm
 License:    ASL 2.0
 URL:        https://github.com/google/gumbo-parser
@@ -69,6 +69,9 @@ install -pm0644 docs/man/man3/*.3 %{buildroot}%{_mandir}/man3
 
 
 %changelog
+
+* Sat Oct 05 2013 Craig Barnes <cr@igbarn.es> - 0-5.gitd90ea2b
+- Update to git master
 
 * Thu Sep 19 2013 Craig Barnes <cr@igbarn.es> - 0-4.gitb646374
 - Update to git master
